@@ -4,10 +4,16 @@ import styles from "./index.module.css";
 
 export default function Home() {
   const [animalInput, setAnimalInput] = useState("");
+  const [validInput, setValidInput] = useState(true);
   const [result, setResult] = useState();
 
+  const onChangeHandler = (e) => {
+    setAnimalInput(e.target.value);
+    if (e.target.value.trim()) setValidInput(true);
+  };
   async function onSubmit(event) {
     event.preventDefault();
+    if (!animalInput.trim()) return setValidInput(false);
     const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
@@ -32,11 +38,12 @@ export default function Home() {
         <h3>Name my pet</h3>
         <form onSubmit={onSubmit}>
           <input
+            className={!validInput && styles.invalidInput}
             type="text"
             name="animal"
             placeholder="Enter an animal"
             value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            onChange={onChangeHandler}
           />
           <input type="submit" value="Generate names" />
         </form>

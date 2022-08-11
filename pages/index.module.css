@@ -19,6 +19,10 @@
   line-height: 24px;
   color: #353740;
   font-family: "ColfaxAI", Helvetica, sans-serif;
+  outline: none;
+}
+.main .invalidInput {
+  border-color: #e64848 !important;
 }
 .main {
   display: flex;
