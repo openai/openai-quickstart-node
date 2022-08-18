@@ -10,17 +10,47 @@ export default async function (req, res) {
 
   const completion = await openai.createCompletion({
     model: "text-davinci-002",
-    prompt: generatePrompt(input),
+    prompt: `Artist: Lupe Fiasco\n\nLyrics:\n`,
     temperature: 1,
     n: 1,
     presence_penalty: 2.0,
     frequency_penalty: 2.0,
-    max_tokens: 1000
+    max_tokens: 4000
   });
   console.log('completion.data.choices:', completion.data.choices)
 
   res.status(200).json({ result: completion.data.choices[0].text });
 }
+
+/*
+  LINE COMPLETION FEATURE:
+  ALGORITHM 1:
+  1. Input entire sentence.
+  2. Take last word in sentence.
+  3. Look up words that rhyme with that last word using DataMuse API.
+  -- We could also ask GPT-3 for rhymes, but it's not very good at that.
+  4. Ask GPT-3 for a rap whose last word is that rhyme word looked up in step #3.
+  5. Return.
+
+  ALGORITHM 2:
+  1. Input entire sentence
+  2. Ask GPT-3 for a rap line that can follow that entire sentence.
+
+  MEDIA SYNTHESIS FEATURE:
+  ALGORITHM 3:
+  1. Ask GPT-3 for lyrics.
+  2. Send those lyrics to Uberduck for TTS.
+  3. Automatically generate a reference track for uberduck by:
+  - finding a TTS speech that will allow you to emphasize certain words
+  - finding a tool that will automatically retrieve musical rhythm from text, such as by moving each accented syllable
+  to the closest accented beat
+  3. Send uberduck that reference track.
+  4. Generate a beat track by using:
+  - Jukebiox: https://github.com/openai/jukebox/
+  - OpenAI MuseNet: https://openai.com/blog/musenet/ https://openai.com/blog/musenet/#fn2
+  - Pop Music Transformer: https://github.com/YatingMusic/remi
+
+*/
 
 function generatePrompt(input) {
   const examples = [
