@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [insectInput, setinsectInput] = useState("");
+  const [specieInput, setspecieInput] = useState("");
   const [result, setResult] = useState();
 
   async function onSubmit(event) {
@@ -13,11 +13,11 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ insect: insectInput }),
+      body: JSON.stringify({ specie: specieInput }),
     });
     const data = await response.json();
     setResult(data.result);
-    setinsectInput("");
+    setspecieInput("");
   }
 
   return (
@@ -29,14 +29,14 @@ export default function Home() {
 
       <main className={styles.main}>
         <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
+        <h3>Name my superhero</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
-            name="insect"
-            placeholder="Enter an insect"
-            value={insectInput}
-            onChange={(e) => setinsectInput(e.target.value)}
+            name="specie"
+            placeholder="Enter a specie"
+            value={specieInput}
+            onChange={(e) => setspecieInput(e.target.value)}
           />
           <input type="submit" value="Generate names" />
         </form>
