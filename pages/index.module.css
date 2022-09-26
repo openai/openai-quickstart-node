@@ -47,6 +47,13 @@
   border-radius: 4px;
   margin-bottom: 24px;
 }
+.main input[type="range"] {
+  /* padding: 12px 16px; */
+  /* border: 1px solid #10a37f;
+  border-radius: 4px; */
+  /* -webkit-appearance: none; */
+  margin-bottom: 24px;
+}
 .main ::placeholder {
   color: #8e8ea0;
   opacity: 1;
