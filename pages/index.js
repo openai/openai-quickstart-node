@@ -3,7 +3,8 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
+  const [promptInput, setPromptInput] = useState("");
+  const [tempInput, setTempInput] = useState("");
   const [result, setResult] = useState();
 
   async function onSubmit(event) {
@@ -13,32 +14,42 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ animal: animalInput }),
+      body: JSON.stringify({ prompt: promptInput }),
     });
     const data = await response.json();
     setResult(data.result);
-    setAnimalInput("");
+    // setPromptInput("");
+    // setTempInput("");
   }
 
   return (
     <div>
       <Head>
-        <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/dog.png" />
+        <title>Message composer</title>
+        <link rel="icon" href="/message.png" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
+        <img src="/message.png" className={styles.icon} />
+        <h3>Compose my message</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            name="Prompt"
+            placeholder="Enter a short response"
+            value={promptInput}
+            onChange={(e) => setPromptInput(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
+          <input
+            type="range" 
+            min="1" max="10" 
+            class="slider"
+            name="temp"
+            // placeholder="Enter number between 0-10"
+            value={tempInput}
+            onChange={(e) => setTempInput(e.target.value)}
+          />
+          <input type="submit" value="Generate message" />
         </form>
         <div className={styles.result}>{result}</div>
       </main>
