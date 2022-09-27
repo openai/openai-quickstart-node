@@ -44,6 +44,7 @@ export default function Home() {
             placeholder="Enter an animal"
             value={animalInput}
             onChange={onChangeHandler}
+            minLength={2}
           />
           <input type="submit" value="Generate names" />
         </form>
