@@ -54,7 +54,7 @@
 .main input[type="submit"] {
   padding: 12px 0;
   color: #fff;
-  background-color: #10a37f;
+  background-color: #a32110;
   border: none;
   border-radius: 4px;
   text-align: center;
@@ -63,4 +63,9 @@
 .main .result {
   font-weight: bold;
   margin-top: 40px;
+  margin-left: 175px;
+  justify-items: 'center';
+  width: 600px;
+  height: 400px;
 }
+

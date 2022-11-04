@@ -3,8 +3,8 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
-  const [result, setResult] = useState();
+  const [argumentInput, setArgumentInput] = useState("");
+  const [result, setResult] = useState("");
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -13,34 +13,44 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ animal: animalInput }),
+      body: JSON.stringify({ argument: argumentInput }),
     });
     const data = await response.json();
+    // console.log(data)
     setResult(data.result);
-    setAnimalInput("");
+    // setArgumentInput("");
   }
+
+  function NewlineText(props) {
+    console.log(props)
+    const text = props.text;
+    return text.split('\n').map(str => <p>{str}</p>);
+  }  
+
 
   return (
     <div>
       <Head>
-        <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/dog.png" />
+        <title>AI Counter Argument</title>
+        <link rel="icon" href="/podium.png" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
+        <img src="/podium.png" className={styles.icon} />
+        <h3>Counter My Argument</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            name="argument"
+            placeholder="Enter an argument"
+            value={argumentInput}
+            onChange={(e) => setArgumentInput(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
+          <input type="submit" value="Generate counter arguments" /> 
         </form>
-        <div className={styles.result}>{result}</div>
+        <div className={styles.result}>
+          <NewlineText text={result ?? ''} />
+        </div>
       </main>
     </div>
   );
