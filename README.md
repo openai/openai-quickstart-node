@@ -20,15 +20,14 @@ This is an example pet name generator app used in the OpenAI API [quickstart tut
    $ npm install
    ```
 
-5. Make a copy of the example environment variables file
+5. Add your [API key](https://beta.openai.com/account/api-keys) to the .env.local file and save
 
    ```bash
-   $ cp .env.example .env
+   @example: 
+     OPEN_API_KEY=329rhdsfsdojfsdoin
    ```
-
-6. Add your [API key](https://beta.openai.com/account/api-keys) to the newly created `.env` file
-
-7. Run the app
+   
+7. open a terminal, navigate to the folder using `cd` and Run the app (don't type the dollar sign)
 
    ```bash
    $ npm run dev
