@@ -63,4 +63,9 @@
 .main .result {
   font-weight: bold;
   margin-top: 40px;
+  font-size: 18px;
+  text-align: center;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
 }
