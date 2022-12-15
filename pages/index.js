@@ -97,10 +97,11 @@ Choice A is incorrect because there’s nothing in the text that suggests that t
   return (
     <div>
       <Head>
-        <title>Prompt</title>
+        <title>=Generator Me</title>
       </Head>
-
+      
       <main className={styles.main}>
+      <h1 class="main">LIAMS MAGIC BUTTONS</h1>
         <button type="button" onClick={() => callAI(prompt1)}>{prompt1Name}</button>
         <button type="button" onClick={() => callAI(prompt2)}>{prompt2Name}</button>
         <button type="button" onClick={() => callAI(prompt3)}>{prompt3Name}</button>
