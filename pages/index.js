@@ -88,11 +88,11 @@ Choice A is incorrect because there’s nothing in the text that suggests that t
  \n###\, "
   const prompt1Name = "Words in Context Format"
 
-  const prompt2 = "List out 5 intricate, complelling details on how and why we are likely living in a simulation.\n###\n1.\n\n\n"
-  const prompt2Name = "5 Reasons were likely in a simulation"
+  const prompt2 = "The CTMU is a theory called the Cognitive-Theoretic Model of the Universe. Write out a compelling paragraph on why and how the simulation theory is true."
+  const prompt2Name = "Do we live in a simulation"
 
-  const prompt3 = "list out five of the utmot amazing and astonishing but little known facts.\n###\n1.\n\n\n"
-  const prompt3Name = "Surprise Me"
+  const prompt3 = "Write out a paragraph of clever, funny, and somewhat insulting reasons on why they should not have clicked the button that says do not click me."
+  const prompt3Name = "Dont click me"
 
   return (
     <div>
