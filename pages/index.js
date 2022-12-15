@@ -3,22 +3,28 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [userInput, setUserInput] = useState("");
   const [result, setResult] = useState();
 
-  async function onSubmit(event) {
-    event.preventDefault();
+  async function callAI(prompt) {
     const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ userInput: userInput }),
+      body: JSON.stringify({ prompt: prompt }),
     });
     const data = await response.json();
     setResult(data.result);
-    setUserInput("");
   }
+
+  const prompt1 = "Why is liam like the way he is?"
+  const prompt1Name = "Prompt 1"
+
+  const prompt2 = "Does he even realize what he's doing?"
+  const prompt2Name = "Prompt 2"
+
+  const prompt3 = "Who is jefferson airplane"
+  const prompt3Name = "Prompt3"
 
   return (
     <div>
@@ -27,17 +33,9 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h3>What's your prompt</h3>
-        <form onSubmit={onSubmit}>
-          <input
-            type="text"
-            name="prompt"
-            placeholder="type your prompt here"
-            value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
-          />
-          <input type="submit" value="AI it." />
-        </form>
+        <button type="button" onClick={() => callAI(prompt1)}>{prompt1Name}</button>
+        <button type="button" onClick={() => callAI(prompt2)}>{prompt2Name}</button>
+        <button type="button" onClick={() => callAI(prompt3)}>{prompt3Name}</button>
         <div className={styles.result}>{result}</div>
       </main>
     </div>
