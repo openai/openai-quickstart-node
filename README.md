@@ -30,7 +30,7 @@ This is an example pet name generator app used in the OpenAI API [quickstart tut
 7. open a terminal, navigate to the folder using `cd` and Run the app (don't type the dollar sign)
 
    ```bash
-   $ npm run dev
+   $ OPENAI_API_KEY=$OPENAI_API_KEY npm run dev
    ```
 
 You should now be able to access the app at [http://localhost:3000](http://localhost:3000)! For the full context behind this example app, check out the [tutorial](https://beta.openai.com/docs/quickstart).
