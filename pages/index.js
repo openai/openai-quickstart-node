@@ -17,14 +17,14 @@ export default function Home() {
     setResult(data.result);
   }
 
-  const prompt1 = "Why is liam like the way he is?"
-  const prompt1Name = "Prompt 1"
+  const prompt1 = "List out five compelling, detailed and clever Reasons why Bishop is clearly gay.\n###\n1.\n\n\n"
+  const prompt1Name = "Why Josh is Gay"
 
-  const prompt2 = "Does he even realize what he's doing?"
-  const prompt2Name = "Prompt 2"
+  const prompt2 = "List out 5 intricate, complelling details on how and why we are likely living in a simulation.\n###\n1.\n\n\n"
+  const prompt2Name = "5 Reasons were likely in a simulation"
 
-  const prompt3 = "Who is jefferson airplane"
-  const prompt3Name = "Prompt3"
+  const prompt3 = "list out five of the utmot amazing and astonishing but little known facts.\n###\n1.\n\n\n"
+  const prompt3Name = "Surprise Me"
 
   return (
     <div>
