@@ -36,6 +36,6 @@ body:
     id: language-version
     attributes:
       label: Node version
-      placeholder: Node v16.14.2
+      placeholder: Node v16.14.1
     validations:
       required: false
