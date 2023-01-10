@@ -1,11 +1,11 @@
 @font-face {
   font-family: "ColfaxAI";
-  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2)
-      format("woff2"),
+  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2) format("woff2"),
     url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: "ColfaxAI";
   src: url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff2) format("woff2"),
@@ -13,6 +13,7 @@
   font-weight: bold;
   font-style: normal;
 }
+
 .main,
 .main input {
   font-size: 16px;
@@ -20,48 +21,105 @@
   color: #353740;
   font-family: "ColfaxAI", Helvetica, sans-serif;
 }
+
 .main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 60px;
+  justify-content: center;
+  z-index: 1;
+  height: 90vh;
+  width: 90vw;
+  margin: 5vh auto;
+
 }
+
 .main .icon {
-  width: 34px;
+  width: 3em;
 }
+
+.main .logo {
+  background: rgba(255, 255, 255, .25);
+  display: inline-block;
+  padding: .5em;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+
+  margin-bottom: 2rem;
+}
+
+.main .logo h2 {
+  font-size: .85rem;
+  font-weight: 900;
+  margin: 0;
+}
+
 .main h3 {
-  font-size: 32px;
-  line-height: 40px;
-  font-weight: bold;
-  color: #202123;
-  margin: 16px 0 40px;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.75);
+  letter-spacing: .25em;
+  margin-bottom: 2rem;
+  padding: .5em;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
 }
-.main form {
-  display: flex;
-  flex-direction: column;
-  width: 320px;
-}
+
 .main input[type="text"] {
-  padding: 12px 16px;
-  border: 1px solid #10a37f;
-  border-radius: 4px;
-  margin-bottom: 24px;
-  outline-color: #10a37f;
+  font-size: 1.75em;
+  padding: 12px 0;
+  border: 1px solid #44ce29;
+  border-radius: .25em;
+  margin-bottom: .5em;
+  outline-color: #44ce29;
+  width: 100%;
+  text-align: center;
+
 }
+
 .main ::placeholder {
-  color: #8e8ea0;
+  color: #cdcdcd;
   opacity: 1;
 }
+
 .main input[type="submit"] {
-  padding: 12px 0;
-  color: #fff;
-  background-color: #10a37f;
+  padding: 1em 0;
+  color: black;
+  background-color: #44ce29;
   border: none;
-  border-radius: 4px;
+
   text-align: center;
   cursor: pointer;
+  display: block;
+  width: 100%;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: .85em;
+  letter-spacing: .25em;
 }
-.main .result {
-  font-weight: bold;
-  margin-top: 40px;
+
+.main .inputForm {
+  text-align: center;
+  padding: 4em;
+  background: rgba(255, 255, 255, .5);
+  border: .5em solid rgba(255, 255, 255, .75);
+  border-radius: .5em;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+.result {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -5;
+  background: rgba(0, 0, 0, 0.2)
+}
+
+.result img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
 }

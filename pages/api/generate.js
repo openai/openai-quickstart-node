@@ -20,7 +20,7 @@ export default async function (req, res) {
   if (animal.trim().length === 0) {
     res.status(400).json({
       error: {
-        message: "Please enter a valid animal",
+        message: "Please enter a valid prompt",
       },
     });
     return;
@@ -31,6 +31,7 @@ export default async function (req, res) {
       prompt: generatePrompt(animal),
       n: 1,
       size: "1024x1024",
+
     });
     // image_url = response.data.data[0].url;
 
@@ -59,7 +60,7 @@ export default async function (req, res) {
 function generatePrompt(animal) {
   const capitalizedAnimal =
     animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-  return `A picture of a ${capitalizedAnimal}`;
+  return `A image of ${capitalizedAnimal}`;
 }
 
 // function generatePrompt(animal) {
