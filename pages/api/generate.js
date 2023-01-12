@@ -60,7 +60,7 @@ export default async function (req, res) {
 function generatePrompt(animal) {
   const capitalizedAnimal =
     animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-  return `A image of ${capitalizedAnimal}`;
+  return `An image of ${capitalizedAnimal}`;
 }
 
 // function generatePrompt(animal) {

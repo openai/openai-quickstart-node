@@ -1,14 +1,31 @@
 import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
+import chalk from 'chalk';
 
 
 export default function Home() {
   const [animalInput, setAnimalInput] = useState("");
-  const [icon, setIcon] = useState("/dog.png");
+  const [promptText, setPromptText] = useState("");
+  // const [promptArray, setPromptArray] = useState([]);
+
   const [result, setResult] = useState();
   const [clicked, setClicked] = useState();
 
+  console.log(chalk.red('Hello world!'));
+
+
+  async function handleBlur(event) {
+    event.preventDefault();
+    try {
+      setPromptText(promptText => promptText + animalInput + " ")
+    }
+    catch (error) {
+      // Consider implementing your own error handling logic here
+      console.error(error);
+      alert(error.message);
+    }
+  }
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -19,7 +36,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ animal: animalInput }),
+        body: JSON.stringify({ animal: promptText }),
       });
 
       const data = await response.json();
@@ -32,7 +49,13 @@ export default function Home() {
       }
 
       setResult(data.result);
-      setIcon(data.result);
+
+
+
+
+
+
+
       setAnimalInput("");
     } catch (error) {
       // Consider implementing your own error handling logic here
@@ -49,32 +72,41 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <div className={styles.inputForm}>
-          <div className={styles.logo}>
-            <img src={icon} className={styles.icon} />
-            <h2>PlainAI</h2>
-          </div>
+        <h3>PL<em>AI</em>N<em>Image</em></h3>
 
-          <h3>Image Builder</h3>
+        <div className={styles.inputForm}>
+
+
+
+          {result && (<div className={styles.resultImage}><img src={result} /></div>)}
+
           <form onSubmit={onSubmit}>
             <input
               type="text"
               name="animal"
-              placeholder="Enter a prompt"
+              placeholder="Enter a subject"
               value={animalInput}
               onChange={(e) => setAnimalInput(e.target.value)}
+              onBlur={(e) => handleBlur(e)}
             />
+            {promptText}
             {clicked && <div>thinking...</div>}
             {!clicked && <input type="submit" value="Generate image" />}
 
           </form>
         </div>
 
+        <div className={styles.logo}>
+          <img src="/dog.png" className={styles.icon} />
+          <h2>Plain<em>AI</em></h2>
 
+        </div>
+        <small>All rights reserved.</small>
       </main>
       <div className={styles.result}>
         <img src={result} width="100%" />
       </div>
+
     </div>
   );
 }

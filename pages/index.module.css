@@ -1,6 +1,7 @@
 @font-face {
   font-family: "ColfaxAI";
-  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2) format("woff2"),
+  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2)
+      format("woff2"),
     url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
   font-weight: normal;
   font-style: normal;
@@ -31,50 +32,63 @@
   height: 90vh;
   width: 90vw;
   margin: 5vh auto;
-
 }
 
 .main .icon {
-  width: 3em;
+  width: 1.5em;
+  margin-top: 0.5em;
 }
 
 .main .logo {
-  background: rgba(255, 255, 255, .25);
+  background: rgba(255, 255, 255, 0.25);
   display: inline-block;
-  padding: .5em;
+  padding: 0;
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
-
-  margin-bottom: 2rem;
+  text-align: center;
+  margin: 1rem auto;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .main .logo h2 {
-  font-size: .85rem;
+  font-size: 0.85rem;
   font-weight: 900;
   margin: 0;
 }
 
+.main .logo h2 em {
+  color: #cc092f;
+}
+
 .main h3 {
-  font-size: 1.25rem;
+  font-size: 1rem;
   text-transform: uppercase;
   font-weight: 800;
   color: rgba(0, 0, 0, 0.75);
-  letter-spacing: .25em;
-  margin-bottom: 2rem;
-  padding: .5em;
+  letter-spacing: 0.25em;
+  margin-bottom: 1rem;
+  padding: 0.5em 5em;
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
 }
 
+.main h3 em {
+  color: red;
+}
 .main input[type="text"] {
   font-size: 1.75em;
   padding: 12px 0;
   border: 1px solid #44ce29;
-  border-radius: .25em;
-  margin-bottom: .5em;
+  border-radius: 0.25em;
+  margin-bottom: 0.5em;
   outline-color: #44ce29;
   width: 100%;
   text-align: center;
-
 }
 
 .main ::placeholder {
@@ -94,17 +108,18 @@
   width: 100%;
   text-transform: uppercase;
   font-weight: 900;
-  font-size: .85em;
-  letter-spacing: .25em;
+  font-size: 0.85em;
+  letter-spacing: 0.25em;
 }
 
 .main .inputForm {
   text-align: center;
-  padding: 4em;
-  background: rgba(255, 255, 255, .5);
-  border: .5em solid rgba(255, 255, 255, .75);
-  border-radius: .5em;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 0.5em solid rgba(255, 255, 255, 0.75);
+  border-radius: 0.5em;
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  width: 375px;
 }
 
 .result {
@@ -115,11 +130,24 @@
   left: 0;
   right: 0;
   z-index: -5;
-  background: rgba(0, 0, 0, 0.2)
+  background: rgba(0, 0, 0, 0.25);
 }
 
 .result img {
+  opacity: 0.1;
   width: 100vw;
   height: 100vh;
   object-fit: cover;
+}
+
+.resultImage {
+  background: rgba(255, 255, 255, 0.75);
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.resultImage img {
+  display: block;
+  width: 100%;
+  border-radius: 1em;
 }
