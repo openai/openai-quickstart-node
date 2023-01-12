@@ -40,15 +40,11 @@
 }
 
 .main .logo {
-  background: rgba(255, 255, 255, 0.25);
   display: inline-block;
-  padding: 0;
-  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  padding: 0.5em;
+
   text-align: center;
-  margin: 1rem auto;
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  margin: 1rem auto 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,6 +57,9 @@
   margin: 0;
 }
 
+.copyright {
+  font-size: 0.75em;
+}
 .main .logo h2 em {
   color: #cc092f;
 }
@@ -73,27 +72,30 @@
   letter-spacing: 0.25em;
   margin-bottom: 1rem;
   padding: 0.5em 5em;
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
 }
 
 .main h3 em {
   color: red;
 }
 .main input[type="text"] {
-  font-size: 1.75em;
-  padding: 12px 0;
-  border: 1px solid #44ce29;
-  border-radius: 0.25em;
-  margin-bottom: 0.5em;
-  outline-color: #44ce29;
+  font-size: 1.25em;
+  padding: 0.75em 1em;
+  border: 0;
+  background: none;
+  border-bottom: 1px solid #44ce29;
+  outline: 0;
   width: 100%;
   text-align: center;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  color: white;
+  font-weight: 600;
 }
 
 .main ::placeholder {
   color: #cdcdcd;
-  opacity: 1;
+  opacity: 0.5;
+  font-size: 1rem;
 }
 
 .main input[type="submit"] {
@@ -114,10 +116,10 @@
 
 .main .inputForm {
   text-align: center;
-  padding: 25px;
-  background: rgba(255, 255, 255, 0.5);
-  border: 0.5em solid rgba(255, 255, 255, 0.75);
-  border-radius: 0.5em;
+  padding: 0.75em;
+  background: rgba(0, 0, 0, 0.5);
+  border: 0;
+  border-radius: 0.25em;
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
   width: 375px;
 }
@@ -134,20 +136,34 @@
 }
 
 .result img {
-  opacity: 0.1;
+  opacity: 0.25;
   width: 100vw;
   height: 100vh;
   object-fit: cover;
 }
 
 .resultImage {
-  background: rgba(255, 255, 255, 0.75);
-  padding: 1em;
-  margin-bottom: 1em;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.5em 0.5em 0;
 }
 
 .resultImage img {
   display: block;
   width: 100%;
-  border-radius: 1em;
+}
+
+.promptText {
+  font-size: 0.8em;
+  line-height: 1.25;
+  font-weight: 400;
+  margin: 0 0 1em;
+  padding: 1em;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.thinking {
+  margin: 1em;
+  font-size: 0.8em;
+  font-weight: 800;
+  color: #44ce29;
 }

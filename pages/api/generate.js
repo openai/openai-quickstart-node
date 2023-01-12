@@ -30,7 +30,7 @@ export default async function (req, res) {
     const response = await openai.createImage({
       prompt: generatePrompt(animal),
       n: 1,
-      size: "1024x1024",
+      size: "512x512",
 
     });
     // image_url = response.data.data[0].url;
