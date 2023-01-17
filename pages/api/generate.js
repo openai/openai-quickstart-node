@@ -5,8 +5,16 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
+function isValidAPIKey() {
+  return configuration.apiKey;
+}
+
+function isEmptyString(inputStr) {
+  return inputStr.trim().length === 0;
+}
+
 export default async function (req, res) {
-  if (!configuration.apiKey) {
+  if (!isValidAPIKey()) {
     res.status(500).json({
       error: {
         message: "OpenAI API key not configured, please follow instructions in README.md",
@@ -16,7 +24,7 @@ export default async function (req, res) {
   }
 
   const animal = req.body.animal || '';
-  if (animal.trim().length === 0) {
+  if (isEmptyString(animal)) {
     res.status(400).json({
       error: {
         message: "Please enter a valid animal",
@@ -33,10 +41,11 @@ export default async function (req, res) {
     });
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
+    const errRes = error.response
     // Consider adjusting the error handling logic for your use case
-    if (error.response) {
-      console.error(error.response.status, error.response.data);
-      res.status(error.response.status).json(error.response.data);
+    if (errRes) {
+      console.error(errRes.status, errRes.data);
+      res.status(errRes.status).json(errRes.data);
     } else {
       console.error(`Error with OpenAI API request: ${error.message}`);
       res.status(500).json({
@@ -48,9 +57,19 @@ export default async function (req, res) {
   }
 }
 
+function capitalizationWord(word) {
+  if (isEmptyString(word)) {
+    return '';
+  }
+
+  const firstLetter = word[0].toUpperCase();
+  const rest = word.slice(1).toLowerCase();
+
+  return firstLetter + rest;
+}
+
 function generatePrompt(animal) {
-  const capitalizedAnimal =
-    animal[0].toUpperCase() + animal.slice(1).toLowerCase();
+  const capitalizedAnimal = capitalizationWord(animal);
   return `Suggest three names for an animal that is a superhero.
 
 Animal: Cat

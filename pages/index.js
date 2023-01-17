@@ -2,6 +2,8 @@ import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
 
+const API_URL = "/api/generate";
+
 export default function Home() {
   const [animalInput, setAnimalInput] = useState("");
   const [result, setResult] = useState();
@@ -9,7 +11,7 @@ export default function Home() {
   async function onSubmit(event) {
     event.preventDefault();
     try {
-      const response = await fetch("/api/generate", {
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
