@@ -1,17 +1,20 @@
 import Head from "next/head";
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import styles from "./index.module.css";
-import chalk from 'chalk';
-export default function Home() {
+// import chalk from 'chalk';
+import Header from "./Header";
+export default function Index() {
   const [animalInput, setAnimalInput] = useState("");
   const [promptText, setPromptText] = useState("");
   // const [promptArray, setPromptArray] = useState([]);
-  const [result, setResult] = useState();
+  const [result, setResult] = useState([{}]);
   const [clicked, setClicked] = useState();
   const [focused, setFocused] = useState();
   const inputRef = useRef(null);
-
-  console.log(chalk.red('Hello world!'));
+  useEffect(() => {
+    console.log("result");
+  }, []);
+  // console.log(chalk.red('bbbb world!'));
   async function handleBlur(event) {
     event.preventDefault();
     try {
@@ -44,7 +47,7 @@ export default function Home() {
           new Error(`Request failed with status ${response.status}`)
         );
       }
-      setResult(data.result);
+      setResult([{ prompt: promptText, imageUrl: data.result }, ...result]);
       inputRef.current.focus();
       setFocused();
     } catch (error) {
@@ -60,11 +63,10 @@ export default function Home() {
         <link rel="icon" href="/dog.png" />
       </Head>
       <main className={styles.main}>
-        <h3>PL<em>AI</em>N<em>Image</em></h3>
+        <Header />
         <div className={styles.inputForm}>
-          {result && (<div className={styles.resultImage}><img src={result} /></div>)}
+          {result[0].imageUrl && (<div className={styles.resultImage}><img src={result[0].imageUrl} /></div>)}
           {promptText && (<div className={styles.promptText}>{promptText}</div>)}
-
           <form onSubmit={onSubmit}>
             <input
               type="text"
@@ -79,6 +81,15 @@ export default function Home() {
             {(!clicked && focused) && <input type="submit" value="Generate image" />}
           </form>
         </div>
+        <ul className={styles.resultList}>
+          {result.map((e, idx) =>
+            <li key={idx} >
+              <img width="100%" src={e.imageUrl} />
+              <h4>{e.prompt}</h4>
+            </li>
+          )}
+        </ul>
+
         <div className={styles.logo}>
           <img src="/dog.png" className={styles.icon} />
           <h2>Plain<em>AI</em></h2>
@@ -86,7 +97,7 @@ export default function Home() {
         <small className={styles.copyright}>All rights reserved.</small>
       </main>
       <div className={styles.result}>
-        <img src={result} width="100%" />
+        <img src={result[0].imageUrl} width="100%" />
       </div>
     </div>
   );
