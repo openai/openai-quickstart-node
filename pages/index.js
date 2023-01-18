@@ -12,17 +12,16 @@ export default function Index() {
   const [focused, setFocused] = useState();
   const inputRef = useRef(null);
   useEffect(() => {
-    console.log("result");
+    console.log("result222");
   }, []);
   // console.log(chalk.red('bbbb world!'));
   async function handleBlur(event) {
     event.preventDefault();
     try {
-      setPromptText(promptText => promptText + animalInput + " ")
+      setPromptText((promptText) => promptText + animalInput + " ");
       setAnimalInput("");
       setFocused(1);
-    }
-    catch (error) {
+    } catch (error) {
       // Consider implementing your own error handling logic here
       console.error(error);
       alert(error.message);
@@ -40,7 +39,9 @@ export default function Index() {
         body: JSON.stringify({ animal: promptText }),
       });
       const data = await response.json();
-      if (data.result != '') { setClicked() }
+      if (data.result != "") {
+        setClicked();
+      }
       if (response.status !== 200) {
         throw (
           data.error ||
@@ -65,8 +66,12 @@ export default function Index() {
       <main className={styles.main}>
         <Header />
         <div className={styles.inputForm}>
-          {result[0].imageUrl && (<div className={styles.resultImage}><img src={result[0].imageUrl} /></div>)}
-          {promptText && (<div className={styles.promptText}>{promptText}</div>)}
+          {result[0].imageUrl && (
+            <div className={styles.resultImage}>
+              <img src={result[0].imageUrl} />
+            </div>
+          )}
+          {promptText && <div className={styles.promptText}>{promptText}</div>}
           <form onSubmit={onSubmit}>
             <input
               type="text"
@@ -78,21 +83,25 @@ export default function Index() {
               ref={inputRef}
             />
             {clicked && <div className={styles.thinking}>thinking...</div>}
-            {(!clicked && focused) && <input type="submit" value="Generate image" />}
+            {!clicked && focused && (
+              <input type="submit" value="Generate image" />
+            )}
           </form>
         </div>
         <ul className={styles.resultList}>
-          {result.map((e, idx) =>
-            <li key={idx} >
+          {result.map((e, idx) => (
+            <li key={idx}>
               <img width="100%" src={e.imageUrl} />
               <h4>{e.prompt}</h4>
             </li>
-          )}
+          ))}
         </ul>
 
         <div className={styles.logo}>
           <img src="/dog.png" className={styles.icon} />
-          <h2>Plain<em>AI</em></h2>
+          <h2>
+            Plain<em>AI</em>
+          </h2>
         </div>
         <small className={styles.copyright}>All rights reserved.</small>
       </main>
