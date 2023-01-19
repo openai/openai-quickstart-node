@@ -1,0 +1,154 @@
+@font-face {
+  font-family: "ColfaxAI";
+  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2)
+      format("woff2"),
+    url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "ColfaxAI";
+  src: url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff2) format("woff2"),
+    url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff) format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+.main,
+.main input {
+  font-size: 16px;
+  line-height: 24px;
+  color: #353740;
+  font-family: "ColfaxAI", Helvetica, sans-serif;
+}
+.main {
+  margin: 0;
+  h3 {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: rgba(0, 0, 0, 0.75);
+    letter-spacing: 0.25em;
+    padding: 1em;
+    em {
+      color: red;
+    }
+  }
+}
+.main .icon {
+  width: 1.5em;
+  margin-top: 0.5em;
+}
+.main .logo {
+  display: inline-block;
+  padding: 0.5em;
+  text-align: center;
+  margin: 1rem auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.main .logo h2 {
+  font-size: 0.85rem;
+  font-weight: 900;
+  margin: 0;
+}
+.copyright {
+  font-size: 0.75em;
+}
+.main .logo h2 em {
+  color: #cc092f;
+}
+
+.inputForm {
+  text-align: center;
+  border: 0;
+  width: 100%;
+  background: black;
+  ::placeholder {
+    color: #cdcdcd;
+    opacity: 0.5;
+    font-size: 1rem;
+  }
+  form {
+    width: 66%;
+    margin: 0 auto;
+  }
+  input[type="text"] {
+    font-size: 1.25em;
+    padding: 0.75em 1em;
+    border: 0;
+    background: none;
+    border-bottom: 1px solid #44ce29;
+    outline: 0;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    margin-bottom: 0.5em;
+    color: white;
+    font-weight: 600;
+  }
+  input[type="submit"] {
+    padding: 1em 0;
+    color: black;
+    background-color: #44ce29;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 0.85em;
+    letter-spacing: 0.25em;
+  }
+}
+.resultImage {
+  img {
+    display: block;
+    width: 100%;
+    max-height: 33vh;
+    object-fit: cover;
+  }
+}
+.promptText {
+  font-size: 0.8em;
+  line-height: 1.25;
+  font-weight: 400;
+  margin: 0 0 1em;
+  padding: 1em;
+  background: rgba(255, 255, 255, 0.95);
+}
+.thinking {
+  margin: 1em;
+  font-size: 0.8em;
+  font-weight: 800;
+  color: #44ce29;
+}
+.resultList {
+  width: 66%;
+  margin: 2em auto 0;
+  background: white;
+
+  li {
+    display: flex;
+    background-color: darkgreen;
+    width: 100%;
+    margin: 0.5%;
+    align-items: center;
+    justify-content: center;
+    img {
+      height: 10em;
+      object-fit: cover;
+      flex: 1;
+    }
+    h4 {
+      color: white;
+      flex: 1;
+      padding: 1em;
+    }
+  }
+}

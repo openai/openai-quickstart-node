@@ -1,10 +1,9 @@
 import Head from "next/head";
 import { useEffect, useState, useRef } from "react";
-import styles from "./index.module.css";
-// import chalk from 'chalk';
+import styles from "./index.module.scss";
 import Header from "./Header";
 export default function Index() {
-  const [animalInput, setAnimalInput] = useState("");
+  const [textInput, setTextInput] = useState("");
   const [promptText, setPromptText] = useState("");
   // const [promptArray, setPromptArray] = useState([]);
   const [result, setResult] = useState([{}]);
@@ -14,12 +13,11 @@ export default function Index() {
   useEffect(() => {
     console.log("result");
   }, []);
-  // console.log(chalk.red('bbbb world!'));
   async function handleBlur(event) {
     event.preventDefault();
     try {
-      setPromptText(promptText => promptText + animalInput + " ")
-      setAnimalInput("");
+      setPromptText(promptText => promptText + textInput + " ")
+      setTextInput("");
       setFocused(1);
     }
     catch (error) {
@@ -37,7 +35,7 @@ export default function Index() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ animal: promptText }),
+        body: JSON.stringify({ promptText: promptText }),
       });
       const data = await response.json();
       if (data.result != '') { setClicked() }
@@ -70,10 +68,10 @@ export default function Index() {
           <form onSubmit={onSubmit}>
             <input
               type="text"
-              name="animal"
+              name="promptText"
               placeholder="Prompt"
-              value={animalInput}
-              onChange={(e) => setAnimalInput(e.target.value)}
+              value={textInput}
+              onChange={(e) => setTextInput(e.target.value)}
               onBlur={(e) => handleBlur(e)}
               ref={inputRef}
             />
@@ -96,9 +94,6 @@ export default function Index() {
         </div>
         <small className={styles.copyright}>All rights reserved.</small>
       </main>
-      <div className={styles.result}>
-        <img src={result[0].imageUrl} width="100%" />
-      </div>
     </div>
   );
 }
