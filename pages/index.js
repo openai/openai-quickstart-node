@@ -6,13 +6,13 @@ export default function Index() {
   const [textInput, setTextInput] = useState("");
   const [promptText, setPromptText] = useState("");
   // const [promptArray, setPromptArray] = useState([]);
-  const [result, setResult] = useState([{}]);
+  const [result, setResult] = useState([]);
   const [clicked, setClicked] = useState();
   const [focused, setFocused] = useState();
   const inputRef = useRef(null);
   useEffect(() => {
-    console.log("result");
-  }, []);
+    console.log("result", result);
+  }, [result]);
   async function handleBlur(event) {
     event.preventDefault();
     try {
@@ -45,7 +45,7 @@ export default function Index() {
           new Error(`Request failed with status ${response.status}`)
         );
       }
-      setResult([{ prompt: promptText, imageUrl: data.result }, ...result]);
+      promptText && setResult([{ prompt: promptText, imageUrl: data.result }, ...result]);
       inputRef.current.focus();
       setFocused();
     } catch (error) {
@@ -63,8 +63,10 @@ export default function Index() {
       <main className={styles.main}>
         <Header />
         <div className={styles.inputForm}>
-          {result[0].imageUrl && (<div className={styles.resultImage}><img src={result[0].imageUrl} /></div>)}
-          {promptText && (<div className={styles.promptText}>{promptText}</div>)}
+          <div className={styles.currentResult}>
+            {result[0] && (<div className={styles.resultImage}><img src={result[0].imageUrl} /></div>)}
+            {promptText && (<div className={styles.promptText}>{promptText}</div>)}
+          </div>
           <form onSubmit={onSubmit}>
             <input
               type="text"
@@ -81,18 +83,21 @@ export default function Index() {
         </div>
         <ul className={styles.resultList}>
           {result.map((e, idx) =>
-            <li key={idx} >
-              <img width="100%" src={e.imageUrl} />
+            <li key={idx} className={styles.shadow}>
+              <div className={styles.resultListImage}><img width="100%" src={e.imageUrl} /></div>
               <h4>{e.prompt}</h4>
             </li>
           )}
         </ul>
 
-        <div className={styles.logo}>
-          <img src="/dog.png" className={styles.icon} />
-          <h2>Plain<em>AI</em></h2>
+        <div className={styles.footer}>
+
+          <div className={styles.logo}>
+            <img src="/dog.png" className={styles.icon} />
+            <h2>Plain<em>AI</em></h2>
+          </div>
+          <div className={styles.copyright}><small>All rights reserved.</small></div>
         </div>
-        <small className={styles.copyright}>All rights reserved.</small>
       </main>
     </div>
   );
