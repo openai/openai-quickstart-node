@@ -4,7 +4,7 @@ This is an example pet name generator app used in the OpenAI API [quickstart tut
 
 ## Setup
 
-1. If you don’t have Node.js installed, [install it from here](https://nodejs.org/en/) (requires version >= 14.6.0)
+1. If you don’t have Node.js installed, [install it from here](https://nodejs.org/en/) (Node.js version >= 14.6.0 required)
 
 2. Clone this repository
 
