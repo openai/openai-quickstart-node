@@ -57,7 +57,7 @@ export default function Index() {
   return (
     <div>
       <Head>
-        <title>Plain AI</title>
+        <title>PlainAI</title>
         <link rel="icon" href="/dog.png" />
       </Head>
       <main className={styles.main}>
