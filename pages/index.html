@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-  @media screen and (max-width: 600px) 
+  {
+    @media screen and (max-width: 600px) 
   {
     #3d-model 
     {
@@ -21,19 +22,7 @@
     }
       
       /* Make the page responsive */
-      @media screen and (max-width: 600px) {
-        #3d-model {
-          width: 90%;
-          height: 300px;
-        }
-        
-        input[type="text"] {
-          width: 90%;
-        }
-        
-        button[type="submit"] {
-          width: 50%;
-        }
+      
         
   }
     
@@ -109,7 +98,7 @@ scene.add(mainSphereMesh);
 // Create the camera
 let camera = new THREE.PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 1000);
 
-// Position the camera by calculating the mean of the 3D positions of the user's eyes
+/*Position the camera by calculating the mean of the 3D positions of the user's eyes*/
 camera.position.set(
   (userEye1Position.x + userEye2Position.x) / 2,
   (userEye1Position.y + userEye2Position.y) / 2,
@@ -132,7 +121,7 @@ camera.lookAt(
   )
 )
 
-/* Create the renderer*
+/* Create the renderer*/
 let renderer = new THREE.WebGLRenderer({ canvas: canvas });
 renderer.setSize(canvas.width, canvas.height);
 
