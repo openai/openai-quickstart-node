@@ -82,4 +82,24 @@
     button[type="submit"] {
       width: 50%;
     }
-  }
+    button[type="submit"]:hover {
+        background-color: #45a049;
+      }
+      
+      /* Make the page responsive */
+      @media screen and (max-width: 600px) {
+        #3d-model {
+          width: 90%;
+          height: 300px;
+        }
+      
+        input[type="text"] {
+          width: 90%;
+        }
+      
+        button[type="submit"] {
+          width: 50%;
+        }
+      
+    }
+}
