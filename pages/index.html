@@ -18,13 +18,7 @@
     button[type="submit"]:hover 
     {
         background-color: #45a049
-    }
-      
-     
-        
-  }
-    
-  <meta name="viewport" content=""width=device-width, initial-scale=1">
+    <meta name="viewport" content=""width=device-width, initial-scale=1">
     <html>
       <head>
         <title>Conversational AI Assistant</title>
@@ -53,92 +47,92 @@
             canvas.width = window.innerWidth
             canvas.height = window.innerHeight
 
-      /* Create the main sphere*/
-      let mainSphere = new THREE.SphereGeometry(50, 32, 32)
-      let mainSphereMaterial = new THREE.MeshBasicMaterial({color: 0xff0000})
-      let mainSphereMesh = new THREE.Mesh(mainSphere, mainSphereMaterial)
+            /* Create the main sphere*/
+            let mainSphere = new THREE.SphereGeometry(50, 32, 32)
+            let mainSphereMaterial = new THREE.MeshBasicMaterial({color: 0xff0000})
+            let mainSphereMesh = new THREE.Mesh(mainSphere, mainSphereMaterial)
 
-      // Position main sphere at [0, 0, 0]
-      mainSphereMesh.position.set(0, 0, 0);
+            /* Position main sphere at [0, 0, 0]*/
+            mainSphereMesh.position.set(0, 0, 0)
 
-      // Create the 4 orbiting smaller spheres
-      let smallSphere1 = new THREE.SphereGeometry(10, 32, 32);
-      let smallSphereMaterial1 = new THREE.MeshBasicMaterial({color: 0x00ff00});
-      let smallSphereMesh1 = new THREE.Mesh(smallSphere1, smallSphereMaterial1);
-      smallSphereMesh1.position.set(100, 0, 0);
+            /* Create the 4 orbiting smaller spheres*/
+            let smallSphere1 = new THREE.SphereGeometry(10, 32, 32)
+            let smallSphereMaterial1 = new THREE.MeshBasicMaterial(color: 0x00ff00)
+            let smallSphereMesh1 = new THREE.Mesh(smallSphere1, smallSphereMaterial1)
+            smallSphereMesh1.position.set(100, 0, 0)
 
-      let smallSphere2 = new THREE.SphereGeometry(10, 32, 32);
-      let smallSphereMaterial2 = new THREE.MeshBasicMaterial({color: 0x00ff00});
-      let smallSphereMesh2 = new THREE.Mesh(smallSphere2, smallSphereMaterial2);
-      smallSphereMesh2.position.set(-100, 0, 0);
+            let smallSphere2 = new THREE.SphereGeometry(10, 32, 32)
+            let smallSphereMaterial2 = new THREE.MeshBasicMaterial(color: 0x00ff00)
+            let smallSphereMesh2 = new THREE.Mesh(smallSphere2, smallSphereMaterial2)
+            smallSphereMesh2.position.set(-100, 0, 0)
 
-      let smallSphere3 = new THREE.SphereGeometry(10, 32, 32);
-      let smallSphereMaterial
-
-
-let smallSphereMesh3 = new THREE.Mesh(smallSphere3, smallSphereMaterial3);
-smallSphereMesh3.position.set(0, 100, 0);
-
-let smallSphere4 = new THREE.SphereGeometry(10, 32, 32);
-let smallSphereMaterial4 = new THREE.MeshBasicMaterial({color: 0x00ff00});
-let smallSphereMesh4 = new THREE.Mesh(smallSphere4, smallSphereMaterial4);
-smallSphereMesh4.position.set(0, -100, 0);
-
-/* Add the small spheres to the main sphere*/
-mainSphereMesh.add(smallSphereMesh1);
-mainSphereMesh.add(smallSphereMesh2);
-mainSphereMesh.add(smallSphereMesh3);
-mainSphereMesh.add(smallSphereMesh4);
-
-/* Create the scene*/
-let scene = new THREE.Scene();
-
-// Add the main sphere to the scene
-scene.add(mainSphereMesh);
-
-// Create the camera
-let camera = new THREE.PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 1000);
-
-// Position the camera by calculating the mean of the 3D positions of the user's eyes
-camera.position.set(
-  (userEye1Position.x + userEye2Position.x) / 2,
-  (userEye1Position.y + userEye2Position.y) / 2,
-  (userEye1Position.z + userEye2
+            let smallSphere3 = new THREE.SphereGeometry(10, 32, 32)
+            let smallSphereMaterial
 
 
-/* Position the camera by calculating the mean of the 3D positions of the user's eyes*/
-camera.position.set(
-  (userEye1Position.x + userEye2Position.x) / 2,
-  (userEye1Position.y + userEye2Position.y) / 2,
-  (userEye1Position.z + userEye2Position.z) / 2
-)i
+              let smallSphereMesh3 = new THREE.Mesh(smallSphere3, smallSphereMaterial3)
+              smallSphereMesh3.position.set(0, 100, 0)
 
-/*Orient the camera by calculating the gaze of the viewer as a directional vector*/
-camera.lookAt(
-  new THREE.Vector3(
-    userEye1Position.x - userEye2Position.x,
-    userEye1Position.y - userEye2Position.y,
-    userEye1Position.z - userEye2Position.z
-  )
-)
+              let smallSphere4 = new THREE.SphereGeometry(10, 32, 32)
+              let smallSphereMaterial4 = new THREE.MeshBasicMaterial({color: 0x00ff00})
+              let smallSphereMesh4 = new THREE.Mesh(smallSphere4, smallSphereMaterial4)
+              smallSphereMesh4.position.set(0, -100, 0)
 
-/* Create the renderer*
-let renderer = new THREE.WebGLRenderer({ canvas: canvas });
-renderer.setSize(canvas.width, canvas.height);
+              /* Add the small spheres to the main sphere*/
+              mainSphereMesh.add(smallSphereMesh1)
+              mainSphereMesh.add(smallSphereMesh2)
+              mainSphereMesh.add(smallSphereMesh3)
+              mainSphereMesh.add(smallSphereMesh4)
 
-/*Create the render loop*/
-let render = function() {
-  requestAnimationFrame(render);
+              /* Create the scene*/
+              let scene = new THREE.Scene()
 
-  // Update the small spheres' positions
-  smallSphereMesh1.position.x += 0.1;
-  smallSphereMesh2.position.x -= 0.1;
-  smallSphereMesh3.position.y += 0.1;
-  smallSphereMesh4.position.y -= 0.1;
+              // Add the main sphere to the scene
+              scene.add(mainSphereMesh);
 
-  // Render the scene
-  renderer.render(scene, camera);
-};
+              // Create the camera
+              let camera = new THREE.PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 1000);
+
+              // Position the camera by calculating the mean of the 3D positions of the user's eyes
+              camera.position.set(
+                (userEye1Position.x + userEye2Position.x) / 2,
+                (userEye1Position.y + userEye2Position.y) / 2,
+                (userEye1Position.z + userEye2
+
+
+              /* Position the camera by calculating the mean of the 3D positions of the user's eyes*/
+              camera.position.set(
+                (userEye1Position.x + userEye2Position.x) / 2,
+                (userEye1Position.y + userEye2Position.y) / 2,
+                (userEye1Position.z + userEye2Position.z) / 2
+              )i
+
+              /*Orient the camera by calculating the gaze of the viewer as a directional vector*/
+              camera.lookAt(
+                new THREE.Vector3(
+                  userEye1Position.x - userEye2Position.x,
+                  userEye1Position.y - userEye2Position.y,
+                  userEye1Position.z - userEye2Position.z
+                )
+              )
+
+              /* Create the renderer*
+              let renderer = new THREE.WebGLRenderer({ canvas: canvas });
+              renderer.setSize(canvas.width, canvas.height);
+
+              /*Create the render loop*/
+              let render = function() {
+                requestAnimationFrame(render);
+
+                // Update the small spheres' positions
+                smallSphereMesh1.position.x += 0.1;
+                smallSphereMesh2.position.x -= 0.1;
+                smallSphereMesh3.position.y += 0.1;
+                smallSphereMesh4.position.y -= 0.1;
+
+                // Render the scene
+                renderer.render(scene, camera);
+              };
 
 
 
@@ -152,7 +146,7 @@ let render = function() {
     transform: translateX(-100%)
   }
 }
-
+/* Crete Render Function
 let render = function() {
   requestAnimationFrame(render)
 
@@ -166,7 +160,7 @@ let render = function() {
   renderer.render(scene, camera)
 }
 
-function onMouseMove(event) {
+function nMouseMoveo(event) {
   /* Calculate the gaze of the viewer
   let gazeX = (event.clientX / window.innerWidth) * 2 - 1;
   let gazeY = -(event.clientY / window.innerHeight) * 2 + 1;
