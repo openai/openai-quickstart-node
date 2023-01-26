@@ -1,0 +1,85 @@
+/*TODO: Add textures and colors*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #f2f2f2;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 48px;
+    color: #333333;
+    margin-top: 50px;
+  }
+  
+  .ai-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  #3d-model {
+    width: 600px;
+    height: 600px;
+    /*TODO: Add 3D model CSS*/
+  }
+  
+  .input-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  form {
+    display: inline-block;
+  }
+  
+  input[type="text"] {
+    width: 60%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button[type="submit"] {
+    width: 20%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  /* Make the page responsive */
+  @media screen and (max-width: 600px) {
+    #3d-model {
+      width: 90%;
+      height: 300px;
+    }
+  
+    input[type="text"] {
+      width: 90%;
+    }
+  
+    button[type="submit"] {
+      width: 50%;
+    }
+  }
