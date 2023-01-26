@@ -1,32 +1,30 @@
 <!DOCTYPE html>
-  {
-    @media screen and (max-width: 600px) 
+  @media screen and (max-width: 600px) 
   {
     #3d-model 
     {
-      width: 90%;
-      height: 300px;
+      width: 90%
+      height: 300px
     }
     
     input[type="text"] {
-      width: 90%;
+      width: 90%
     }
     
     button[type="submit"] {
-      width: 50%;
+      width: 50%
     }
     
     button[type="submit"]:hover 
     {
-        background-color: #45a049;
+        background-color: #45a049
     }
       
-      /* Make the page responsive */
-      
+     
         
   }
     
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content=""width=device-width, initial-scale=1">
     <html>
       <head>
         <title>Conversational AI Assistant</title>
@@ -41,21 +39,24 @@
           <script src="index.js"></script>
           <link rel="stylesheet" type="text/css" href="styles.css">
       </head>
-    <body>
-    <canvas id="ai-assistant"></canvas>
+   
     
-    <script>
-      /* Get canvas element*/
-      let canvas = document.getElementById("ai-assistant");
+    
+      <body>
+        <canvas id="ai-assistant"></canvas>
+    
+          <script>
+            /* Get canvas element*/
+            let canvas = document.getElementById("ai-assistant")
 
-      /* Set canvas size to the size of the window */
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+            /* Set canvas size to the size of the window */
+            canvas.width = window.innerWidth
+            canvas.height = window.innerHeight
 
-      / Create the main sphere
-      let mainSphere = new THREE.SphereGeometry(50, 32, 32);
-      let mainSphereMaterial = new THREE.MeshBasicMaterial({color: 0xff0000});
-      let mainSphereMesh = new THREE.Mesh(mainSphere, mainSphereMaterial);
+      /* Create the main sphere*/
+      let mainSphere = new THREE.SphereGeometry(50, 32, 32)
+      let mainSphereMaterial = new THREE.MeshBasicMaterial({color: 0xff0000})
+      let mainSphereMesh = new THREE.Mesh(mainSphere, mainSphereMaterial)
 
       // Position main sphere at [0, 0, 0]
       mainSphereMesh.position.set(0, 0, 0);
@@ -98,7 +99,7 @@ scene.add(mainSphereMesh);
 // Create the camera
 let camera = new THREE.PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 1000);
 
-/*Position the camera by calculating the mean of the 3D positions of the user's eyes*/
+// Position the camera by calculating the mean of the 3D positions of the user's eyes
 camera.position.set(
   (userEye1Position.x + userEye2Position.x) / 2,
   (userEye1Position.y + userEye2Position.y) / 2,
@@ -121,7 +122,7 @@ camera.lookAt(
   )
 )
 
-/* Create the renderer*/
+/* Create the renderer*
 let renderer = new THREE.WebGLRenderer({ canvas: canvas });
 renderer.setSize(canvas.width, canvas.height);
 
@@ -142,17 +143,36 @@ let render = function() {
 
 
 
-document.addEventListener('mousemove', onMouseMove, false);
-document.addEventListener('keydown', onKeyDown, false);
+/* Create the render loop*/
+@keyframes renderLoop {
+  0% {
+    transform: translateX(0)
+  }
+  100% {
+    transform: translateX(-100%)
+  }
+}
 
+let render = function() {
+  requestAnimationFrame(render)
+
+  /* Update the small spheres' positions*/
+  smallSphereMesh1.position.x += 0.1
+  smallSphereMesh2.position.x -= 0.1
+  smallSphereMesh3.position.y += 0.1
+  smallSphereMesh4.position.y -= 0.1
+
+  /* Render the scene*/
+  renderer.render(scene, camera)
+}
 
 function onMouseMove(event) {
-  // Calculate the gaze of the viewer
+  /* Calculate the gaze of the viewer
   let gazeX = (event.clientX / window.innerWidth) * 2 - 1;
   let gazeY = -(event.clientY / window.innerHeight) * 2 + 1;
 
-  // Update the camera's position and orientation
-  camera.position.set(
+  /* Update the camera's position and orientation*/
+  camera.position.set(gazeX, gazeY, camera.position.z)
 
 
 // Update the camera's position and orientation

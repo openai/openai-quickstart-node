@@ -529,34 +529,27 @@ Sure, here is the continuation of the `index.html` file:
 
         // Update the camera's position and orientation
         camera.position.set(
-```
-
-continue
-
-Sure, here is the continuation of the `onMouseMove` function in the `index.html` file:
-
-        ```javascript
-// Update the camera's position and orientation
+/* Update the camera's position and orientation*/
         camera.position.set(gazeX, gazeY, camera.position.z);
         camera.lookAt(new THREE.Vector3(gazeX, gazeY, 0));
 
-        // Update the small spheres' positions
+        /* Update the small spheres' positions*/
         smallSphereMesh1.position.x += gazeX * 0.01;
         smallSphereMesh2.position.x -= gazeX * 0.01;
         smallSphereMesh3.position.y += gazeY * 0.01;
         smallSphereMesh4.position.y -= gazeY * 0.01;
       }
 
-      // Handle key down event
+      /* Handle key down event*/
       function onKeyDown(event) {
         switch (event.keyCode) {
-          case 49: // 1
-            // Code to execute when the 1 key is pressed
+          case 49:
+            /* Code to execute when the 1 key is pressed
             break;
           case 50: // 2
-            // Code to execute when the 2 key is pressed
+            /* Code to execute when the 2 key is pressed
             break;
-          // Add more cases as needed
+          /* Add more cases as needed
         }
       }
     </script>
@@ -573,16 +566,16 @@ Sure, here is the continuation of the `onMouseMove` function in the `index.html`
       ```javascript
 }
 
-      // Handle key down event
+      /* Handle key down event
       function onKeyDown(event) {
         switch (event.keyCode) {
-          case 49: // 1
-            // Code to execute when the 1 key is pressed
+          case 49: /* 1
+            /* Code to execute when the 1 key is pressed
             break;
-          case 50: // 2
-            // Code to execute when the 2 key is pressed
+          case 50: /* 2
+            /* Code to execute when the 2 key is pressed
             break;
-          // Add more cases as needed
+          /* Add more cases as needed
         }
       }
     </script>
@@ -597,7 +590,7 @@ Next, We will add the code for the render loop which will be responsible for upd
       ```javascript
 var render = function () {
         requestAnimationFrame(render);
-        // Code to update the scene goes here
+        /* Code to update the scene goes here
         renderer.render(scene, camera);
       };
 
@@ -630,22 +623,22 @@ Sure, here is the updated and commented version of the `index.html` file for the
   <body>
     <div id="canvas"></div>
     <script>
-      // Initialize Three.js scene and objects
+      /* Initialize Three.js scene and objects*/
       var scene = new THREE.Scene();
       var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
       var renderer = new THREE.WebGLRenderer();
       renderer.setSize(window.innerWidth, window.innerHeight);
-// Add the canvas element to the HTML body
+/* Add the canvas element to the HTML body*/
       document.getElementById("canvas").appendChild(renderer.domElement);
 
-      // Create the main sphere object
+      /* Create the main sphere object*/
       var mainSphereGeometry = new THREE.SphereGeometry(2, 32, 32);
       var mainSphereMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff }); // TODO: Replace with actual texture
       var mainSphere = new THREE.Mesh(mainSphereGeometry, mainSphereMaterial);
       mainSphere.position.set(0, 0, 0); // Position the main sphere at the origin
       scene.add(mainSphere);
 
-      // Create the orbiting spheres
+      /* Create the orbiting spheres*/
       var orbitingSphereGeometry = new THREE.SphereGeometry(0.5, 32, 32);
       var orbitingSphereMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff }); // TODO: Replace with actual texture
       var orbitingSpheres = [];
@@ -656,7 +649,7 @@ Sure, here is the updated and commented version of the `index.html` file for the
         scene.add(sphere);
       }
 
-      // Create the render loop
+      /* Create the render loop*/
       var render = function() {
         requestAnimationFrame(render);
 
