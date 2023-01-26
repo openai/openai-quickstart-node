@@ -54,5 +54,5 @@ export default function Home() {
         <div className={styles.result}>{result}</div>
       </main>
     </div>
-  );
+  )
 }

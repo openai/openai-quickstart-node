@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+  @media screen and (max-width: 600px) 
+  {
+    #3d-model 
+    {
+      width: 90%;
+      height: 300px;
+    }
+    
+    input[type="text"] {
+      width: 90%;
+    }
+    
+    button[type="submit"] {
+      width: 50%;
+    }
+    
+    button[type="submit"]:hover 
+    {
+        background-color: #45a049;
+    }
+      
+      /* Make the page responsive */
+      @media screen and (max-width: 600px) {
+        #3d-model {
+          width: 90%;
+          height: 300px;
+        }
+        
+        input[type="text"] {
+          width: 90%;
+        }
+        
+        button[type="submit"] {
+          width: 50%;
+        }
+        
+  }
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <html>
+      <head>
+        <title>Conversational AI Assistant</title>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r119/three.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/webgl-utils/0.0.2/webgl-utils.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/opencv.js/4.4.0/opencv.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"></script>
+                                                  <meta charset="utf-8">
+          <title>AI Assistant</title>
+          <script src="openCV.js"></script>
+          <script src="WebGL.js"></script>
+          <script src="index.js"></script>
+          <link rel="stylesheet" type="text/css" href="styles.css">
+      </head>
+    <body>
+    <canvas id="ai-assistant"></canvas>
+    
+    <script>
+      /* Get canvas element*/
+      let canvas = document.getElementById("ai-assistant");
+
+      /* Set canvas size to the size of the window */
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      / Create the main sphere
+      let mainSphere = new THREE.SphereGeometry(50, 32, 32);
+      let mainSphereMaterial = new THREE.MeshBasicMaterial({color: 0xff0000});
+      let mainSphereMesh = new THREE.Mesh(mainSphere, mainSphereMaterial);
+
+      // Position main sphere at [0, 0, 0]
+      mainSphereMesh.position.set(0, 0, 0);
+
+      // Create the 4 orbiting smaller spheres
+      let smallSphere1 = new THREE.SphereGeometry(10, 32, 32);
+      let smallSphereMaterial1 = new THREE.MeshBasicMaterial({color: 0x00ff00});
+      let smallSphereMesh1 = new THREE.Mesh(smallSphere1, smallSphereMaterial1);
+      smallSphereMesh1.position.set(100, 0, 0);
+
+      let smallSphere2 = new THREE.SphereGeometry(10, 32, 32);
+      let smallSphereMaterial2 = new THREE.MeshBasicMaterial({color: 0x00ff00});
+      let smallSphereMesh2 = new THREE.Mesh(smallSphere2, smallSphereMaterial2);
+      smallSphereMesh2.position.set(-100, 0, 0);
+
+      let smallSphere3 = new THREE.SphereGeometry(10, 32, 32);
+      let smallSphereMaterial
+
+
+let smallSphereMesh3 = new THREE.Mesh(smallSphere3, smallSphereMaterial3);
+smallSphereMesh3.position.set(0, 100, 0);
+
+let smallSphere4 = new THREE.SphereGeometry(10, 32, 32);
+let smallSphereMaterial4 = new THREE.MeshBasicMaterial({color: 0x00ff00});
+let smallSphereMesh4 = new THREE.Mesh(smallSphere4, smallSphereMaterial4);
+smallSphereMesh4.position.set(0, -100, 0);
+
+/* Add the small spheres to the main sphere*/
+mainSphereMesh.add(smallSphereMesh1);
+mainSphereMesh.add(smallSphereMesh2);
+mainSphereMesh.add(smallSphereMesh3);
+mainSphereMesh.add(smallSphereMesh4);
+
+/* Create the scene*/
+let scene = new THREE.Scene();
+
+// Add the main sphere to the scene
+scene.add(mainSphereMesh);
+
+// Create the camera
+let camera = new THREE.PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 1000);
+
+// Position the camera by calculating the mean of the 3D positions of the user's eyes
+camera.position.set(
+  (userEye1Position.x + userEye2Position.x) / 2,
+  (userEye1Position.y + userEye2Position.y) / 2,
+  (userEye1Position.z + userEye2
+
+
+/* Position the camera by calculating the mean of the 3D positions of the user's eyes*/
+camera.position.set(
+  (userEye1Position.x + userEye2Position.x) / 2,
+  (userEye1Position.y + userEye2Position.y) / 2,
+  (userEye1Position.z + userEye2Position.z) / 2
+)i
+
+/*Orient the camera by calculating the gaze of the viewer as a directional vector*/
+camera.lookAt(
+  new THREE.Vector3(
+    userEye1Position.x - userEye2Position.x,
+    userEye1Position.y - userEye2Position.y,
+    userEye1Position.z - userEye2Position.z
+  )
+)
+
+/* Create the renderer*
+let renderer = new THREE.WebGLRenderer({ canvas: canvas });
+renderer.setSize(canvas.width, canvas.height);
+
+/*Create the render loop*/
+let render = function() {
+  requestAnimationFrame(render);
+
+  // Update the small spheres' positions
+  smallSphereMesh1.position.x += 0.1;
+  smallSphereMesh2.position.x -= 0.1;
+  smallSphereMesh3.position.y += 0.1;
+  smallSphereMesh4.position.y -= 0.1;
+
+  // Render the scene
+  renderer.render(scene, camera);
+};
+
+
+
+
+document.addEventListener('mousemove', onMouseMove, false);
+document.addEventListener('keydown', onKeyDown, false);
+
+
+function onMouseMove(event) {
+  // Calculate the gaze of the viewer
+  let gazeX = (event.clientX / window.innerWidth) * 2 - 1;
+  let gazeY = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  // Update the camera's position and orientation
+  camera.position.set(
+
+
+// Update the camera's position and orientation
+camera.position.set(gazeX, gazeY, camera.position.z);
+camera.lookAt(new THREE.Vector3(gazeX, gazeY, 0));
+
+// Update the small spheres' positions
+smallSphereMesh1.position.x += gazeX * 0.01;
+smallSphereMesh2.position.x -= gazeX * 0.01;
+smallSphereMesh3.position.y += gazeY * 0.01;
+smallSphereMesh4.position.y -= gazeY * 0.01;
+}
+
+// Handle key down event
+function onKeyDown(event) {
+switch (event.keyCode) {
+  case 49: // 1
+    // Code to execute when the 1 key is pressed
+    break;
+  case 50: // 2
+    // Code to execute when the 2 key is pressed
+    break;
+  // Add more cases as needed
+}
+}
+
+
+
+}
+
+// Handle key down event
+function onKeyDown(event) {
+  switch (event.keyCode) {
+    case 49: // 1
+      // Code to execute when the 1 key is pressed
+      break;
+    case 50: // 2
+      // Code to execute when the 2 key is pressed
+      break;
+    // Add more cases as needed
+  }
+}
+
+
+
+
+
+var render = function () {
+    requestAnimationFrame(render);
+    // Code to update the scene goes here
+    renderer.render(scene, camera);
+  };
+
+  render();
+</script>
+</body>
+</html>
