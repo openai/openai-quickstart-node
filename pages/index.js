@@ -45,7 +45,7 @@ export default function Home() {
           <input
             type="text"
             name="animal"
-            placeholder="Enter an animal"
+            placeholder="testing"
             value={animalInput}
             onChange={(e) => setAnimalInput(e.target.value)}
           />
