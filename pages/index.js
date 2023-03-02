@@ -1,10 +1,11 @@
 import Head from "next/head";
-import { useState } from "react";
+import {useState} from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
   const [animalInput, setAnimalInput] = useState("");
   const [result, setResult] = useState();
+  const [modelId, setModelId] = useState("text-davinci-003");
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -14,7 +15,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ animal: animalInput }),
+        body: JSON.stringify({animal: animalInput, modelId: modelId}),
       });
 
       const data = await response.json();
@@ -24,24 +25,51 @@ export default function Home() {
 
       setResult(data.result);
       setAnimalInput("");
-    } catch(error) {
+    } catch (error) {
       // Consider implementing your own error handling logic here
       console.error(error);
       alert(error.message);
     }
   }
 
+  function onModelToggle(event) {
+    const modelId = event.target.value;
+    setModelId(modelId);
+  }
+
   return (
     <div>
       <Head>
         <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/dog.png" />
+        <link rel="icon" href="/dog.png"/>
       </Head>
 
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
+        <img src="/dog.png" className={styles.icon}/>
         <h3>Name my pet</h3>
         <form onSubmit={onSubmit}>
+          <div className={styles.radios}>
+          <label>
+            <input
+              type="radio"
+              name="modelId"
+              value="text-davinci-003"
+              checked={modelId === "text-davinci-003"}
+              onChange={onModelToggle}
+            />
+            <code>text-davinci-003</code>
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="modelId"
+              value="gpt-3.5-turbo"
+              checked={modelId === "gpt-3.5-turbo"}
+              onChange={onModelToggle}
+            />
+            <code>gpt-3.5-turbo</code>
+          </label>
+          </div>
           <input
             type="text"
             name="animal"
@@ -49,7 +77,7 @@ export default function Home() {
             value={animalInput}
             onChange={(e) => setAnimalInput(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
+          <input type="submit" value="Generate names"/>
         </form>
         <div className={styles.result}>{result}</div>
       </main>

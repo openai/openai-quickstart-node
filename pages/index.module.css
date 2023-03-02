@@ -65,3 +65,9 @@
   font-weight: bold;
   margin-top: 40px;
 }
+
+.main .radios {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column
+}
