@@ -11,11 +11,9 @@ export default function Home() {
     event.preventDefault();
     try {
       const response = await fetch("/api/generate", {
-        method: "POST",
-        headers: {
+        method: "POST", headers: {
           "Content-Type": "application/json",
-        },
-        body: JSON.stringify({animal: animalInput, modelId: modelId}),
+        }, body: JSON.stringify({animal: animalInput, modelId: modelId}),
       });
 
       const data = await response.json();
@@ -37,18 +35,17 @@ export default function Home() {
     setModelId(modelId);
   }
 
-  return (
-    <div>
-      <Head>
-        <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/dog.png"/>
-      </Head>
+  return (<div>
+    <Head>
+      <title>OpenAI Quickstart</title>
+      <link rel="icon" href="/dog.png"/>
+    </Head>
 
-      <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon}/>
-        <h3>Name my pet</h3>
-        <form onSubmit={onSubmit}>
-          <div className={styles.radios}>
+    <main className={styles.main}>
+      <img src="/dog.png" className={styles.icon}/>
+      <h3>Name my pet</h3>
+      <form onSubmit={onSubmit}>
+        <div className={styles.radios}>
           <label>
             <input
               type="radio"
@@ -69,18 +66,17 @@ export default function Home() {
             />
             <code>gpt-3.5-turbo</code>
           </label>
-          </div>
-          <input
-            type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
-          />
-          <input type="submit" value="Generate names"/>
-        </form>
-        <div className={styles.result}>{result}</div>
-      </main>
-    </div>
-  );
+        </div>
+        <input
+          type="text"
+          name="animal"
+          placeholder="Enter an animal"
+          value={animalInput}
+          onChange={(e) => setAnimalInput(e.target.value)}
+        />
+        <input type="submit" value="Generate names"/>
+      </form>
+      <div className={styles.result}>{result}</div>
+    </main>
+  </div>);
 }
