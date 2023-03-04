@@ -13,6 +13,13 @@
   font-style: normal;
 }
 @font-face {
+  font-family: "Social";
+  src: url(/fonts/ABCSocial-RegularItalic.woff2) format("woff2"),
+    url(/fonts/ABCSocial-RegularItalic.woff) format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
   font-family: "Impact";
   src: url(/fonts/ImpactNieuw-2012.woff2) format("woff2"),
     url(/fonts/ImpactNieuw-2012.woff) format("woff");
@@ -33,6 +40,8 @@
   align-items: center;
     padding: 20px 20px 0;
 }
+
+
 .main .icon {
   width: 100%;
   max-width: 800px;
@@ -45,6 +54,7 @@
   font-weight: normal;
   color: #202123;
   margin: 16px 0 40px;
+  margin-bottom: 12px;
 }
 .main form {
   display: flex;
@@ -73,6 +83,19 @@
 }
 .main .result {
   font-weight: normal;
-  margin-top: 40px;
+  font-style: italic;
+  margin-top: 10px;
+  margin-bottom: 10px;
   max-width: 720px;
+
+}
+
+.question {
+  max-width: 720px;
+}
+.caption {
+  margin-top: 4px;
+}
+.image {
+  max-width: 100%;
 }
