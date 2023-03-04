@@ -25,9 +25,14 @@
   flex-direction: column;
   align-items: center;
   padding-top: 60px;
+  background-image: url('/dark_calypso.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  color: #000000;
 }
 .main .icon {
-  width: 34px;
+  width: 15vw;
 }
 .main h3 {
   font-size: 32px;
@@ -64,4 +69,10 @@
 .main .result {
   font-weight: bold;
   margin-top: 40px;
+  background: #10a37f;
+  border: 5px solid black;
+  padding: 10px;
+  width: 300px;
+  height: fit-content;
+  min-height: 25px;
 }
