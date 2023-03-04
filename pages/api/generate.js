@@ -9,7 +9,7 @@ export default async function (req, res) {
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
-        message: "OpenAI API key not configured, please follow instructions in README.md",
+        message: "OpenAI API key no configurado, por favor sigue las instrucciones en README.md",
       }
     });
     return;
@@ -19,7 +19,7 @@ export default async function (req, res) {
   if (text.trim().length === 0) {
     res.status(400).json({
       error: {
-        message: "Please enter a valid text",
+        message: "Ingresa un texto válido para que funcione. :)",
       }
     });
     return;
@@ -29,20 +29,19 @@ export default async function (req, res) {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: generatePrompt(text),
-      temperature: 0.6,
+      temperature: 0.1,
       max_tokens: 500,
     });
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
-    // Consider adjusting the error handling logic for your use case
     if (error.response) {
       console.error(error.response.status, error.response.data);
       res.status(error.response.status).json(error.response.data);
     } else {
-      console.error(`Error with OpenAI API request: ${error.message}`);
+      console.error(`Error con la respuesta de OpenAI API: ${error.message}`);
       res.status(500).json({
         error: {
-          message: 'An error occurred during your request.',
+          message: 'A ocurrido un error durante la respuesta.',
         }
       });
     }
@@ -52,5 +51,13 @@ export default async function (req, res) {
 function generatePrompt(text) {
   const capitalizedText =
     text[0].toUpperCase() + text.slice(1).toLowerCase();
-  return `${capitalizedText}`;
+
+  // Si el texto contiene una lista, agregar el carácter de lista a cada elemento
+  if (/\n\s*[-*+]\s/.test(text)) {
+    const items = text.split('\n').map((line) => line.trim());
+    const formattedItems = items.map((item) => `• ${item.slice(2)}`);
+    return formattedItems.join('\n');
+  }
+
+  return capitalizedText;
 }

@@ -15,19 +15,22 @@
 }
 .main,
 .main input {
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 14px;
+  line-height: 18px;
   color: #353740;
   font-family: "ColfaxAI", Helvetica, sans-serif;
 }
 .main {
   display: flex;
+  width: 100%;
+  max-width: 500px;
   flex-direction: column;
   align-items: center;
   padding-top: 60px;
+  padding-bottom: 100px;
   background-image: url('/dark_calypso.png');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: center center;
   color: #000000;
 }
@@ -38,13 +41,13 @@
   font-size: 32px;
   line-height: 40px;
   font-weight: bold;
-  color: #202123;
+  color: #ffffff;
   margin: 16px 0 40px;
 }
 .main form {
   display: flex;
   flex-direction: column;
-  width: 320px;
+  width: 75%;
 }
 .main input[type="text"] {
   padding: 12px 16px;
@@ -70,9 +73,17 @@
   font-weight: bold;
   margin-top: 40px;
   background: #10a37f;
-  border: 5px solid black;
-  padding: 10px;
-  width: 300px;
+  width: 100%;
+  max-width: 300px;
   height: fit-content;
   min-height: 25px;
+  padding: 25px;
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 15px;
+  height: 15px;
 }

@@ -3,11 +3,16 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
+  
   const [textInput, setTextInput] = useState("");
   const [result, setResult] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const loaderImg = "/giphy.gif";
 
   async function onSubmit(event) {
     event.preventDefault();
+    console.log("Loading TRUE");
+    setIsLoading(true);
     try {
       const response = await fetch("/api/generate", {
         method: "POST",
@@ -19,15 +24,17 @@ export default function Home() {
 
       const data = await response.json();
       if (response.status !== 200) {
-        throw data.error || new Error(`Request failed with status ${response.status}`);
+        throw data.error || new Error(`Respuesta del estado fallida ${response.status}`);
       }
 
       setResult(data.result);
       setTextInput("");
     } catch(error) {
-      // Consider implementing your own error handling logic here
       console.error(error);
       alert(error.message);
+    } finally {
+      console.log("Loading FALSE");
+      setIsLoading(false);
     }
   }
 
@@ -35,12 +42,12 @@ export default function Home() {
     <div>
       <Head>
         <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/maquina_escribir.png" />
+        <link rel="icon" href="/marmota.png" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/marmota.png" className={styles.icon} />
-        <h3>Escribe algun texto</h3>
+        <img src="/Vinyl_fs.png" className={styles.icon} />
+        <h3>¿Alguna pregunta?</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
@@ -49,9 +56,12 @@ export default function Home() {
             value={textInput}
             onChange={(e) => setTextInput(e.target.value)}
           />
-          <input type="submit" value="Generate texto" />
+          <input type="submit" value="Generar respuesta" />
         </form>
-        <div className={styles.result}>{result}</div>
+        {isLoading && <img src={loaderImg} className={styles.loader} />}
+        <div className={styles.result}>
+        {result}
+        </div>
       </main>
     </div>
   );
