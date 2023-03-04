@@ -1,38 +1,48 @@
 @font-face {
-  font-family: "ColfaxAI";
-  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2)
-      format("woff2"),
-    url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
+  font-family: "Social";
+  src: url(/fonts/ABCSocial-Regular.woff2) format("woff2"),
+    url(/fonts/ABCSocial-Regular.woff) format("woff");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "ColfaxAI";
-  src: url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff2) format("woff2"),
-    url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff) format("woff");
+  font-family: "Social";
+  src: url(/fonts/ABCSocial-Bold.woff2) format("woff2"),
+    url(/fonts/ABCSocial-Bold.woff) format("woff");
   font-weight: bold;
   font-style: normal;
 }
+@font-face {
+  font-family: "Impact";
+  src: url(/fonts/ImpactNieuw-2012.woff2) format("woff2"),
+    url(/fonts/ImpactNieuw-2012.woff) format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .main,
 .main input {
   font-size: 16px;
   line-height: 24px;
   color: #353740;
-  font-family: "ColfaxAI", Helvetica, sans-serif;
+  font-family: "Social", Helvetica, sans-serif;
 }
 .main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 60px;
+    padding: 20px 20px 0;
 }
 .main .icon {
-  width: 34px;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 40px;
 }
 .main h3 {
   font-size: 32px;
   line-height: 40px;
-  font-weight: bold;
+  font-family: "Impact", Helvetica, sans-serif;
+  font-weight: normal;
   color: #202123;
   margin: 16px 0 40px;
 }
@@ -62,6 +72,7 @@
   cursor: pointer;
 }
 .main .result {
-  font-weight: bold;
+  font-weight: normal;
   margin-top: 40px;
+  max-width: 720px;
 }
