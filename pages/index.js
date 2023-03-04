@@ -7,7 +7,7 @@ export default function Home() {
   const [textInput, setTextInput] = useState("");
   const [result, setResult] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const loaderImg = "/giphy.gif";
+  const loaderImg = "/loader.gif";
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -62,6 +62,7 @@ export default function Home() {
         <div className={styles.result}>
         {result}
         </div>
+        <button className="boton_reset" onClick={() => window.location.reload(false)}>Recargar!</button>
       </main>
     </div>
   );

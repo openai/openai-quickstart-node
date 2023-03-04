@@ -1,29 +1,13 @@
-@font-face {
-  font-family: "ColfaxAI";
-  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2)
-      format("woff2"),
-    url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "ColfaxAI";
-  src: url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff2) format("woff2"),
-    url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff) format("woff");
-  font-weight: bold;
-  font-style: normal;
-}
+
 .main,
 .main input {
   font-size: 14px;
   line-height: 18px;
   color: #353740;
-  font-family: "ColfaxAI", Helvetica, sans-serif;
+  font-family: "Consolas", Helvetica, sans-serif;
 }
 .main {
   display: flex;
-  width: 100%;
-  max-width: 500px;
   flex-direction: column;
   align-items: center;
   padding-top: 60px;
@@ -32,7 +16,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  color: #000000;
+  color: #ffffff;
 }
 .main .icon {
   width: 15vw;
@@ -47,10 +31,10 @@
 .main form {
   display: flex;
   flex-direction: column;
-  width: 75%;
 }
 .main input[type="text"] {
   padding: 12px 16px;
+  width: 60vw;
   border: 1px solid #10a37f;
   border-radius: 4px;
   margin-bottom: 24px;
@@ -61,9 +45,11 @@
   opacity: 1;
 }
 .main input[type="submit"] {
-  padding: 12px 0;
+  padding: 12px 12px;
+  width: auto;
+  margin: 10px;
   color: #fff;
-  background-color: #10a37f;
+  background-color: rgb(11,52,84);
   border: none;
   border-radius: 4px;
   text-align: center;
@@ -72,7 +58,7 @@
 .main .result {
   font-weight: bold;
   margin-top: 40px;
-  background: #10a37f;
+  background: rgb(11,52,84);
   width: 100%;
   max-width: 300px;
   height: fit-content;
@@ -83,7 +69,18 @@
 .loader {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 15px;
-  height: 15px;
+  justify-content: center;
+  width: 60px;
+  height: 50px;
+}
+
+.main button{
+  padding: 12px 12px;
+  margin-top: 50px;
+  color: #fff;
+  background-color: rgb(11,52,84);
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
 }
