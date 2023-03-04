@@ -27,12 +27,14 @@
   font-style: normal;
 }
 
+
 .main,
 .main input {
   font-size: 16px;
   line-height: 24px;
   color: #353740;
   font-family: "Social", Helvetica, sans-serif;
+  background-color: #faf6ed;
 }
 .main {
   display: flex;
@@ -63,10 +65,10 @@
 }
 .main input[type="text"] {
   padding: 12px 16px;
-  border: 1px solid #10a37f;
+  border: 1px solid #000;
   border-radius: 4px;
   margin-bottom: 24px;
-  outline-color: #10a37f;
+  outline-color: #000;
 }
 .main ::placeholder {
   color: #8e8ea0;
@@ -74,12 +76,17 @@
 }
 .main input[type="submit"] {
   padding: 12px 0;
-  color: #fff;
-  background-color: #10a37f;
-  border: none;
+  color: #000;
+  background-color: #faf6ed;
+  border: 1px solid #000;
   border-radius: 4px;
   text-align: center;
   cursor: pointer;
+}
+
+.main input[type="submit"]:hover {
+  color: #faf6ed;
+  background-color: #000;
 }
 .main .result {
   font-weight: normal;
