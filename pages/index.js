@@ -41,7 +41,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>OpenAI Quickstart</title>
+        <title>IA-FS</title>
         <link rel="icon" href="/marmota.png" />
       </Head>
 
