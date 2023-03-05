@@ -63,6 +63,7 @@ export default function Home() {
         <meta property="og:title" content="Nieuwe Instituut CollectionBot" />
         <meta property="og:description" content="A prototype demonstrating the use of a generative AI application to disclose collection data." />
         <meta property="twitter:description" content="A prototype demonstrating the use of a generative AI application to disclose collection data." />
+        
       </Head>
 
      
