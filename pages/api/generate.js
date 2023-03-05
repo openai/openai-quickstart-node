@@ -30,8 +30,8 @@ export default async function (req, res) {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: generatePrompt(text),
-      temperature: 0.6,
-      max_tokens: 500,
+      temperature: 0.9,
+      max_tokens: 3500,
     });
     // estado 500 ok, recepcion del mensaje es correcta
     res.status(200).json({ result: completion.data.choices[0].text });
@@ -63,5 +63,5 @@ function generatePrompt(text) {
     return formattedItems.join('\n');
   }
 
-  return "Responde "+capitalizedText;
+  return "Me respondes lo siguiente?, "+capitalizedText;
 }

@@ -1,31 +1,36 @@
-
 .main,
-.main input {
+.input_main {
   font-size: 14px;
   line-height: 18px;
-  color: #353740;
+  color: #000000;
   font-family: "Consolas", Helvetica, sans-serif;
+  
 }
 .main {
   display: flex;
   flex-direction: column;
+  width: auto;
   align-items: center;
-  padding-top: 60px;
-  padding-bottom: 100px;
-  background-image: url('/dark_calypso.png');
+  text-align: left;
+  padding-top: 0px;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  padding-bottom: 0px;
+  /*background-image: url('/dark_calypso.png');*/
+  background: #000000;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
   color: #ffffff;
 }
 .main .icon {
-  width: 15vw;
+  width: 35vw;
 }
 .main h3 {
   font-size: 32px;
   line-height: 40px;
   font-weight: bold;
-  color: #ffffff;
+  color: #000000;
   margin: 16px 0 40px;
 }
 .main form {
@@ -36,51 +41,67 @@
   padding: 12px 16px;
   width: 60vw;
   border: 1px solid #10a37f;
-  border-radius: 4px;
-  margin-bottom: 24px;
+  border-radius: 20px;
+  margin-bottom: 0px;
   outline-color: #10a37f;
 }
 .main ::placeholder {
-  color: #8e8ea0;
+  color: #6b6b6b;
   opacity: 1;
 }
-.main input[type="submit"] {
-  padding: 12px 12px;
-  width: auto;
+
+.contenedor{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.gen_res{
+  color: aliceblue;
+  text-align: center;
+  width: fit-content;  
   margin: 10px;
-  color: #fff;
+  padding: 10px;
   background-color: rgb(11,52,84);
   border: none;
-  border-radius: 4px;
-  text-align: center;
+  border-radius: 20px;
   cursor: pointer;
 }
-.main .result {
+.result {
+  background-color: rgb(255, 255, 255);
+  color: aliceblue;
+  display: flex;
   font-weight: bold;
-  margin-top: 40px;
-  background: rgb(11,52,84);
-  width: 100%;
-  max-width: 300px;
+  flex-direction: column;
+  font-size: 18px;
   height: fit-content;
+  line-height: 20px;
+  margin-top: 10px;
+  max-width: 300px;
   min-height: 25px;
   padding: 25px;
+  width: 100%;
 }
 
 .loader {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 50px;
+  width: 8vw;
+  height: 5vh;
+  border-radius: 20px;
 }
 
-.main button{
-  padding: 12px 12px;
-  margin-top: 50px;
+
+.btn_reset{
+  padding: 12px;
+  margin: 50px;
   color: #fff;
   background-color: rgb(11,52,84);
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
   text-align: center;
   cursor: pointer;
+  
 }

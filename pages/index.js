@@ -46,24 +46,26 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <img src="/Vinyl_fs.png" className={styles.icon} />
-        <h3>Pregúntale algo a la IA. :)</h3>
+        <img src="/dark_brain.gif" className={styles.icon} />
         <form onSubmit={onSubmit}>
           <input
+            className={styles.input_main}
             type="text"
             name="text"
             placeholder="Escribe algo"
             value={textInput}
             onChange={(e) => setTextInput(e.target.value)}
           />
-          <input type="submit" value="Generar respuesta" />
+          <div className={styles.contenedor}>
+            <input className={styles.gen_res} type="submit" value="Generar respuesta" />
+          </div>
         </form>
         {isLoading && <img src={loaderImg} className={styles.loader} />}
-        <div className={styles.result}>
-        {result}
-        </div>
-        <button className="boton_reset" onClick={() => window.location.reload(false)}>Recargar!</button>
       </main>
+      <div className={styles.main}>
+        {result}
+        <button className={styles.btn_reset} onClick={() => window.location.reload(false)}>Recargar!</button>
+        </div>
     </div>
   );
 }
