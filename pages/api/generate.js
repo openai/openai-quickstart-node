@@ -6,6 +6,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export default async function (req, res) {
+
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
@@ -29,15 +30,18 @@ export default async function (req, res) {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: generatePrompt(text),
-      temperature: 0.6,
+      temperature: 0.1,
       max_tokens: 500,
     });
+    // estado 500 ok, recepcion del mensaje es correcta
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
     if (error.response) {
+      // ver tipo de error por consola
       console.error(error.response.status, error.response.data);
       res.status(error.response.status).json(error.response.data);
     } else {
+      // error 500 error del servidor de la api
       console.error(`Error con la respuesta de OpenAI API: ${error.message}`);
       res.status(500).json({
         error: {
