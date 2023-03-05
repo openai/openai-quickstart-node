@@ -1,3 +1,5 @@
+
+
 .main,
 .input_main {
   font-size: 14px;
@@ -16,15 +18,16 @@
   padding-left: 5vw;
   padding-right: 5vw;
   padding-bottom: 0px;
-  /*background-image: url('/dark_calypso.png');*/
-  background: #000000;
+  background-image: url('/dark_calypso.png');
+  /*background: #a3c9dd;*/
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
   color: #ffffff;
 }
 .main .icon {
-  width: 35vw;
+  width: 15vw;
+  border-radius: 50%;
 }
 .main h3 {
   font-size: 32px;
@@ -37,14 +40,21 @@
   display: flex;
   flex-direction: column;
 }
+
 .main input[type="text"] {
   padding: 12px 16px;
-  width: 60vw;
+  width: 20vw;
   border: 1px solid #10a37f;
   border-radius: 20px;
   margin-bottom: 0px;
   outline-color: #10a37f;
+  transition: width 0.3s ease-in-out; /* agregar transición de ancho */
 }
+
+.main input[type="text"]:focus {
+  width: 45vw; /* aumentar el ancho del input */
+}
+
 .main ::placeholder {
   color: #6b6b6b;
   opacity: 1;
@@ -104,4 +114,35 @@
   text-align: center;
   cursor: pointer;
   
+}
+
+@media screen and (max-width: 450px) {
+  .main {
+    padding: 0 10px; /* reduce left and right padding */
+    text-align: center; /* center align text */
+  }
+  .main .icon {
+    width: 80vw; /* reduce width of the icon */
+  }
+  .main h3 {
+    font-size: 24px; /* reduce font size of heading */
+    line-height: 32px; /* reduce line height of heading */
+    margin: 12px 0 32px; /* reduce margins of heading */
+  }
+  .main input[type="text"] {
+    width: 45vw; /* reduce width of input field */
+  }
+  .result {
+    font-size: 16px; /* reduce font size of result text */
+    line-height: 18px; /* reduce line height of result text */
+    padding: 15px; /* reduce padding of result box */
+    max-width: 100%; /* make result box width 100% */
+  }
+  .btn_reset{
+    margin: 30px; /* reduce margin of reset button */
+  }
+
+  .main input[type="text"]:focus {
+    width: 80vw; /* aumentar el ancho del input */
+  }
 }

@@ -43,10 +43,11 @@ export default function Home() {
       <Head>
         <title>IA-FS</title>
         <link rel="icon" href="/marmota.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
       </Head>
 
       <main className={styles.main}>
-        <img src="/dark_brain.gif" className={styles.icon} />
+        <img src="/brain.gif" className={styles.icon} />
         <form onSubmit={onSubmit}>
           <input
             className={styles.input_main}
@@ -61,11 +62,9 @@ export default function Home() {
           </div>
         </form>
         {isLoading && <img src={loaderImg} className={styles.loader} />}
-      </main>
-      <div className={styles.main}>
         {result}
         <button className={styles.btn_reset} onClick={() => window.location.reload(false)}>Recargar!</button>
-        </div>
+      </main>
     </div>
   );
 }
