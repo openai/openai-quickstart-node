@@ -75,11 +75,14 @@ export default function Home() {
         </header>
         <main className={styles.main}>
         <h1 className={styles.title}>Nieuwe Instituut Collection bot</h1>
-        <p className={styles.intro}>This is a prototype application, testing the usage of the <a href="https://openai.com/blog/introducing-chatgpt-and-whisper-apis">new ChatGPT API by OpenAI</a> to disclose collection information using the language model's general knowledge base combined with a small amount of custom training data and instructions. It can be used to convey information in a conversational interface, more tailored to the user's interests. Additionally, it is conceivable that the model could be user-configurable, switching to a different language or difficulty level. The prototype is created by Jaap Stronks.</p>
+        <p className={styles.intro}>This is a prototype application, testing the usage of the generative AI to disclose collection information.</p> 
+        
+        <p className={styles.regular}>This website was made using the <a href="https://openai.com/blog/introducing-chatgpt-and-whisper-apis">new ChatGPT API by OpenAI</a>. It prepends user questions with specific information about a collection item, allowing for a fair amount of control over the accuracy of the AI's response, while still benefiting from the AI's abilities to add all kinds of information in a customizable, conversational interface. The prototype is created by Jaap Stronks.</p>
+        <h3>Ask a question about Van Doesburg's interior model for l'Aubette</h3>
         <img src="/maquette.jpeg" className={styles.image} alt="maquette Van Doesburg" />
         <p className={styles.caption}>This is a model by architect and artist Theo van Doesburg.  Photo: Johannes Schwartz. </p>
-        <h3>What do you want to know about this object?</h3>
-        <p className={styles.question}>Feel free to ask about more about the interior model for l'Aubette. For example, you could ask: what is this a model of? How was it made? What is special about it? Which movement is this an icon of? Where can it be seen in person? Ask away!</p>
+      
+        <p className={styles.regular}>Feel free to ask about more about the interior model for l'Aubette. For example, you could ask: what is this a model of? How was it made? What is special about it? Which movement is this an icon of? Where can it be seen in person? Ask away!</p>
         <div className={styles.listwrapper}>
         <ul className={styles.list}><li><strong>Tip 1</strong>: each answer takes a couple of seconds to generate, so be patient after clicking the 'Get answer' button.</li><li> <strong>Tip 2</strong>: if you don't know where to start, just ask 'What's so special about this?'</li> </ul>
         </div>
