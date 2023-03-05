@@ -1,12 +1,10 @@
-
-
 .main,
 .input_main {
   font-size: 14px;
   line-height: 18px;
   color: #000000;
   font-family: "Consolas", Helvetica, sans-serif;
-  
+
 }
 .main {
   display: flex;
@@ -140,6 +138,37 @@
   }
   .btn_reset{
     margin: 30px; /* reduce margin of reset button */
+  }
+
+  .main input[type="text"]:focus {
+    width: 80vw; /* aumentar el ancho del input */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    padding: 0 20px; /* reduce left and right padding */
+    text-align: center; /* center align text */
+  }
+  .main .icon {
+    width: 60vw; /* reduce width of the icon */
+  }
+  .main h3 {
+    font-size: 28px; /* increase font size of heading */
+    line-height: 36px; /* increase line height of heading */
+    margin: 16px 0 36px; /* increase margins of heading */
+  }
+  .main input[type="text"] {
+    width: 60vw; /* reduce width of input field */
+  }
+  .result {
+    font-size: 18px; /* increase font size of result text */
+    line-height: 20px; /* increase line height of result text */
+    padding: 20px; /* increase padding of result box */
+    max-width: 80%; /* make result box width 80% */
+  }
+  .btn_reset{
+    margin: 40px; /* increase margin of reset button */
   }
 
   .main input[type="text"]:focus {
