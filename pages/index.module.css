@@ -78,7 +78,7 @@
 }
 .result {
   background-color: rgb(255, 255, 255);
-  color: aliceblue;
+  color: rgb(0, 0, 0);
   display: flex;
   font-weight: bold;
   flex-direction: column;
@@ -114,3 +114,64 @@
   
 }
 
+@media screen and (max-width: 450px) {
+  .main {
+    padding: 0 10px; /* reduce left and right padding */
+    text-align: center; /* center align text */
+  }
+  .main .icon {
+    width: 80vw; /* reduce width of the icon */
+  }
+  .main h3 {
+    font-size: 24px; /* reduce font size of heading */
+    line-height: 32px; /* reduce line height of heading */
+    margin: 12px 0 32px; /* reduce margins of heading */
+  }
+  .main input[type="text"] {
+    width: 45vw; /* reduce width of input field */
+  }
+  .result {
+    font-size: 16px; /* reduce font size of result text */
+    line-height: 18px; /* reduce line height of result text */
+    padding: 15px; /* reduce padding of result box */
+    max-width: 100%; /* make result box width 100% */
+  }
+  .btn_reset{
+    margin: 30px; /* reduce margin of reset button */
+  }
+
+  .main input[type="text"]:focus {
+    width: 80vw; /* aumentar el ancho del input */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    padding: 0 20px; /* reduce left and right padding */
+    text-align: center; /* center align text */
+  }
+  .main .icon {
+    width: 60vw; /* reduce width of the icon */
+  }
+  .main h3 {
+    font-size: 28px; /* increase font size of heading */
+    line-height: 36px; /* increase line height of heading */
+    margin: 16px 0 36px; /* increase margins of heading */
+  }
+  .main input[type="text"] {
+    width: 60vw; /* reduce width of input field */
+  }
+  .result {
+    font-size: 18px; /* increase font size of result text */
+    line-height: 20px; /* increase line height of result text */
+    padding: 20px; /* increase padding of result box */
+    max-width: 80%; /* make result box width 80% */
+  }
+  .btn_reset{
+    margin: 40px; /* increase margin of reset button */
+  }
+
+  .main input[type="text"]:focus {
+    width: 80vw; /* aumentar el ancho del input */
+  }
+}

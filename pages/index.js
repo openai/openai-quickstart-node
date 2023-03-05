@@ -62,9 +62,12 @@ export default function Home() {
           </div>
         </form>
         {isLoading && <img src={loaderImg} className={styles.loader} />}
+      </main>
+      <div className={styles.main}>
         {result}
         <button className={styles.btn_reset} onClick={() => window.location.reload(false)}>Recargar!</button>
-      </main>
+
+      </div>
     </div>
   );
 }
