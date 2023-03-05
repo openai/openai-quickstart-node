@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
+import Typewriter from 'typewriter-effect';
+
 
 
 
@@ -8,6 +10,9 @@ export default function Home() {
   const [topicInput, setTopicInput] = useState("");
   const [result, setResult] = useState();
   const [isELI5Checked, setIsELI5Checked] = useState(false);
+  const [isResultReady, setIsResultReady] = useState(false);
+
+
 
   const questions = [
     "What is interesting about this model?",
@@ -23,6 +28,7 @@ export default function Home() {
   async function onSubmit(event) {
     event.preventDefault();
     try {
+      setResult(null); // Reset the result state when a new question is submitted
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: {
@@ -36,14 +42,16 @@ export default function Home() {
       if (response.status !== 200) {
         throw data.error || new Error(`Request failed with status ${response.status}`);
       }
-
+     
       setResult(data.result);
+      setIsResultReady(true);
       setTopicInput("");
     } catch(error) {
       // Consider implementing your own error handling logic here
       console.error(error);
       alert(error.message);
     }
+
   }
 
 
@@ -52,7 +60,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Nieuwe Instituut Collection bot</title>
+        <title>Nieuwe Instituut CollectionBot</title>
         <link rel="favicon" href="/favicon.png" />
         <meta property="og:image" content="/opengraph.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -86,8 +94,23 @@ export default function Home() {
         <div className={styles.listwrapper}>
         <ul className={styles.list}><li><strong>Tip 1</strong>: each answer takes a couple of seconds to generate, so be patient after clicking the 'Get answer' button.</li><li> <strong>Tip 2</strong>: if you don't know where to start, just ask 'What's so special about this?'</li> </ul>
         </div>
-  
-        <div className={styles.result}>{result}</div>
+        {result && (
+  <div className={styles.result}>
+    <h3 className={styles.collectionboth3}>CollectionBot:</h3>
+    <Typewriter
+      onInit={(typewriter) => {
+        typewriter.typeString(result)
+          .callFunction(() => {
+            console.log('String typed out!');
+          })
+          .start();
+      }}
+      options={{
+        delay: 15
+      }}
+    />
+  </div>
+)}
         <form onSubmit={onSubmit} className={styles.form}>
         <label className={styles.label}>
         Ask a question about this object
