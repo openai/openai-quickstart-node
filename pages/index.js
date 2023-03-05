@@ -47,7 +47,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <img src="/Vinyl_fs.png" className={styles.icon} />
-        <h3>¿Preguntale algo a la IA?</h3>
+        <h3>Pregúntale algo a la IA. :)</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
