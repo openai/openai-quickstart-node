@@ -80,10 +80,13 @@ export default function Home() {
  
         </header>
         <main className={styles.main}>
+
         <h1 className={styles.title}>Nieuwe Instituut Collection bot</h1>
         <p className={styles.intro}>This is a prototype application, testing the usage of the generative AI to disclose collection information.</p> 
         
         <p className={styles.regular}>This website was made using the <a href="https://openai.com/blog/introducing-chatgpt-and-whisper-apis">new ChatGPT API by OpenAI</a>. It prepends user questions with specific information about a collection item, allowing for a fair amount of control over the accuracy of the AI's response, while still benefiting from the AI's abilities to add all kinds of information in a customizable, conversational interface. The prototype is created by Jaap Stronks.</p>
+
+
         <h3>Ask a question about Van Doesburg's interior model for l'Aubette</h3>
         <img src="/maquette.jpeg" className={styles.image} alt="maquette Van Doesburg" />
         <p className={styles.caption}>This is a model by architect and artist Theo van Doesburg.  Photo: Johannes Schwartz. </p>
