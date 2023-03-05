@@ -75,7 +75,7 @@
   font-family: "Social", Helvetica, sans-serif;
   font-weight: normal;
   color: #000;
-  margin: 1em 0 2em;
+  margin: 1em 0 1em;
   margin-bottom: 12px;
   max-width: 720px;
 }
@@ -97,7 +97,7 @@
   padding: 12px 16px;
   border: 1px solid #000;
   border-radius: 4px;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
   outline-color: #000;
 }
 .main ::placeholder {
@@ -139,6 +139,41 @@
   margin-bottom: 30px;
   max-width: 720px;
   font-size: 20px;
+
+}
+
+.labeltext {
+  padding-left: 4px;
+}
+
+.checkmark {
+
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  margin-bottom: 8px;
+}
+
+.listwrapper {
+  max-width: 720px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0 auto 0;
+
+}
+
+.main .list {
+  max-width: 600px;
+margin: 0 auto;
+  padding: 0 0 0 30px; 
+
+}
+
+.list li {
+  font-size: 18px;
+  line-height: 1.3em;
+  margin-bottom: 0.3em;
 
 }
 
