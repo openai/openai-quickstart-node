@@ -54,7 +54,7 @@ export default function Home() {
         </header>
         <main className={styles.main}>
         <h1 className={styles.title}>Nieuwe Instituut Collection bot</h1>
-        <p className={styles.intro}>This is a prototype application, testing the usage of the <a href="https://openai.com/blog/introducing-chatgpt-and-whisper-apis">new ChatGPT API by OpenAI</a> to disclose collection information using general a language model general knowledge base, added with a small amount of custom training data and instructions. It can be used to convey information in a conversational interface, more tailored to the user's interests. Additionally, it is conceivable that the model could be user-configurable, switching to a different language or difficulty level. The prototype is created by Jaap Stronks.</p>
+        <p className={styles.intro}>This is a prototype application, testing the usage of the <a href="https://openai.com/blog/introducing-chatgpt-and-whisper-apis">new ChatGPT API by OpenAI</a> to disclose collection information using the language model's general knowledge base combined with a small amount of custom training data and instructions. It can be used to convey information in a conversational interface, more tailored to the user's interests. Additionally, it is conceivable that the model could be user-configurable, switching to a different language or difficulty level. The prototype is created by Jaap Stronks.</p>
         <img src="/maquette.jpeg" className={styles.image} alt="maquette Van Doesburg" />
         <p className={styles.caption}>This is a model by architect and artist Theo van Doesburg.  Photo: Johannes Schwartz. </p>
         <h3>What do you want to know?</h3>
