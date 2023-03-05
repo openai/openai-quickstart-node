@@ -1,4 +1,14 @@
+:root {
+  --my-accent-color: #8cffb4;
+}
+
 body {
   margin: 0;
   background: #faf6ed;
+}
+
+
+
+header {
+  color: var(--my-accent-color);
 }

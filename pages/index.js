@@ -58,8 +58,8 @@ export default function Home() {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta name="twitter:image" content="/opengraph.jpg" />
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Nieuwe Instituut CollectionBot">
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Nieuwe Instituut CollectionBot" />
         <meta property="og:title" content="Nieuwe Instituut CollectionBot" />
         <meta property="og:description" content="A prototype demonstrating the use of a generative AI application to disclose collection data." />
         <meta property="twitter:description" content="A prototype demonstrating the use of a generative AI application to disclose collection data." />
