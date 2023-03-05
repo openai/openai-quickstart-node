@@ -24,7 +24,7 @@ export default function Home() {
 
       const data = await response.json();
       if (response.status !== 200) {
-        throw data.error || new Error(`Respuesta del estado fallida ${response.status}`);
+        throw data.error || new Error(`hazlo de nuevo! el servidor no alcanzó a leer tu pregunta. ERROR:${response.status}`);
       }
 
       setResult(data.result);
