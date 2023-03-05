@@ -10,7 +10,7 @@ export default function Home() {
   const [isELI5Checked, setIsELI5Checked] = useState(false);
 
   const questions = [
-    "What is interesting about this model??",
+    "What is interesting about this model?",
     "How does this relate to 'The Style'?",
     "What is the history behind this design?",
     "How was this model made?",
