@@ -10,7 +10,7 @@ export default async function (req, res) {
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
-        message: "OpenAI API key no configurado, por favor sigue las instrucciones en README.md",
+        message: "OpenAI API key no se encontró.",
       }
     });
     return;
