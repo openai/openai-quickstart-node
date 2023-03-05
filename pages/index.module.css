@@ -31,10 +31,8 @@
 .main,
 .main input {
   font-size: 16px;
-  line-height: 24px;
-  color: #353740;
+  color: #000;
   font-family: "Social", Helvetica, sans-serif;
-  background-color: #faf6ed;
 }
 .main {
   display: flex;
@@ -43,19 +41,51 @@
     padding: 20px 20px 0;
 }
 
-
-.main .icon {
+.header {
   width: 100%;
-  max-width: 800px;
-  margin-bottom: 40px;
+  background-color: #8cffb4;
+}
+.headercontainer {
+  padding: 30px;
+}
+
+.header .icon {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width:1200px;
+
+}
+.main h1 {
+  font-size:52px;
+  line-height: 1.125;
+  font-family: "Impact", Helvetica, sans-serif;
+  font-weight: normal;
+  color: #000;
+  margin: 30px 0 30px;
+}
+
+.form {
+  margin-bottom:60px;
+}
+
+.main p {
+  font-size: 20px;
+  line-height: 1.3em;
+  font-family: "Social", Helvetica, sans-serif;
+  font-weight: normal;
+  color: #000;
+  margin: 1em 0 2em;
+  margin-bottom: 12px;
+  max-width: 720px;
 }
 .main h3 {
   font-size: 32px;
   line-height: 40px;
   font-family: "Impact", Helvetica, sans-serif;
   font-weight: normal;
-  color: #202123;
-  margin: 16px 0 40px;
+  color: #000;
+  margin: 32px 0 40px;
   margin-bottom: 12px;
 }
 .main form {
@@ -74,14 +104,28 @@
   color: #8e8ea0;
   opacity: 1;
 }
+.label {
+  font-size: 20px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.input {
+  margin-top: 8px;
+
+  background-color: #fff;
+  min-width: 300px;
+}
 .main input[type="submit"] {
   padding: 12px 0;
   color: #000;
-  background-color: #faf6ed;
+  background-color: #fff;
   border: 1px solid #000;
   border-radius: 4px;
   text-align: center;
   cursor: pointer;
+  margin-top: 12px;
 }
 
 .main input[type="submit"]:hover {
@@ -100,9 +144,21 @@
 .question {
   max-width: 720px;
 }
-.caption {
-  margin-top: 4px;
+.main p.caption {
+  margin: 4px;
+  font-size: 16px;
+}
+.main p.intro {
+  font-size:24px;
+  margin: 1em 0 2em;
 }
 .image {
-  max-width: 100%;
+  width: 100%;
+  max-width: 920px;
+}
+
+.main a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  color: #000;
 }
