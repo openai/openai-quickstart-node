@@ -3,19 +3,16 @@
   font-size: 14px;
   line-height: 18px;
   color: #000000;
-  font-family: "Consolas", Helvetica, sans-serif;
-
+  font-family: Arial, Helvetica, sans-serif;
 }
 .main {
   display: flex;
   flex-direction: column;
+  min-width: min-content;
   width: auto;
+  height: fit-content;
   align-items: center;
   text-align: left;
-  padding-top: 0px;
-  padding-left: 5vw;
-  padding-right: 5vw;
-  padding-bottom: 0px;
   background-image: url('/dark_calypso.png');
   /*background: #a3c9dd;*/
   background-repeat: no-repeat;
@@ -40,7 +37,9 @@
 }
 
 .main input[type="text"] {
-  padding: 12px 16px;
+  padding: 10px 10px;
+  margin: 10px;
+  font-family: Arial, Helvetica, sans-serif;
   width: 20vw;
   border: 1px solid #10a37f;
   border-radius: 20px;
@@ -66,15 +65,16 @@
 }
 
 .gen_res{
-  color: aliceblue;
+  color: rgb(255, 255, 255);
   text-align: center;
   width: fit-content;  
   margin: 10px;
   padding: 10px;
-  background-color: rgb(11,52,84);
+  background-color: #3ae1accb;
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .result {
   background-color: rgb(255, 255, 255);
@@ -103,14 +103,17 @@
 
 
 .btn_reset{
-  padding: 12px;
-  margin: 50px;
-  color: #fff;
-  background-color: rgb(11,52,84);
+  padding: 10px;
+  margin: 25px;
+  color: #ffffff;
+  background-color: #db2110c7;
+  width: fit-content;
+  height: fit-content;
   border: none;
-  border-radius: 20px;
+  border-radius: 25px;
   text-align: center;
   cursor: pointer;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   
 }
 
@@ -174,4 +177,48 @@
   .main input[type="text"]:focus {
     width: 80vw; /* aumentar el ancho del input */
   }
+}
+
+.navbar {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: #1a2a3f;
+  min-width: fit-content;
+  position: static;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.navbar__list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 40px;
+}
+
+.navbar__item {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__item a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  margin: 0 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.correo{
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  margin: 0 10px;
+  font-size: 18px;
+  font-weight: bold;
 }

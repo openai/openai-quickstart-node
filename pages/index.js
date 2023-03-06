@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
+import NavigationBar from "./NavigationBar";
 
 export default function Home() {
   
@@ -45,7 +46,9 @@ export default function Home() {
         <link rel="icon" href="/marmota.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
       </Head>
-
+      
+      <NavigationBar/>
+      
       <main className={styles.main}>
         <img src="/brain.gif" className={styles.icon} />
         <form onSubmit={onSubmit}>
@@ -62,12 +65,9 @@ export default function Home() {
           </div>
         </form>
         {isLoading && <img src={loaderImg} className={styles.loader} />}
-      </main>
-      <div className={styles.main}>
         {result}
         <button className={styles.btn_reset} onClick={() => window.location.reload(false)}>Recargar!</button>
-
-      </div>
+      </main>
     </div>
   );
 }
