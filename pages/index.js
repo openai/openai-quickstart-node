@@ -99,7 +99,7 @@ export default function Home() {
         
         {result && (
   <div className={styles.result}>
-    <h3 className={styles.collectionboth3}>CollectionBot:</h3>
+    <h3 className={styles.collectionboth3}>🤖 CollectionBot:</h3>
     <Typewriter
       onInit={(typewriter) => {
         typewriter.typeString(result)
