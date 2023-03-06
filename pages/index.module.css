@@ -26,7 +26,13 @@
   font-weight: normal;
   font-style: normal;
 }
-
+@font-face {
+  font-family: "Cerial";
+  src: url(/fonts/Cerial.woff2) format("woff2"),
+    url(/fonts/Cerial.woff) format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 
 .main,
 .main input {
@@ -67,6 +73,10 @@
   text-align: left;
 }
 
+.main .cerial {
+  font-family: 'Cerial', sans-serif;
+  font-size: 60px;
+}
 
 .form {
   margin-bottom:60px;
