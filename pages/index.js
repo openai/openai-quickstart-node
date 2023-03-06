@@ -11,7 +11,6 @@ export default function Home() {
   const [isResultReady, setIsResultReady] = useState(false);
 
 
-
   const questions = [
     "What is interesting about this model?",
     "How does this relate to 'The Style'?",
@@ -53,6 +52,7 @@ export default function Home() {
   }
 
 
+  
 
 
   return (
@@ -84,7 +84,7 @@ export default function Home() {
         <h1 className={styles.title}>Nieuwe Instituut Collection bot</h1>
         <p className={styles.intro}>This is a prototype application, testing the usage of the generative AI to disclose collection information.</p> 
         
-        <p className={styles.regular}>This website was made using the <a href="https://openai.com/blog/introducing-chatgpt-and-whisper-apis">new ChatGPT API by OpenAI</a>. It prepends user questions with specific information about a collection item, allowing for a fair amount of control over the accuracy of the AI's response, while still benefiting from the AI's abilities to add all kinds of information in a customizable, conversational interface. The prototype is created by Jaap Stronks.</p>
+        <p className={styles.regular}>This website was made using the <a href="https://openai.com/blog/introducing-chatgpt-and-whisper-apis">new ChatGPT API by OpenAI</a>. It prepends user questions with specific information about a collection item, allowing for a fair amount of control over the accuracy of the AI's response, while still benefiting from the AI's abilities to add all kinds of information in a customizable, conversational interface.</p>
 
 
         <h3>Ask a question about Van Doesburg's interior model for l'Aubette</h3>
@@ -95,6 +95,8 @@ export default function Home() {
         <div className={styles.listwrapper}>
         <ul className={styles.list}><li><strong>Tip 1</strong>: each answer takes a couple of seconds to generate, so be patient after clicking the 'Get answer' button.</li><li> <strong>Tip 2</strong>: if you don't know where to start, just ask 'What's so special about this?'</li> </ul>
         </div>
+     
+        
         {result && (
   <div className={styles.result}>
     <h3 className={styles.collectionboth3}>CollectionBot:</h3>
@@ -112,7 +114,7 @@ export default function Home() {
     />
   </div>
 )}
-        <form onSubmit={onSubmit} className={styles.form}>
+        <form id="my-form" onSubmit={onSubmit} className={styles.form}>
         <label className={styles.label}>
         Ask a question about this object
         <input className={styles.input}
@@ -135,7 +137,7 @@ export default function Home() {
    
       <input type="submit" value="Get an answer" />
         </form>
-
+<p className={styles.disclaimer}>This prototype was made by Jaap Stronks.</p>
       </main>
     </div>
   );

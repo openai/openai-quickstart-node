@@ -178,8 +178,13 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  margin: 0 auto 0;
+  margin: 10px auto 0;
 
+}
+
+.main .disclaimer {
+  font-style: italic;
+  font-size: 17px;
 }
 
 .main .list {
