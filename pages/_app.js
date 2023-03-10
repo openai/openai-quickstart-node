@@ -1,3 +1,4 @@
+import { appWithTranslation } from 'next-i18next';
 import "./global.css";
 import React, { useEffect } from "react";
 
@@ -15,4 +16,4 @@ function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;
 }
 
-export default MyApp;
+export default appWithTranslation(MyApp);

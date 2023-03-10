@@ -87,14 +87,14 @@ export default function Home() {
         <h1 className={styles.title}><span className={styles.cerial}>Collecti</span>onBot</h1>
         <p className={styles.intro}>This is a prototype application, testing the usage of the generative AI to disclose collection information.</p> 
         
-        <p className={styles.regular}>This website was made using the <a href="https://openai.com/blog/introducing-chatgpt-and-whisper-apis">new ChatGPT API by OpenAI</a>. It prepends user questions with specific information about a collection item, allowing for a fair amount of control over the accuracy of the AI's response, while still benefiting from the AI's abilities to add all kinds of information in a customizable, conversational interface.</p>
+       
 
 
         <h3>Ask a question about Sonneveld House</h3>
         <img src="/sonneveld.jpg" className={styles.image} alt="Sonneveld House" />
         <p className={styles.caption}>This is the Sonneveld House. Photo: Johannes Schwartz. </p>
       
-        <p className={styles.regular}>Feel free to ask about more about Sonneveld House</p>
+        <p className={styles.regular}>Feel free to ask about more about Sonneveld House.</p>
         <div className={styles.listwrapper}>
         <ul className={styles.list}><li><strong>Tip 1</strong>: each answer takes a couple of seconds to generate, so be patient after clicking the 'Get answer' button.</li><li> <strong>Tip 2</strong>: if you don't know where to start, just ask 'What's so special about this?'</li> </ul>
         </div>
@@ -116,7 +116,9 @@ export default function Home() {
       }}
     />
   </div>
+  
 )}
+
         <form id="my-form" onSubmit={onSubmit} className={styles.form}>
         <label className={styles.label}>
         Ask a question about this object
@@ -140,6 +142,7 @@ export default function Home() {
    
       <input type="submit" value="Get an answer" />
         </form>
+        <p className={styles.regular}>This website was made using the <a href="https://openai.com/blog/introducing-chatgpt-and-whisper-apis">new ChatGPT API by OpenAI</a>. It prepends user questions with specific information about a collection item, allowing for a fair amount of control over the accuracy of the AI's response, while still benefiting from the AI's abilities to add all kinds of information in a customizable, conversational interface.</p>
 <p className={styles.disclaimer}>This prototype was made by Jaap Stronks.</p>
       </main>
     </div>
