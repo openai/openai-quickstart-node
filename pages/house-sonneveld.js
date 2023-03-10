@@ -12,11 +12,11 @@ export default function Home() {
 
 
   const questions = [
-    "What is interesting about this model?",
-    "How does this relate to 'The Style'?",
-    "What is the history behind this design?",
+    "What is interesting about this ?",
+    "How was it designed?",
+    "What is the history behind this house?",
     "How was this model made?",
-    "Who did Van Doesburg collaborate with?"
+    "Tell me a random fact about this house"
   ];
   
   const randomIndex = Math.floor(Math.random() * 5);
@@ -92,7 +92,7 @@ export default function Home() {
 
         <h3>Ask a question about Sonneveld House</h3>
         <img src="/sonneveld.jpg" className={styles.image} alt="Sonneveld House" />
-        <p className={styles.caption}>This is the Sonneveld HOuse  Photo: Johannes Schwartz. </p>
+        <p className={styles.caption}>This is the Sonneveld House. Photo: Johannes Schwartz. </p>
       
         <p className={styles.regular}>Feel free to ask about more about Sonneveld House</p>
         <div className={styles.listwrapper}>
