@@ -66,7 +66,7 @@ Answer:`;
 
   if (isELI5) {
     console.log('eli5 was checked');
-    return `${prompt} Explain it to me like I'm a five year old. Don't use any difficult words or concepts, really dumb it down for me please.`;
+    return `${prompt} Explain it to me like I'm a seven year old, so keep it simple, but don't dumb it down too much. If you use difficult words, such ash 'gouache' or 'elementarism', place them in quotes and explain what they mean.`;
     
   }
 
