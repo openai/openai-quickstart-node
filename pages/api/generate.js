@@ -66,7 +66,7 @@ Answer:`;
 
   if (isELI5) {
     console.log('eli5 was checked');
-    return `${prompt} Explain it to me like I'm a five year old.`;
+    return `${prompt} Explain it to me like I'm a five year old. Don't use any difficult words or concepts, really dumb it down for me please.`;
     
   }
 
