@@ -71,14 +71,15 @@ function generatePrompt(topic, isELI5, slug) {
     console.error(`Error reading file: ${error.message}`);
   }
 
-  const prompt = `I want you to answer a question about a heritage collection item. In your answer, use whatever you know about this topic, but also take into account the following information: ${specificInfo}. Also, don't try to say too many things in every answer. The person asking the questions will ask follow-up questions, so tell one tidbit of information at a time, and expand a little about it. You can use the information provided in this prompt for that, but feel free to add existing knowledge to it. If you mention a certain style, place or person, use your general knowledge to explain what, where or who that is. Also, on a new line, make 1 suggestion for related follow-up questions the person can ask you, if they want to dive deeper into a certain topic. Suggest these by saying "You could also ask me about..." or "Perhaps you would like to ask something about..."
+  const prompt = `Here's a question about a part of the heritage collection of het Nieuwe Instituut, a museum for architecture, design and digital culture based in Rotterdam, the Netherlands. In your answer, use information from this prompt, but veel free to add your own knowledge. Do not tell too many things at once (you will get followup questions), but do elaborate on the aspect of the object in question your answer focuses on. If you mention a certain style, place or person, use your general knowledge to explain what, where or who that is. Also, on a new line, make 1 suggestion for a related follow-up question."
+  ${specificInfo}. 
   
 Question: ${capitalizedTopic}
 Answer:`;
 
   if (isELI5) {
     console.log('eli5 was checked');
-    return `${prompt} Explain it to me like I'm a seven-year-old, so keep it simple, but don't dumb it down too much. If you use difficult words, such as 'gouache' or 'elementarism', place them in quotes and explain what they mean.`;
+    return `${prompt} Answer the following question like I'm a seven-year-old, so keep it simple, but don't dumb it down too much. In your answer, place difficult answers in quotes and explain what they mean. `;
   }
 
   return prompt;

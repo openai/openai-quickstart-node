@@ -2,9 +2,11 @@ import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
 import Typewriter from "typewriter-effect";
+import { useTranslation } from 'next-i18next';
 
 
 export default function Home() {
+  const { t } = useTranslation('common');
   const [topicInput, setTopicInput] = useState("");
   const [result, setResult] = useState();
   const [isELI5Checked, setIsELI5Checked] = useState(false);
