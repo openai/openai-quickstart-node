@@ -39,6 +39,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+        <div><h1>Gabriels Model</h1></div>
         <img src="/dog.png" className={styles.icon} />
         <h3>Name my pet</h3>
         <form onSubmit={onSubmit}>
