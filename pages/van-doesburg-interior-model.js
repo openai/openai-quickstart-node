@@ -3,6 +3,7 @@ import { useState } from "react";
 import styles from "./index.module.css";
 import Typewriter from "typewriter-effect";
 import { useTranslation } from 'next-i18next';
+import Link from 'next/link'
 
 
 export default function Home() {
@@ -80,7 +81,7 @@ export default function Home() {
      
         <header className={styles.header}>
         <div className={styles.headercontainer}>
-        <img src="/ni-logo-small.png" className={styles.icon} />
+        <Link href="/"> <img src="/ni-logo-small.png" className={styles.icon} /></Link>
         </div>
  
         </header>
