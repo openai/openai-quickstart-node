@@ -34,10 +34,13 @@ console.log(slug);
 
   try {
     const prompt = await generatePrompt(topic, isELI5, slug); // Generate the prompt first
-    const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: prompt, // Pass the isELI5 value to the generatePrompt function
-      max_tokens: 400,
+    const completion = await openai.createChatCompletion({
+      model: "gpt-4",
+      messages: [
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": prompt},
+    ], // Pass the isELI5 value to the generatePrompt function
+      max_tokens: 1200,
       temperature: 0.9,
       top_p: 1,
       frequency_penalty: 0,
@@ -45,7 +48,9 @@ console.log(slug);
       stop: ["\n"],
 
     });
-    res.status(200).json({ result: completion.data.choices[0].text.trim() });
+    res.status(200).json({ result: completion.data.choices[0].message.content.trim() });
+
+
   } catch(error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
