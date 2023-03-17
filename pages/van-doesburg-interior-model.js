@@ -6,6 +6,7 @@ import Typewriter from "typewriter-effect";
 import Link from "next/link"
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import Header from '../components/Header';
 
 
 
@@ -81,12 +82,7 @@ export default function Home() {
       </Head>
 
      
-        <header className={styles.header}>
-        <div className={styles.headercontainer}>
-        <Link href="/"> <img src="/ni-logo-small.png" className={styles.icon} /></Link>
-        </div>
- 
-        </header>
+      <Header />
         <main className={styles.main}>
 
         <h1 className={styles.title}><span className={styles.cerial}>Collecti</span>onBot</h1>

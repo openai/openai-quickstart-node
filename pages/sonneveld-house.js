@@ -6,6 +6,7 @@ import Typewriter from "typewriter-effect";
 import Link from "next/link"
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import Header from '../components/Header';
 
 
 export default function Home() {
@@ -31,7 +32,8 @@ export default function Home() {
     event.preventDefault();
   
     // Get the slug from the URL
-    const slug = window.location.pathname.split('/')[1];
+    const pathArray = window.location.pathname.split('/');
+    const slug = pathArray[pathArray.length - 1];
   
     try {
       setResult(null); // Reset the result state when a new question is submitted
@@ -80,12 +82,7 @@ export default function Home() {
       </Head>
 
      
-      <header className={styles.header}>
-        <div className={styles.headercontainer}>
-        <Link href="/">  <img src="/ni-logo-small.png" className={styles.icon} /></Link>
-        </div>
- 
-        </header>
+      <Header />
         <main className={styles.main}>
 
         <h1 className={styles.title}><span className={styles.cerial}>{t('sonneveldTitle')}</span></h1>

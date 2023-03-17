@@ -3,6 +3,7 @@ import styles from "./index.module.css";
 import Link from 'next/link'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
+import Header from '../components/Header';
 
 
 export default function Home() {
@@ -24,14 +25,13 @@ export default function Home() {
         <meta property="twitter:description" content={t('description')} />
       </Head>
 
-      <header className={styles.header}>
-        <div className={styles.headercontainer}>
-          <img src="/ni-logo-small.png" className={styles.icon} />
-        </div>
-      </header>
+      
+    <Header />
+  
+    
       
       <main className={styles.main}>
-        <h1 className={styles.title}>{t('title1')}<span className={styles.cerial}>{t('title2')}</span></h1>
+        <h1 className={styles.title}>{t('indextitle1')}<span className={styles.cerial}>{t('indextitle2')}</span></h1>
         <p className={styles.intro}>{t('intro')}</p> 
         <p className={styles.regular}>{t('regular_1')}<a href="https://openai.com/blog/introducing-chatgpt-and-whisper-apis">{t('regular_2')}</a>{t('regular_3')}</p>
 

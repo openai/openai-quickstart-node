@@ -87,12 +87,13 @@ async function generatePrompt(topic, isELI5, slug) {
     topic[0].toUpperCase() + topic.slice(1).toLowerCase();
 
 
-    const prompt = `Here's a question about a part of the heritage collection of het Nieuwe Instituut, a museum for architecture, design and digital culture based in Rotterdam, the Netherlands. In your answer, use information from this prompt, but feel free to add your own knowledge. Do not tell too many things at once (you will get followup questions), but do elaborate on the aspect of the object in question your answer focuses on. If you mention a certain style, place or person, use your general knowledge to explain what, where or who that is. Also, make 1 suggestion for a related follow-up question. ` + specificInfo + ` Question: ${capitalizedTopic} Answer:`;
+    const prompt = `Here's a question about a part of the heritage collection of het Nieuwe Instituut, a museum for architecture, design and digital culture based in Rotterdam, the Netherlands. In your answer, use information from this prompt, but feel free to add your own knowledge. Do not tell too many things at once (you will get followup questions), but do elaborate on the aspect of the object in question your answer focuses on. If you mention a certain style, place or person, use your general knowledge to explain what, where or who that is. Also, make 1 suggestion for a related follow-up question. ` + specificInfo + ` Answer the following question. If the question is in Dutch, answer in Dutch; if it is in English answer in English. Question: ${capitalizedTopic} Answer:`;
 
   if (isELI5) {
     console.log('eli5 was checked');
-    return `${prompt} Answer the following question like I'm a seven-year-old, so keep it simple, but don't dumb it down too much. In your answer, place difficult answers in quotes and explain what they mean. `;
+    return `${prompt} Answer the following question like I'm a seven-year-old, so keep it simple, but don't dumb it down too much. In your answer, place difficult answers in quotes and explain what they mean. If the question is asked in Dutch, explain it in Dutch as though you are explaining it to a seven year old Dutch kid. `;
   }
   console.log("Generated prompt:", prompt);
+  console.log("used slug:", slug);
   return prompt;
 }
