@@ -63,16 +63,24 @@
   max-width:240px;
 
 }
-.main h1 {
-  font-size:52px;
-  line-height: 1.125;
+
+.main h1, .main h2 {
   font-family: "Impact", Helvetica, sans-serif;
   font-weight: normal;
   color: #000;
+}
+.main h1 {
+  font-size:52px;
+  line-height: 1.125;
   margin: 20px 0 20px;
   text-align: left;
 }
-
+.main h4.subtitle {
+  font-family: 'Social', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+}
 .main .cerial {
   font-family: 'Cerial', sans-serif;
   font-size: 60px;
