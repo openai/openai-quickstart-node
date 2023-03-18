@@ -93,7 +93,7 @@ async function generatePrompt(topic, isELI5, slug) {
     console.log('eli5 was checked');
     return `${prompt} Answer the following question like I'm a seven-year-old, so keep it simple, but don't dumb it down too much. In your answer, place difficult answers in quotes and explain what they mean. If the question is asked in Dutch, explain it in Dutch as though you are explaining it to a seven year old Dutch kid. `;
   }
-  window.console.log("Generated prompt:", prompt);
-  window.console.log("used slug:", slug);
+  console.log("Generated prompt:", prompt);
+ console.log("used slug]:", slug);
   return prompt;
 }
