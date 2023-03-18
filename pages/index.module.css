@@ -144,6 +144,14 @@
   color: #faf6ed;
   background-color: #000;
 }
+
+.main input[type="submit"]:active {
+  color: #000;
+  background-color: #8cffb4;
+}
+
+
+
 .main .result {
   font-weight: normal;
   font-family: 'Courier New', Courier, monospace;  text-align: left;
