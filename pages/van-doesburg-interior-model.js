@@ -1,25 +1,28 @@
+
 import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
 import Typewriter from "typewriter-effect";
-import { useTranslation } from 'next-i18next';
-import Link from 'next/link'
+import Link from "next/link"
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import Header from '../components/Header';
+
 
 
 export default function Home() {
-  const { t } = useTranslation('common');
   const [topicInput, setTopicInput] = useState("");
   const [result, setResult] = useState();
   const [isELI5Checked, setIsELI5Checked] = useState(false);
   const [isResultReady, setIsResultReady] = useState(false);
-
+  const { t } = useTranslation();
 
   const questions = [
-    "What is interesting about this model?",
-    "How does this relate to 'The Style'?",
-    "What is the history behind this design?",
-    "How was this model made?",
-    "Who did Van Doesburg collaborate with?"
+    t("doesburgquestion1"),
+    t("doesburgquestion2"),
+    t("doesburgquestion3"),
+    t("doesburgquestion4"),
+    t("doesburgquestion5")
   ];
   
   const randomIndex = Math.floor(Math.random() * 5);
@@ -79,28 +82,24 @@ export default function Home() {
       </Head>
 
      
-        <header className={styles.header}>
-        <div className={styles.headercontainer}>
-        <Link href="/"> <img src="/ni-logo-small.png" className={styles.icon} /></Link>
-        </div>
- 
-        </header>
+      <Header />
         <main className={styles.main}>
 
         <h1 className={styles.title}><span className={styles.cerial}>Collecti</span>onBot</h1>
-        <p className={styles.intro}>This is a prototype application, testing the usage of the generative AI to disclose collection information.</p> 
         
-        <p className={styles.regular}>This website was made using the <a href="https://openai.com/blog/introducing-chatgpt-and-whisper-apis">new ChatGPT API by OpenAI</a>. It prepends user questions with specific information about a collection item, allowing for a fair amount of control over the accuracy of the AI's response, while still benefiting from the AI's abilities to add all kinds of information in a customizable, conversational interface.</p>
 
+        <h3>{t('vanDoesburgQuestion')}</h3>
+<img src="/maquette.jpeg" className={styles.image} alt={t('vanDoesburgAlt')} />
+<p className={styles.caption}>{t('vanDoesburgCaption')}</p>
+  
+<p className={styles.regular}>{t('vanDoesburgMoreInfo')}</p>
+<div className={styles.listwrapper}>
+  <ul className={styles.list}>
+    <li><strong>{t('vanDoesburgTip1Title')}</strong>: {t('vanDoesburgTip1Text')}</li>
+    <li><strong>{t('vanDoesburgTip2Title')}</strong>: {t('vanDoesburgTip2Text')}</li>
+  </ul>
+</div>
 
-        <h3>Ask a question about Van Doesburg's interior model for l'Aubette</h3>
-        <img src="/maquette.jpeg" className={styles.image} alt="maquette Van Doesburg" />
-        <p className={styles.caption}>This is a model by architect and artist Theo van Doesburg.  Photo: Johannes Schwartz. </p>
-      
-        <p className={styles.regular}>Feel free to ask about more about the interior model for l'Aubette. For example, you could ask: what is this a model of? How was it made? What is special about it? Which movement is this an icon of? Where can it be seen in person? Ask away!</p>
-        <div className={styles.listwrapper}>
-        <ul className={styles.list}><li><strong>Tip 1</strong>: each answer takes a couple of seconds to generate, so be patient after clicking the 'Get answer' button.</li><li> <strong>Tip 2</strong>: if you don't know where to start, just ask 'What's so special about this?'</li> </ul>
-        </div>
      
         
         {result && (
@@ -122,7 +121,7 @@ export default function Home() {
 )}
         <form id="my-form" onSubmit={onSubmit} className={styles.form}>
         <label className={styles.label}>
-        Ask a question about this object
+        {t('questionLabel')}
         <input className={styles.input}
           type="text"
           name="topic"
@@ -139,12 +138,25 @@ export default function Home() {
   name="eli5"
   checked={isELI5Checked}
   onChange={() => setIsELI5Checked(!isELI5Checked)}
-/><span className={styles.labeltext}>Explain it like I'm five</span></label>
+/><span className={styles.labeltext}>{t('eli5label')}</span></label>
    
-      <input type="submit" value="Get an answer" />
+<input type="submit" value={t('buttonText')} />
         </form>
-<p className={styles.disclaimer}>This prototype was made by Jaap Stronks.</p>
+
+<p className={styles.disclaimer}>{t('disclaimertext')}</p>
       </main>
     </div>
   );
+}
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, [
+        'common',
+        'footer',
+      ])),
+      // Will be passed to the page component as props
+    },
+  }
 }

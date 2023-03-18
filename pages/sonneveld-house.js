@@ -1,8 +1,12 @@
+
 import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
 import Typewriter from "typewriter-effect";
 import Link from "next/link"
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import Header from '../components/Header';
 
 
 export default function Home() {
@@ -10,14 +14,15 @@ export default function Home() {
   const [result, setResult] = useState();
   const [isELI5Checked, setIsELI5Checked] = useState(false);
   const [isResultReady, setIsResultReady] = useState(false);
+  const { t } = useTranslation();
 
 
   const questions = [
-    "What is interesting about this ?",
-    "How was it designed?",
-    "What is the history behind this house?",
-    "How was this model made?",
-    "Tell me a random fact about this house"
+    t("sonneveldQuestion1"),
+    t("sonneveldQuestion2"),
+    t("sonneveldQuestion3"),
+    t("sonneveldQuestion4"),
+    t("sonneveldQuestion5"),
   ];
   
   const randomIndex = Math.floor(Math.random() * 5);
@@ -27,7 +32,8 @@ export default function Home() {
     event.preventDefault();
   
     // Get the slug from the URL
-    const slug = window.location.pathname.split('/')[1];
+    const pathArray = window.location.pathname.split('/');
+    const slug = pathArray[pathArray.length - 1];
   
     try {
       setResult(null); // Reset the result state when a new question is submitted
@@ -62,42 +68,36 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Nieuwe Instituut CollectionBot</title>
+        <title>{t('sonneveldTitle')}</title>
         <link rel="favicon" href="/favicon.png" />
         <meta property="og:image" content="/opengraph.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta name="twitter:image" content="/opengraph.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Nieuwe Instituut CollectionBot" />
-        <meta property="og:title" content="Nieuwe Instituut CollectionBot" />
-        <meta property="og:description" content="A prototype demonstrating the use of a generative AI application to disclose collection data." />
-        <meta property="twitter:description" content="A prototype demonstrating the use of a generative AI application to disclose collection data." />
-        
+        <meta name="twitter:title" content={t('sonneveldTwitterTitle')} />
+        <meta property="og:title" content={t('sonneveldOgTitle')} />
+        <meta property="og:description" content={t('sonneveldOgDescription')} />
+        <meta property="twitter:description" content={t('sonneveldTwitterDescription')} />   
       </Head>
 
      
-        <header className={styles.header}>
-        <div className={styles.headercontainer}>
-        <Link href="/">  <img src="/ni-logo-small.png" className={styles.icon} /></Link>
-        </div>
- 
-        </header>
+      <Header />
         <main className={styles.main}>
 
-        <h1 className={styles.title}><span className={styles.cerial}>Collecti</span>onBot</h1>
-        <p className={styles.intro}>This is a prototype application, testing the usage of the generative AI to disclose collection information.</p> 
+        <h1 className={styles.title}><span className={styles.cerial}>{t('sonneveldTitle')}</span></h1>
+        <p className={styles.intro}>{t('sonneveldIntro')}</p> 
         
        
 
 
-        <h3>Ask a question about Sonneveld House</h3>
+        <h3>{t('sonneveldQuestion')}</h3>
         <img src="/sonneveld.jpg" className={styles.image} alt="Sonneveld House" />
-        <p className={styles.caption}>This is the Sonneveld House. Photo: Johannes Schwartz. </p>
+        <p className={styles.caption}>{t('sonneveldCaption')}</p>
       
-        <p className={styles.regular}>Feel free to ask about more about Sonneveld House.</p>
+        <p className={styles.regular}>{t('sonneveldMoreInfo')}</p>
         <div className={styles.listwrapper}>
-        <ul className={styles.list}><li><strong>Tip 1</strong>: each answer takes a couple of seconds to generate, so be patient after clicking the 'Get answer' button.</li><li> <strong>Tip 2</strong>: if you don't know where to start, just ask 'What's so special about this?'</li> </ul>
+        <ul className={styles.list}><li><strong>{t('sonneveldTip1Title')}</strong>: {t('sonneveldTip1Text')}</li><li> <strong>{t('sonneveldTip2Title')}</strong>: {t('sonneveldTip2Text')}</li> </ul>
         </div>
      
         
@@ -120,9 +120,10 @@ export default function Home() {
   
 )}
 
+
         <form id="my-form" onSubmit={onSubmit} className={styles.form}>
         <label className={styles.label}>
-        Ask a question about this object
+        {t('questionLabel')}
         <input className={styles.input}
           type="text"
           name="topic"
@@ -139,13 +140,26 @@ export default function Home() {
   name="eli5"
   checked={isELI5Checked}
   onChange={() => setIsELI5Checked(!isELI5Checked)}
-/><span className={styles.labeltext}>Explain it like I'm five</span></label>
+/><span className={styles.labeltext}>{t('eli5label')}</span></label>
    
-      <input type="submit" value="Get an answer" />
+      <input type="submit" value={t('buttonText')} />
         </form>
-        <p className={styles.regular}>This website was made using the <a href="https://openai.com/blog/introducing-chatgpt-and-whisper-apis">new ChatGPT API by OpenAI</a>. It prepends user questions with specific information about a collection item, allowing for a fair amount of control over the accuracy of the AI's response, while still benefiting from the AI's abilities to add all kinds of information in a customizable, conversational interface.</p>
-<p className={styles.disclaimer}>This prototype was made by Jaap Stronks.</p>
+
+<p className={styles.disclaimer}>{t('disclaimertext')}</p>
       </main>
     </div>
   );
 }
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, [
+        'common',
+        'footer',
+      ])),
+      // Will be passed to the page component as props
+    },
+  }
+}
+

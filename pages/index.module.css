@@ -44,38 +44,35 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-    padding: 20px 20px 0;
+    padding: 0 20px;
     background-color: #faf6ed;
 }
 
-.header {
-  width: 100%;
-  background-color: #8cffb4;
-}
-.headercontainer {
-  padding: 30px;
-}
 
-.header .icon {
-  display: block;
-  margin: 0 auto;
-  width: 100%;
-  max-width:240px;
 
-}
-.main h1 {
-  font-size:52px;
-  line-height: 1.125;
+.main h1, .main h2 {
   font-family: "Impact", Helvetica, sans-serif;
   font-weight: normal;
   color: #000;
-  margin: 20px 0 20px;
+}
+.main h1 {
+  font-size:74px;
+  line-height: 83px;
+  line-height: 1.125;
+  margin: 16px 0;
+  text-align: left;
+}
+.main h4.subtitle {
+  font-family: 'Social', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
   text-align: left;
 }
 
 .main .cerial {
   font-family: 'Cerial', sans-serif;
-  font-size: 60px;
+  font-size: 86px;
+  line-height: 83px;
 }
 
 .form {
@@ -90,7 +87,7 @@
   color: #000;
   margin: 12px 0 12px;
   margin-bottom: 12px;
-  max-width: 680px;
+  max-width: 671px;
 }
 .main h3 {
   font-size: 32px;
@@ -100,7 +97,7 @@
   color: #000;
   margin: 32px 0 40px;
   margin-bottom: 12px;
-  max-width: 680px;
+  max-width: 671px;
 }
 .main form {
   display: flex;
@@ -184,7 +181,7 @@
 }
 
 .listwrapper {
-  max-width: 680px;
+  max-width: 671px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -213,7 +210,7 @@ margin: 0 auto;
 }
 
 .regular {
-  max-width: 680px;
+  max-width: 671px;
 }
 .main p.caption {
   margin: 4px;
@@ -279,4 +276,15 @@ border-radius: 10px;
   font-weight: normal;
   text-align: left;
   margin: 0;
+}
+
+@media only screen and (max-width: 800px) {
+  .main h1 {
+    font-size:34px;
+    line-height: 39px;
+}
+.main .cerial {
+  font-size: 40px;
+  line-height: 49px;
+}
 }
