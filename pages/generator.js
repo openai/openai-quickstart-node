@@ -21,7 +21,7 @@ const Home = () => {
     <Header />
     <div className="page">
     <main className={styles.main}>
-    <div className={styles.h1title}><h1>Design generator</h1></div>
+<h1 className="title">Design gen<span className="cerial">erator</span></h1>
     <div  className={styles.generator}>
       
       <PromptGenerator onPromptSubmit={handlePromptSubmit} />

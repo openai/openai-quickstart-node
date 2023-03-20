@@ -1,7 +1,7 @@
 .prompt {
   flex: 0 0 440px;
   margin-top: 20px;
-  padding: 0 16px 32px;
+  padding: 16px 16px 32px;
   align-items: center;
   background-color: #ccf4fc;
 }
@@ -10,7 +10,9 @@
   display: flex;
  
 }
-
+.formtitle {
+  margin-top: 0;
+}
 .promptinput {
   font-size: 18px;
   height: 28px;
