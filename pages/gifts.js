@@ -8,7 +8,7 @@ export default function Home() {
   const [age, setAge] = useState(30);
   const [priceMin, setPriceMin] = useState(25);
   const [priceMax, setPriceMax] = useState(100);
-  const [hobbies, setHobbies] = useState("");
+  const [hobbies, setHobbies] = useState("dogs");
   const [loading, setLoading] = useState(false);
 
   const [result, setResult] = useState("");
@@ -31,7 +31,7 @@ export default function Home() {
       });
       const data = await response.json();
       // console.log(data.result);
-      setResult(data.result.replaceAll("\\n", "<br />"));
+      setResult(data.result.replaceAll("\n", "<br />"));
       setLoading(false);
     } catch (e) {
       alert("Failed to generate gift ideas");
@@ -48,7 +48,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h3>Christmas gift generator 🎁 💡</h3>
+        <h3>Christmas gift generator</h3>
         <form onSubmit={onSubmit}>
           <label>For who is the gift?</label>
           <select name='gender' value={gender} onChange={(e) => setGender(e.target.value)}>
