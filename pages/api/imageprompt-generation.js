@@ -1,5 +1,4 @@
 import { Configuration, OpenAIApi } from "openai";
-import axios from "axios";
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -12,10 +11,12 @@ const truncateResponse = (response, maxLength) => {
   let index = 0;
 
   while (index < sentences.length && (truncated.length + sentences[index].length) <= maxLength) {
+    if (truncated.length > 0) {
+      truncated += " "; // Add a space before appending a new sentence
+    }
     truncated += sentences[index];
     index++;
   }
-
   return truncated;
 };
 

@@ -10,14 +10,11 @@
 
 .status {
   font-weight: normal;
-  font-family: 'Courier New', Courier, monospace;  text-align: left;
+  font-family: 'Courier New', Courier, monospace;  
+  text-align: left;
   margin-top: 18px;
-  margin-left: 20px;
+  margin-left: 30px;
   line-height:1.25;
-  font-size: 16px;
+  font-size: 18px;
   padding: 20px;
-  background-color: #000;
-  color: #faf6ed;
-  padding: 16px 16px 24px;
-  border-radius: 8px;
 }

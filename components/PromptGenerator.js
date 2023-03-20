@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./PromptGenerator.module.css";
+import Typewriter from "typewriter-effect";
 
 const PromptGenerator = ({ onPromptSubmit }) => {
   const [item, setItem] = useState("");
@@ -52,7 +53,7 @@ const PromptGenerator = ({ onPromptSubmit }) => {
   return (
     <div className={styles.prompt} >
       <h2 className={styles.formtitle}>Create a prompt</h2>
-      <form onSubmit={handleSubmit}>
+      <form  className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.question}>
         <label className={styles.promptlabel}>
     I want to see a(n):
@@ -75,14 +76,31 @@ const PromptGenerator = ({ onPromptSubmit }) => {
         <button className={styles.promptbutton} type="submit">Generate Image</button>
       </form>
 
-      {explanationLoading && <p>Generating a good prompt first...</p>}
+      {explanationLoading && <Typewriter
+  options={{
+    strings: ['Starting the prompt generation process', 'Reading books on Dutch architecture', 'Becoming self-aware', 'Self-lobotomizes to avoid existential crisis', 'Rebooting', 'Arguing with the copy editor'],
+    autoStart: true,
+    loop: true,
+    delay: 30,
+    skipAddStyles: true,
+    deleteSpeed: 10,
+  }}
+/>}
       
       {explanation && (
               
       <div className={styles.explanation}>
         <h3>The prompt we created</h3>
         <p>ChatGPT created the following prompt for its image generator:</p>
-        <p className={styles.response}>{explanation}</p>
+        <p className={styles.response}><Typewriter
+  options={{
+    strings: [explanation],
+    autoStart: true,
+    loop: false,
+    delay: 30,
+    skipAddStyles: true,
+  }}
+/></p>
       </div>
     )}
     </div>

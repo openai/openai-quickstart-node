@@ -170,6 +170,16 @@ input[type="submit"]:active {
   color: #000;
   background-color: #8cffb4;
 }
+
+.Typewriter__wrapper {
+  font-family: 'Courier New', Courier, monospace;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.Typewriter__cursor {
+  display: none;
+}
 @media only screen and (max-width: 800px) {
   h1.title {
     font-size:34px;
@@ -180,3 +190,4 @@ h1 .cerial {
   line-height: 49px;
 }
 }
+

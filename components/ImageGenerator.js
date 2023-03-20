@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./ImageGenerator.module.css";
+import Typewriter from "typewriter-effect";
 
 const ImageGenerator = ({ prompt }) => {
   const [image, setImage] = useState(null);
@@ -46,7 +47,16 @@ const ImageGenerator = ({ prompt }) => {
   }
 
   if (!image) {
-    return <div className={styles.status}>Generating image...</div>;
+    return <div className={styles.status}><Typewriter
+    options={{
+      strings: ['Booting up the server', 'Hacking the mainframe', 'Painting pixels', 'Pondering the meaning of life'],
+      autoStart: true,
+      loop: true,
+      delay: 50,
+      skipAddStyles: true,
+      deleteSpeed: 30,
+    }}
+  /></div>;
   }
 
   return <div className={styles.generated}><img className={styles.genimage} src={image} alt="Generated image" /></div>;
