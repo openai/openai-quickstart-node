@@ -8,3 +8,16 @@
   max-width: 500px;
 }
 
+.status {
+  font-weight: normal;
+  font-family: 'Courier New', Courier, monospace;  text-align: left;
+  margin-top: 18px;
+  margin-left: 20px;
+  line-height:1.25;
+  font-size: 16px;
+  padding: 20px;
+  background-color: #000;
+  color: #faf6ed;
+  padding: 16px 16px 24px;
+  border-radius: 8px;
+}

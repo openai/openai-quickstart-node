@@ -49,8 +49,18 @@
   margin-bottom: 20px;
   align-items: center;
 }
-
-.explanation {
+.explanation p {
+  font-size: 18px;
+}
+p.response  {
   margin-top: 1rem;
-  font-size: 1.2em;
+  font-weight: normal;
+  font-family: 'Courier New', Courier, monospace;  text-align: left;
+  line-height:1.25;
+  font-size: 16px;
+  margin-bottom: 30px;
+  background-color: #000;
+  color: #faf6ed;
+  padding: 16px 16px 24px;
+  border-radius: 8px;
 }

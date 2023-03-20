@@ -46,7 +46,7 @@ const ImageGenerator = ({ prompt }) => {
   }
 
   if (!image) {
-    return <div>Generating image...</div>;
+    return <div className={styles.status}>Generating image...</div>;
   }
 
   return <div className={styles.generated}><img className={styles.genimage} src={image} alt="Generated image" /></div>;
