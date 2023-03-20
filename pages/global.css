@@ -51,7 +51,7 @@ header {
 }
 
 .content {
-
+padding: 12px;
   background-color: #faf6ed;
 }
 
@@ -169,4 +169,14 @@ input[type="submit"]:hover {
 input[type="submit"]:active {
   color: #000;
   background-color: #8cffb4;
+}
+@media only screen and (max-width: 800px) {
+  h1.title {
+    font-size:34px;
+    line-height: 39px;
+}
+h1 .cerial {
+  font-size: 40px;
+  line-height: 49px;
+}
 }
