@@ -1,7 +1,6 @@
 @font-face {
   font-family: "ColfaxAI";
-  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2)
-      format("woff2"),
+  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2) format("woff2"),
     url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
   font-weight: normal;
   font-style: normal;
@@ -41,11 +40,14 @@
   flex-direction: column;
   width: 320px;
 }
-.main input[type="text"] {
+.main input[type="text"],
+.main input[type="number"],
+.main select {
   padding: 12px 16px;
   border: 1px solid #10a37f;
   border-radius: 4px;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
+  margin-top: 4px;
   outline-color: #10a37f;
 }
 .main ::placeholder {
