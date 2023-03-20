@@ -42,7 +42,9 @@ const PromptGenerator = ({ onPromptSubmit }) => {
           <select className={styles.promptinput} value={name} onChange={handleNameChange}>
             <option value="">Select a name</option>
             <option value="Rem Koolhaas">Rem Koolhaas</option>
+            <option value="Marcel Wanders">Francine Houben</option>
             <option value="Piet Boon">Piet Boon</option>
+            <option value="Marcel Wanders">Marlies Rohmer</option>
             <option value="Marcel Wanders">Marcel Wanders</option>
           </select>
           </div>
