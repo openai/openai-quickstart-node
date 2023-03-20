@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <div>
     <Header />
-    <div class="page">
+    <div className="page">
     <main className={styles.main}>
     <div className={styles.h1title}><h1>Art generator</h1></div>
     <div  className={styles.generator}>
