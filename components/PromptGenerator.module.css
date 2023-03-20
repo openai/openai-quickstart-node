@@ -1,5 +1,5 @@
 .prompt {
-  flex: 0 0 400px;
+  flex: 0 0 440px;
   margin-top: 20px;
   padding: 0 16px 32px;
   align-items: center;
@@ -48,4 +48,9 @@
   justify-content: space-between;
   margin-bottom: 20px;
   align-items: center;
+}
+
+.explanation {
+  margin-top: 1rem;
+  font-size: 1.2em;
 }
