@@ -67,7 +67,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Nieuwe Instituut CollectionBot</title>
+        <title>CollectionBot: Van Doesburg's interior model</title>
         <link rel="favicon" href="/favicon.png" />
         <meta property="og:image" content="/opengraph.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -85,12 +85,12 @@ export default function Home() {
       <Header />
      
         <main className={styles.main}>
+        <div className="page">
 
-        <h1 className="title"><span className={styles.cerial}>Collecti</span>onBot</h1>
+        <h1 className="title"><span className="cerial">Van Doesburg & </span>l'Aubette</h1>
         <div className="content">
 
-        <h3>{t('vanDoesburgQuestion')}</h3>
-<img src="/maquette.jpeg" className={styles.image} alt={t('vanDoesburgAlt')} />
+<img src="/maquette.jpeg" className="contentimage" alt={t('vanDoesburgAlt')} />
 <p className="caption">{t('vanDoesburgCaption')}</p>
   
 <p className="regular">{t('vanDoesburgMoreInfo')}</p>
@@ -145,6 +145,7 @@ export default function Home() {
         </form>
 
 <p className={styles.disclaimer}>{t('disclaimertext')}</p>
+</div>
 </div>
       </main>
     </div>

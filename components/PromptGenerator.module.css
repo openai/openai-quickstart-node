@@ -64,3 +64,10 @@ p.response  {
   padding: 16px 16px 24px;
   border-radius: 8px;
 }
+
+@media only screen and (max-width: 840px) {
+
+  .question {
+    justify-content:flex-start;
+  }
+}

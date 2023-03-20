@@ -105,7 +105,7 @@ min-height: 1024px;
   font-family: "Social", Helvetica, sans-serif;
   font-weight: normal;
   color: #000;
-  margin: 12px 0 12px;
+  margin: 12px auto 12px;
   margin-bottom: 12px;
   max-width: 671px;
 }
@@ -119,12 +119,20 @@ min-height: 1024px;
   margin-bottom: 12px;
   max-width: 671px;
 }
-
-.content p.caption {
-  margin: 4px;
+p.caption {
+  margin: 4px auto 24px;
+  display: flex;
   font-size: 16px;
   color: #444;
 }
+
+.contentimage {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  margin: 0 auto;
+}
+
 .content p.intro {
   font-size:24px;
   margin: 12px 0 12px;

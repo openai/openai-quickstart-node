@@ -12,3 +12,9 @@
   padding-top:20px;
 }
 
+@media only screen and (max-width: 840px) {
+  .generator {
+    display: block
+  }
+
+}

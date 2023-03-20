@@ -84,19 +84,14 @@ export default function Home() {
      
       <Header />
         <main className={styles.main}>
-<div class="page">
-        <h1 class="title"><span className={styles.cerial}>{t('sonneveldTitle')}</span></h1>
-        <div class="content">
-        <p className={styles.intro}>{t('sonneveldIntro')}</p> 
-        
-       
+<div className="page">
+        <h1 className="title">{t('sonneveldTitle1')}<span className="cerial">{t('sonneveldTitle2')}</span></h1>
+        <div className="content">
 
-
-        <h3>{t('sonneveldQuestion')}</h3>
-        <img src="/sonneveld.jpg" className={styles.image} alt="Sonneveld House" />
-        <p class="caption">{t('sonneveldCaption')}</p>
+         <img src="/sonneveld.jpg" className="contentimage" alt="Sonneveld House" />
+        <p className="caption">{t('sonneveldCaption')}</p>
       
-        <p className={styles.regular}>{t('sonneveldMoreInfo')}</p>
+        <p className="regular">{t('sonneveldMoreInfo')}</p>
         <div className={styles.listwrapper}>
         <ul className={styles.list}><li><strong>{t('sonneveldTip1Title')}</strong>: {t('sonneveldTip1Text')}</li><li> <strong>{t('sonneveldTip2Title')}</strong>: {t('sonneveldTip2Text')}</li> </ul>
         </div>
