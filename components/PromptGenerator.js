@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./PromptGenerator.module.css";
 import Typewriter from "typewriter-effect";
 
+
 const PromptGenerator = ({ onPromptSubmit }) => {
   const [item, setItem] = useState("");
   const [name, setName] = useState("");
@@ -78,7 +79,7 @@ const PromptGenerator = ({ onPromptSubmit }) => {
 
       {explanationLoading && <Typewriter
   options={{
-    strings: ['Starting the prompt generation process', 'Reading books on Dutch architecture', 'Becoming self-aware', 'Self-lobotomizes to avoid existential crisis', 'Rebooting', 'Arguing with the copy editor'],
+    strings: ['Starting the prompt generation process', 'Reading books on Dutch architecture', 'Becoming self-aware', 'Self-lobotomizes to avoid existential crisis', 'Arguing with the copy editor', 'Opening Paint', 'Coloring the pixels', 'Filling out some captchas'],
     autoStart: true,
     loop: true,
     delay: 30,
@@ -99,6 +100,7 @@ const PromptGenerator = ({ onPromptSubmit }) => {
     loop: false,
     delay: 30,
     skipAddStyles: true,
+    pauseFor: 40000,
   }}
 /></p>
       </div>

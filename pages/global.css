@@ -174,7 +174,7 @@ input[type="submit"]:active {
 .Typewriter__wrapper {
   font-family: 'Courier New', Courier, monospace;
   padding: 10px;
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .Typewriter__cursor {
