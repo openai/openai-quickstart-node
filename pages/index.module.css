@@ -79,5 +79,6 @@
 }
 .main .result {
   font-weight: bold;
-  width: 600px;
+  width: 80vw;
+  max-width: 600px;
 }

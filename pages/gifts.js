@@ -5,10 +5,10 @@ import styles from "./index.module.css";
 
 export default function Home() {
   const [gender, setGender] = useState("man");
-  const [age, setAge] = useState(30);
+  const [age, setAge] = useState(34);
   const [priceMin, setPriceMin] = useState(25);
   const [priceMax, setPriceMax] = useState(100);
-  const [hobbies, setHobbies] = useState("dogs");
+  const [hobbies, setHobbies] = useState("");
   const [loading, setLoading] = useState(false);
 
   const [result, setResult] = useState("");
