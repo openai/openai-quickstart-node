@@ -38,9 +38,6 @@ export default function Home() {
         <p className={styles.intro}>{t('intro')}</p> 
         <p className="regular">{t('regular_1')}<a href="https://openai.com/blog/introducing-chatgpt-and-whisper-apis">{t('regular_2')}</a>{t('regular_3')}</p>
 
-        <h4 className={styles.subtitle}>{t('frontpageSubtitle')}</h4>
-  
-
         <div className={styles.cardContainer}>
           <Link href="/van-doesburg-interior-model" className={styles.card}>
             <img src="/maquette.jpeg" className={styles.cardImage} alt={t('van_doesburg_alt')} />
