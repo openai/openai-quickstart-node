@@ -15,21 +15,29 @@ export default function Home() {
 
   async function onSubmit(event) {
     event.preventDefault();
+
     if (loading) {
       return;
     }
     setLoading(true);
-    setResult("");
-    const response = await fetch("/api/generate-gifts", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ priceMin, priceMax, gender, age, hobbies })
-    });
-    const data = await response.json();
-    setResult(data.result.replaceAll("\\n", "<br />"));
-    setLoading(false);
+
+    try {
+      const response = await fetch("/api/generate-gifts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ priceMin, priceMax, gender, age, hobbies })
+      });
+      const data = await response.json();
+      // console.log(data.result);
+      setResult(data.result.replaceAll("\\n", "<br />"));
+      setLoading(false);
+    } catch (e) {
+      alert("Failed to generate gift ideas");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -90,12 +98,12 @@ export default function Home() {
           <input type='submit' value='Generate gift ideas' />
         </form>
         {loading && (
-          <div>
-            <h3>Looking for the best gift ideas 🎁 💡</h3>
-            <img src='/loading.webp' className={styles.loading} />
+          <div className={styles.loading_container}>
+            <h4>Looking for the best gift ideas</h4>
+            <img src='/loading.gif' className={styles.loading} />
           </div>
         )}
-        <div className={styles.result} dangerouslySetInnerHTML={{ __html: result }} />
+        {result && <div className={styles.result} dangerouslySetInnerHTML={{ __html: result }} />}
       </main>
     </div>
   );

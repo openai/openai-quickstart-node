@@ -12,6 +12,7 @@
   font-weight: bold;
   font-style: normal;
 }
+
 .main,
 .main input {
   font-size: 16px;
@@ -40,6 +41,18 @@
   flex-direction: column;
   width: 320px;
 }
+
+.main .loading {
+  width: 200px;
+}
+
+.loading_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .main input[type="text"],
 .main input[type="number"],
 .main select {
@@ -50,6 +63,7 @@
   margin-top: 4px;
   outline-color: #10a37f;
 }
+
 .main ::placeholder {
   color: #8e8ea0;
   opacity: 1;

@@ -12,7 +12,7 @@ export default async function (req, res) {
   console.log(prompt);
 
   const completion = await openai.createCompletion({
-    model: "text-davinci-004",
+    model: "text-davinci-003",
     prompt: prompt,
     temperature: 0.6
   });
@@ -22,5 +22,5 @@ export default async function (req, res) {
 }
 
 function generatePrompt(priceMin, priceMax, gender, age, hobbies) {
-  return `suggest 3 Christmas gift ideas between ${priceMin} and ${priceMax}for a ${age} year old ${gender} that is into ${hobbies}.`;
+  return `Suggest 3 Christmas gift ideas between ${priceMin} and ${priceMax}for a ${age} year old ${gender} that is into ${hobbies}.`;
 }
