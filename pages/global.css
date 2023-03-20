@@ -1,3 +1,40 @@
+@font-face {
+  font-family: "Social";
+  src: url(/fonts/ABCSocial-Regular.woff2) format("woff2"),
+    url(/fonts/ABCSocial-Regular.woff) format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Social";
+  src: url(/fonts/ABCSocial-Bold.woff2) format("woff2"),
+    url(/fonts/ABCSocial-Bold.woff) format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Social";
+  src: url(/fonts/ABCSocial-RegularItalic.woff2) format("woff2"),
+    url(/fonts/ABCSocial-RegularItalic.woff) format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Impact";
+  src: url(/fonts/ImpactNieuw-2012.woff2) format("woff2"),
+    url(/fonts/ImpactNieuw-2012.woff) format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Cerial";
+  src: url(/fonts/Cerial.woff2) format("woff2"),
+    url(/fonts/Cerial.woff) format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 :root {
   --my-accent-color: #8cffb4;
 }
@@ -13,3 +50,115 @@ header {
   color: var(--my-accent-color);
 }
 
+.content {
+
+  background-color: #faf6ed;
+}
+
+
+
+p, label, ul, li, h3, h4 {
+  font-family: 'Social', sans-serif;
+}
+
+label {
+  font-size: 18px;
+}
+
+h1, h2 {
+  font-family: "Impact", Helvetica, sans-serif;
+  font-weight: normal;
+  color: #000;
+}
+h1 {
+  font-size:74px;
+  line-height: 83px;
+  line-height: 1.125;
+  margin: 16px 0;
+  text-align: left;
+}
+h4.subtitle {
+  font-family: 'Social', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.cerial {
+  font-family: 'Cerial', sans-serif;
+  font-size: 86px;
+  line-height: 83px;
+}
+
+.page {   
+background-color: #faf6ed;
+width: 100%;
+min-height: 1024px;
+}
+.main-title {
+  padding: 0 16px;
+  max-width: 1200px;
+}
+.content p {
+  font-size: 20px;
+  line-height: 1.3em;
+  font-family: "Social", Helvetica, sans-serif;
+  font-weight: normal;
+  color: #000;
+  margin: 12px 0 12px;
+  margin-bottom: 12px;
+  max-width: 671px;
+}
+.content h3 {
+  font-size: 32px;
+  line-height: 1.125;
+  font-family: "Impact", Helvetica, sans-serif;
+  font-weight: normal;
+  color: #000;
+  margin: 32px 0 40px;
+  margin-bottom: 12px;
+  max-width: 671px;
+}
+
+.content p.caption {
+  margin: 4px;
+  font-size: 16px;
+  color: #444;
+}
+.content p.intro {
+  font-size:24px;
+  margin: 12px 0 12px;
+}
+
+
+.content a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  color: #000;
+}
+
+.input {
+  margin-top: 8px;
+
+  background-color: #faf6ed;
+
+}
+input[type="submit"] {
+  padding: 12px 0;
+  color: #000;
+  background-color: #faf6ed;
+  border: 1px solid #000;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+input[type="submit"]:hover {
+  color: #faf6ed;
+  background-color: #000;
+}
+
+input[type="submit"]:active {
+  color: #000;
+  background-color: #8cffb4;
+}

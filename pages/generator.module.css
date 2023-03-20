@@ -1,0 +1,14 @@
+.generator {
+  display: flex;
+  background-color: #faf6ed;
+}
+
+.h1title h1 {
+  margin-left: 16px;
+  font-size: 52px;
+}
+.main {
+  background-color: #faf6ed;
+  padding-top:20px;
+}
+

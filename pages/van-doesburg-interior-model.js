@@ -83,16 +83,17 @@ export default function Home() {
 
      
       <Header />
+     
         <main className={styles.main}>
 
-        <h1 className={styles.title}><span className={styles.cerial}>Collecti</span>onBot</h1>
-        
+        <h1 class="title"><span className={styles.cerial}>Collecti</span>onBot</h1>
+        <div class="content">
 
         <h3>{t('vanDoesburgQuestion')}</h3>
 <img src="/maquette.jpeg" className={styles.image} alt={t('vanDoesburgAlt')} />
-<p className={styles.caption}>{t('vanDoesburgCaption')}</p>
+<p class="caption">{t('vanDoesburgCaption')}</p>
   
-<p className={styles.regular}>{t('vanDoesburgMoreInfo')}</p>
+<p class="regular">{t('vanDoesburgMoreInfo')}</p>
 <div className={styles.listwrapper}>
   <ul className={styles.list}>
     <li><strong>{t('vanDoesburgTip1Title')}</strong>: {t('vanDoesburgTip1Text')}</li>
@@ -144,8 +145,10 @@ export default function Home() {
         </form>
 
 <p className={styles.disclaimer}>{t('disclaimertext')}</p>
+</div>
       </main>
     </div>
+
   );
 }
 

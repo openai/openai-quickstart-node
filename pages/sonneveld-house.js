@@ -84,8 +84,9 @@ export default function Home() {
      
       <Header />
         <main className={styles.main}>
-
-        <h1 className={styles.title}><span className={styles.cerial}>{t('sonneveldTitle')}</span></h1>
+<div class="page">
+        <h1 class="title"><span className={styles.cerial}>{t('sonneveldTitle')}</span></h1>
+        <div class="content">
         <p className={styles.intro}>{t('sonneveldIntro')}</p> 
         
        
@@ -93,7 +94,7 @@ export default function Home() {
 
         <h3>{t('sonneveldQuestion')}</h3>
         <img src="/sonneveld.jpg" className={styles.image} alt="Sonneveld House" />
-        <p className={styles.caption}>{t('sonneveldCaption')}</p>
+        <p class="caption">{t('sonneveldCaption')}</p>
       
         <p className={styles.regular}>{t('sonneveldMoreInfo')}</p>
         <div className={styles.listwrapper}>
@@ -145,7 +146,7 @@ export default function Home() {
       <input type="submit" value={t('buttonText')} />
         </form>
 
-<p className={styles.disclaimer}>{t('disclaimertext')}</p>
+<p className={styles.disclaimer}>{t('disclaimertext')}</p></div></div>
       </main>
     </div>
   );

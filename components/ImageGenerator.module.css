@@ -1,0 +1,10 @@
+.generated {
+  flex: 1 1 auto;
+  padding: 20px;
+}
+.genimage {
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+}
+

@@ -1,0 +1,51 @@
+.prompt {
+  flex: 0 0 400px;
+  margin-top: 20px;
+  padding: 0 16px 32px;
+  align-items: center;
+  background-color: #ccf4fc;
+}
+
+.promptlabel {
+  display: flex;
+ 
+}
+
+.promptinput {
+  font-size: 18px;
+  height: 28px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  margin-left: 10px;
+}
+
+.promptbutton {
+  padding: 10px 20px;
+  border: 1px solid #000;
+  background-color: #faf6ed;
+  color: #000;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.promptbutton:hover {
+  background-color: #000;
+  color: #faf6ed;
+}
+.promptbutton:active {
+  color: #000;
+  background-color: #8cffb4;
+}
+
+.prompt-p {
+  margin-top: 20px;
+  font-size: 1.2em;
+
+}
+
+.question {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  align-items: center;
+}

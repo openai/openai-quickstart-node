@@ -29,9 +29,12 @@ export default function Home() {
     <Header />
   
     
-      
-      <main className={styles.main}>
-        <h1 className={styles.title}>{t('indextitle1')}<span className={styles.cerial}>{t('indextitle2')}</span></h1>
+    <div class="page">
+      <main  className={styles.main}>
+    <div class="main-title">
+        <h1 class="title">{t('indextitle1')}<span class="cerial">{t('indextitle2')}</span></h1>
+        </div>
+        <div class="content">
         <p className={styles.intro}>{t('intro')}</p> 
         <p className={styles.regular}>{t('regular_1')}<a href="https://openai.com/blog/introducing-chatgpt-and-whisper-apis">{t('regular_2')}</a>{t('regular_3')}</p>
 
@@ -51,7 +54,9 @@ export default function Home() {
         </div>
 
         <p className={styles.disclaimer}>{t('disclaimer')}</p>
+        </div>
       </main>
+    </div>
     </div>
   );
 }
