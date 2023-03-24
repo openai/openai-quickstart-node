@@ -1,0 +1,102 @@
+{
+    "morals": [
+        {
+            "content": "Honesty"
+        },
+        {
+            "content": "Respect"
+        },
+        {
+            "content": "Sharing"
+        },
+        {
+            "content": "Listening"
+        },
+        {
+            "content": "Hard Work"
+        },
+        {
+            "content": "Resilience"
+        },
+        {
+            "content": "Kindness"
+        },
+        {
+            "content": "Not Judging"
+        },
+        {
+            "content": "Saying Sorry"
+        },
+        {
+            "content": "Responsibility"
+        },
+        {
+            "content": "Being Grateful"
+        },
+        {
+            "content": "Asking For Help"
+        },
+        {
+            "content": "Having Faith"
+        },
+        {
+            "content": "Confidence"
+        },
+        {
+            "content": "Respect"
+        },
+        {
+            "content": "Truthfulness"
+        },
+        {
+            "content": "Kindness"
+        },
+        {
+            "content": "Patience"
+        },
+        {
+            "content": "Safety"
+        },
+        {
+            "content": "Appreciation"
+        }
+    ],
+    "holidays": [
+        {
+            "content": "Christmas"
+        },
+        {
+            "content": "Halloween"
+        },
+        {
+            "content": "Thanksgiving"
+        },
+        {
+            "content": "Easter"
+        },
+        {
+            "content": "Valentine's Day"
+        },
+        {
+            "content": "Fourth of July"
+        },
+        {
+            "content": "Hanukkah"
+        },
+        {
+            "content": "Chinese New Year"
+        },
+        {
+            "content": "St. Patrick's Day"
+        },
+        {
+            "content": "New Year's Eve"
+        },
+        {
+            "content": "Mother's Day"
+        },
+        {
+            "content": "Father's Day"
+        }
+    ]
+}
