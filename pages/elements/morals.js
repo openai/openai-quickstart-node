@@ -34,10 +34,6 @@ export function Morals() {
             "content": "Resilience"
         },
         {
-            "key": "Kindness",
-            "content": "Kindness"
-        },
-        {
             "key":  "Judging",
             "content": "Not Judging"
         },
@@ -64,10 +60,6 @@ export function Morals() {
         {
             "key": "Confidence",
             "content": "Confidence"
-        },
-        {
-            "key": "Respect",
-            "content": "Respect"
         },
         {
             "key": "Truthfulness",
@@ -103,6 +95,8 @@ export function Morals() {
                 selectionMode="single"
                 selectedKeys={selected}
                 onSelectionChange={setSelected}
+                onChange={(e) => SetMoralInput(e.target.value)}
+                name="moral"
                 items={menuItems}>
                 {(item) => (
                     <Dropdown.Item

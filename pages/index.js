@@ -1,12 +1,15 @@
 import Head from "next/head";
 import { useState } from "react";
-import styles from "./index.module.css";
+// import styles from "./index.module.css";
+import { Container, Card, Row, Col, Spacer } from "@nextui-org/react";
+
 import { CssBaseline } from "@nextui-org/react";
 import { useTheme, Text } from '@nextui-org/react';
 import { Radio } from "@nextui-org/react";
 
 // import custom elements
 import { Morals } from './elements/morals.js';
+import { Child } from './elements/child.js';
 
 
 
@@ -18,6 +21,7 @@ export default function Home(props) {
   const morals = props.morals;
   const holidays = props.holidays;
   const [childInput, SetChildNameInput] = useState("");
+
   const [moralInput, SetMoralInput] = useState("");
   const [result, setResult] = useState();
 
@@ -48,6 +52,7 @@ export default function Home(props) {
   }
 
 
+
   return (
     <div>
       <Head>
@@ -55,17 +60,16 @@ export default function Home(props) {
         <link rel="icon" href="/dog.png" />
       </Head>
 
-      <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
+      <main>
+        <Container gap={0}>
+          <Row gap={1}>
+            <Col>
+        <img src="/dog.png" />
         <h3>Generate your 2-minute bedtime story</h3>
         <form onSubmit={onSubmit}>
-          <input
-            type="text"
-            name="child"
-            placeholder="Enter your child's name"
-            value={childInput}
-            onChange={(e) => SetChildNameInput(e.target.value)}
-          />
+          
+          {Child()}
+
 
           <Radio.Group label="Story Types" defaultValue="moral">
             <Radio value="moral">Morals</Radio>
@@ -75,21 +79,12 @@ export default function Home(props) {
 
           {Morals()}
 
-
-          <label for="moral">Moral of the story:</label>
-          <select
-            name="moral"
-            style={{ marginBottom: '1em' }}
-            value={moralInput}
-            onChange={(e) => SetMoralInput(e.target.value)}
-
-          >
-
-
-          </select>
           <input type="submit" value="Generate story" />
         </form>
-        <div className={styles.result}>{result}</div>
+        <div>{result}</div>
+            </Col>
+          </Row>
+        </Container>
       </main>
     </div>
   );
