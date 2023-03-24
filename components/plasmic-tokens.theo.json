@@ -1,0 +1,19 @@
+{
+  "props": [
+    {
+      "name": "Brand",
+      "type": "color",
+      "value": "rgba(11,166,245,0.77)",
+      "category": "color",
+      "meta": {
+        "projectId": "ncZgg9dD4G7MhkSChzd3xt",
+        "id": "rcszoJT2CB7Et"
+      }
+    }
+  ],
+  "global": {
+    "meta": {
+      "source": "plasmic.app"
+    }
+  }
+}
