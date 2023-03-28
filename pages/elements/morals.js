@@ -84,28 +84,29 @@ export function Morals() {
     ];
 
     return (
-        <Dropdown>
-            <Dropdown.Button flat color="secondary" css={{ tt: "capitalize" }}>
-                {selectedValue}
-            </Dropdown.Button>
-            <Dropdown.Menu 
-                aria-label="Single selection actions"
-                color="secondary"
-                disallowEmptySelection
-                selectionMode="single"
-                selectedKeys={selected}
-                onSelectionChange={setSelected}
-                onChange={(e) => SetMoralInput(e.target.value)}
-                name="moral"
-                items={menuItems}>
-                {(item) => (
-                    <Dropdown.Item
-                        key={item.key}
-                    >
-                        {item.content}
-                    </Dropdown.Item>
-                )}
-            </Dropdown.Menu>
-        </Dropdown>
+        <span id="Morals" className="story-dropdown">
+            <Dropdown>
+                <Dropdown.Button flat color="secondary" css={{ tt: "capitalize" }}>
+                    {selectedValue}
+                </Dropdown.Button>
+                <Dropdown.Menu 
+                    aria-label="Single selection actions"
+                    color="secondary"
+                    disallowEmptySelection
+                    selectionMode="single"
+                    selectedKeys={selected}
+                    onSelectionChange={setSelected}
+                    onChange={(e) => SetMoralInput(e.target.value)}
+                    items={menuItems}>
+                    {(item) => (
+                        <Dropdown.Item
+                            key={item.key}
+                        >
+                            {item.content}
+                        </Dropdown.Item>
+                    )}
+                </Dropdown.Menu>
+            </Dropdown>
+        </span>
     );
 }

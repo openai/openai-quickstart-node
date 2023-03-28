@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useState } from "react";
-// import styles from "./index.module.css";
+import styles from "./index.module.css";
 import { Container, Card, Row, Col, Spacer } from "@nextui-org/react";
 
 import { CssBaseline } from "@nextui-org/react";
@@ -71,9 +71,9 @@ export default function Home(props) {
           {Child()}
 
 
-          <Radio.Group label="Story Types" defaultValue="moral">
-            <Radio value="moral">Morals</Radio>
-            <Radio value="holiday">Holidays</Radio>
+          <Radio.Group label="Story Types" className="story-type" defaultValue="moral">
+            <Radio value="Morals">Morals</Radio>
+            <Radio value="Holidays">Holidays</Radio>
           </Radio.Group>
 
 

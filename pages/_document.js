@@ -16,10 +16,14 @@ class MyDocument extends Document {
     render() {
         return (
             <Html lang="en">
-                <Head>{CssBaseline.flush()}</Head>
+                <Head>{CssBaseline.flush()}
+                    <link rel="stylesheet" href="./tiny-tales.css"></link>
+                </Head>
                 <body>
                     <Main />
                     <NextScript />
+                    <script src="./tiny-tales.js" async></script>
+
                 </body>
             </Html>
         );

@@ -1,0 +1,7 @@
+.story-dropdown {
+    display: none !important;
+}
+
+.active {
+    display: block !important;
+}
