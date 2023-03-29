@@ -17,12 +17,13 @@ export default async function (req, res) {
 
   const child = req.body.child || '';
   const moral = req.body.moral || '';
+  const holiday = req.body.holiday || '';
 
 
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generatePrompt(child, moral),
+      prompt: generatePrompt(child, moral, holiday),
       temperature: 0.9,
       max_tokens: 100
     });
@@ -43,9 +44,12 @@ export default async function (req, res) {
   }
 }
 
-function generatePrompt(child, moral) {
+function generatePrompt(child, moral, holiday) {
+  
   return `Make very short bedtime story based on information:
 
 Child name: ${child}
-Moral: ${moral}`;
+Moral: ${moral}
+Holi: ${holiday}
+`;
 }
