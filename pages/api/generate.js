@@ -5,22 +5,29 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
+export const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type",
+};
+
 export default async function (req, res) {
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
-        message: "OpenAI API key not configured, please follow instructions in README.md",
-      }
+        message:
+          "OpenAI API key not configured, please follow instructions in README.md",
+      },
     });
     return;
   }
 
-  const animal = req.body.animal || '';
+  const animal = req.body.animal || "";
   if (animal.trim().length === 0) {
     res.status(400).json({
       error: {
         message: "Please enter a valid animal",
-      }
+      },
     });
     return;
   }
@@ -31,8 +38,9 @@ export default async function (req, res) {
       prompt: generatePrompt(animal),
       temperature: 0.6,
     });
+    console.log(completion.data.choices);
     res.status(200).json({ result: completion.data.choices[0].text });
-  } catch(error) {
+  } catch (error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
       console.error(error.response.status, error.response.data);
@@ -41,22 +49,29 @@ export default async function (req, res) {
       console.error(`Error with OpenAI API request: ${error.message}`);
       res.status(500).json({
         error: {
-          message: 'An error occurred during your request.',
-        }
+          message: "An error occurred during your request.",
+        },
       });
     }
   }
 }
 
 function generatePrompt(animal) {
-  const capitalizedAnimal =
-    animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-  return `Suggest three names for an animal that is a superhero.
+  return `You are sql expert. Given the following table structure,
+ answer the question using only that information,
+  outputted in markdown format. If you are unsure , say
+  Sorry, I don't know how to help with that.
 
-Animal: Cat
-Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-Animal: Dog
-Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-Animal: ${capitalizedAnimal}
-Names:`;
+  Table structure:
+  CREATE TABLE Sales (
+    sale_id INT PRIMARY KEY,
+    customer_id INT,
+    sale_date DATE,
+    product_name VARCHAR(255),
+    quantity INT,
+    price DECIMAL(10,2),
+    total DECIMAL(10,2),
+    payment_method VARCHAR(255)
+);
+  Question :  ${animal}`;
 }
