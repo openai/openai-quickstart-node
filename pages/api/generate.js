@@ -1,7 +1,7 @@
 import { Configuration, OpenAIApi } from "openai";
 
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.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
 });
 const openai = new OpenAIApi(configuration);
 
@@ -60,3 +60,4 @@ Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
 Animal: ${capitalizedAnimal}
 Names:`;
 }
+$ npm install
