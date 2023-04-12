@@ -26,7 +26,7 @@ export default async function (req, res) {
   if (animal.trim().length === 0) {
     res.status(400).json({
       error: {
-        message: "Please enter a valid animal",
+        message: "Please enter a valid sales query",
       },
     });
     return;
