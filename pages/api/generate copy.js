@@ -16,25 +16,32 @@ export default async function (req, res) {
     return;
   }
 
-  // const question = req.body.question || "";
-  // if (question.trim().length === 0) {
-  //   res.status(400).json({
-  //     error: {
-  //       message: "Please enter a valid question",
-  //     },
-  //   });
-  //   return;
-  // }
+  const animal = req.body.animal || "";
+  if (animal.trim().length === 0) {
+    res.status(400).json({
+      error: {
+        message: "Please enter a valid animal",
+      },
+    });
+    return;
+  }
 
-
+  const cantidadAnimal = req.body.cantidadAnimal || "";
+  if (cantidadAnimal.trim().length === 0) {
+    res.status(400).json({
+      error: {
+        message: "Please enter a valid count",
+      },
+    });
+    return;
+  }
 
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      //prompt: req.body.question,
-      prompt: `Actúa como si fueras un experto en psicologia, tratame de una manera amigable y comprensiva, con empatia y de manega amigable y de confianza. pasciente: ${req.body.question}`,
-      //temperature: 0.6,
-      max_tokens: 500,
+      prompt: generatePrompt(animal, cantidadAnimal),
+      temperature: 0.6,
+      max_tokens: 100,
     });
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch (error) {
@@ -53,7 +60,14 @@ export default async function (req, res) {
   }
 }
 
-// function generatePrompt(animal, cantidadAnimal) {
-//   console.log(animal, cantidadAnimal);
-//   return `genera una tabla en html con sugerencias de ${cantidadAnimal} nombres de ${animal} `;
-// }
+function generatePrompt(animal, cantidadAnimal) {
+  const capitalizedAnimal =
+    animal[0].toUpperCase() + animal.slice(1).toLowerCase();
+  return `Suggest ${cantidadAnimal} names for an animal that is a superhero.
+Animal: Cat
+Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
+Animal: Dog
+Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
+Animal: ${capitalizedAnimal}
+Names:`;
+}
