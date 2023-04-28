@@ -5,10 +5,14 @@ import styles from "./index.module.css";
 export default function Home() {
   const [animalInput, setAnimalInput] = useState("");
   const [result, setResult] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(undefined);
 
   async function onSubmit(event) {
     event.preventDefault();
     try {
+      setError(undefined);
+      setIsLoading(true);
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: {
@@ -16,18 +20,22 @@ export default function Home() {
         },
         body: JSON.stringify({ animal: animalInput }),
       });
-
       const data = await response.json();
       if (response.status !== 200) {
-        throw data.error || new Error(`Request failed with status ${response.status}`);
+        throw (
+          data.error ||
+          new Error(`Request failed with status ${response.status}`)
+        );
       }
-
       setResult(data.result);
       setAnimalInput("");
-    } catch(error) {
+    } catch (err) {
       // Consider implementing your own error handling logic here
-      console.error(error);
-      alert(error.message);
+      console.error(err);
+      setError(err.message);
+      // alert(err.message);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -51,7 +59,13 @@ export default function Home() {
           />
           <input type="submit" value="Generate names" />
         </form>
-        <div className={styles.result}>{result}</div>
+        {isLoading ? (
+          <div className={styles.loading}></div>
+        ) : error ? (
+          <div className={styles.error}>{error}</div>
+        ) : (
+          <div className={styles.result}>{result}</div>
+        )}
       </main>
     </div>
   );
