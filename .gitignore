@@ -29,3 +29,4 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+$ npm install$ copy .env.example .env$
