@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
+  const [textChatInput, setTextChatInput] = useState("");
   const [result, setResult] = useState();
 
   async function onSubmit(event) {
@@ -14,7 +14,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ animal: animalInput }),
+        body: JSON.stringify({ textChat: textChatInput }),
       });
 
       const data = await response.json();
@@ -23,9 +23,9 @@ export default function Home() {
       }
 
       setResult(data.result);
-      setAnimalInput("");
+      setTextChatInput("");
     } catch(error) {
-      // Consider implementing your own error handling logic here
+      // todo: implement error handling logic.
       console.error(error);
       alert(error.message);
     }
@@ -34,22 +34,22 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/dog.png" />
+        <title>Chat with my AI</title>
+        <link rel="icon" href="/eBabel_logo_144x.png" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
+        <img src="/eBabel_logo_144x.png" className={styles.icon} />
+        <h3>Chat with my AI</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            name="textChat"
+            placeholder="What's your question?"
+            value={textChatInput}
+            onChange={(e) => setTextChatInput(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
+          <input type="submit" value="Send your question" />
         </form>
         <div className={styles.result}>{result}</div>
       </main>

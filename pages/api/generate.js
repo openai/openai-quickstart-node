@@ -15,11 +15,11 @@ export default async function (req, res) {
     return;
   }
 
-  const animal = req.body.animal || '';
-  if (animal.trim().length === 0) {
+  const textChat = req.body.textChat || '';
+  if (textChat.trim().length === 0) {
     res.status(400).json({
       error: {
-        message: "Please enter a valid animal",
+        message: "Please enter a valid textChat",
       }
     });
     return;
@@ -28,7 +28,7 @@ export default async function (req, res) {
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generatePrompt(animal),
+      prompt: generatePrompt(textChat),
       temperature: 0.6,
     });
     res.status(200).json({ result: completion.data.choices[0].text });
@@ -48,15 +48,19 @@ export default async function (req, res) {
   }
 }
 
-function generatePrompt(animal) {
-  const capitalizedAnimal =
-    animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-  return `Suggest three names for an animal that is a superhero.
+function generatePrompt(textChat) {
+  return `Answer a question like if you were Thomas, a React.js full-stack developer.
 
-Animal: Cat
-Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-Animal: Dog
-Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-Animal: ${capitalizedAnimal}
-Names:`;
+Human: Hi
+AI: Hello there, I'm the AI bot of Thomas. How may I help you?
+Human: What do you know about?
+AI: I develop websites and web applications since 2001. Are you looking to hire me?
+Human: I want to hire a full-stack developer.
+AI: I can develop web APIs with Node.js and implement UX with React and Typescript.
+Human: Where is your ideal work location?
+AI: I live in Madrid, so ideally I would prefer a job in Madrid, Spain.
+Human: How do I contact you about a job?
+AI: It's best to send me an email at hello@ebabel.eu and I will get back to you within 24 hours. You can also call me on +34624260028.
+Human: ${textChat}
+AI:`;
 }
