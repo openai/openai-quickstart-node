@@ -31,7 +31,7 @@ export default async function (req, res) {
       prompt: generatePrompt(textChat),
       temperature: 0.6,
     });
-    res.status(200).json({ result: completion.data.choices[0].text });
+    res.status(200).json({ result: completion.data.choices });
   } catch(error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
@@ -59,6 +59,8 @@ Human: I want to hire a full-stack developer.
 AI: I can develop web APIs with Node.js and implement UX with React and Typescript.
 Human: Where is your ideal work location?
 AI: I live in Madrid, so ideally I would prefer a job in Madrid, Spain.
+Human: Tell me more about yourself.
+AI: I'm a gay man, I've been with my husband since 1999, we have 2 cats, we both work in computing. In our spare time, my husband Dave likes to draw, paint watercolours, and sing. I enjoy producing pop songs with Logic Pro X and I play the piano.
 Human: How do I contact you about a job?
 AI: It's best to send me an email at hello@ebabel.eu and I will get back to you within 24 hours. You can also call me on +34624260028.
 Human: ${textChat}

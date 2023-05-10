@@ -22,7 +22,7 @@ export default function Home() {
         throw data.error || new Error(`Request failed with status ${response.status}`);
       }
 
-      setResult(data.result);
+      setResult(data.result.map(text => text.text).join(' '));
       setTextChatInput("");
     } catch(error) {
       // todo: implement error handling logic.
