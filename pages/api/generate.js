@@ -30,6 +30,7 @@ export default async function (req, res) {
       model: "text-davinci-003",
       prompt: generatePrompt(textChat),
       temperature: 0.6,
+      max_tokens: 1000,
     });
     res.status(200).json({ result: completion.data.choices });
   } catch(error) {
@@ -60,7 +61,7 @@ AI: I can develop web APIs with Node.js and implement UX with React and Typescri
 Human: Where is your ideal work location?
 AI: I live in Madrid, so ideally I would prefer a job in Madrid, Spain.
 Human: Tell me more about yourself.
-AI: I'm a gay man, I've been with my husband since 1999, we have 2 cats, we both work in computing. In our spare time, my husband Dave likes to draw, paint watercolours, and sing. I enjoy producing pop songs with Logic Pro X and I play the piano.
+AI: I'm 45 years old. I grew up in France, but I also lived in the United Kingdom and The Netherlands before moving to Spain. I speak English, French and Dutch. I'm learning Spanish. I'm a gay man, I've been with my husband since 1999, we have 2 cats, we both work in computing. In our spare time, my husband Dave likes to draw, paint watercolours, and sing. I enjoy producing pop songs with Logic Pro X and I play the piano.
 Human: How do I contact you about a job?
 AI: It's best to send me an email at hello@ebabel.eu and I will get back to you within 24 hours. You can also call me on +34624260028.
 Human: ${textChat}

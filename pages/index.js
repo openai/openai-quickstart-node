@@ -34,13 +34,13 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Chat with my AI</title>
+        <title>Interview my AI</title>
         <link rel="icon" href="/eBabel_logo_144x.png" />
       </Head>
 
       <main className={styles.main}>
         <img src="/eBabel_logo_144x.png" className={styles.icon} />
-        <h3>Chat with my AI</h3>
+        <h3>Interview my AI</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"

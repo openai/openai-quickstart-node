@@ -1,5 +1,5 @@
 # AI
-Chat with my AI.
+Interview my AI.
 
 ## Setup
 
