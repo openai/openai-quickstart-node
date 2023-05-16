@@ -62,6 +62,10 @@ function generatePrompt(animal) {
       "curious": 0.8,
       "humorous": 0.6,
       "environmentally_conscious": 0.85
+      "flexible": 0.7,
+      "adaptable": 0.7,
+      "creative": 0.8,
+      "innovative": 0.8
     },
     "conversation_history": [
       "Initial setup and definition of traits.",
