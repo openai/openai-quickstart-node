@@ -3,18 +3,27 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
-  const [result, setResult] = useState();
+  const [jobNameInput, setJobNameInput] = useState("");
+  const [jobLevelInput, setJobLevelInput] = useState("");
+  const [experienceInput, setExperienceInput] = useState("");
+  const [result, setResult] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   async function onSubmit(event) {
     event.preventDefault();
+    setIsLoading(true); // Start loading
+
     try {
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ animal: animalInput }),
+        body: JSON.stringify({
+          jobName: jobNameInput,
+          jobLevel: jobLevelInput,
+          experience: experienceInput,
+        }),
       });
 
       const data = await response.json();
@@ -23,35 +32,58 @@ export default function Home() {
       }
 
       setResult(data.result);
-      setAnimalInput("");
-    } catch(error) {
+    } catch (error) {
       // Consider implementing your own error handling logic here
       console.error(error);
       alert(error.message);
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   }
 
   return (
     <div>
       <Head>
-        <title>OpenAI Quickstart</title>
+        <title>Job requirements</title>
         <link rel="icon" href="/dog.png" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
+        <h3>Find job requirements</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            name="jobName"
+            placeholder="Enter job name"
+            value={jobNameInput}
+            onChange={(e) => setJobNameInput(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
+          <input
+            type="text"
+            name="jobLevel"
+            placeholder="Enter job level (ex. junior)"
+            value={jobLevelInput}
+            onChange={(e) => setJobLevelInput(e.target.value)}
+          />
+          <input
+            type="text"
+            name="experience"
+            placeholder="Enter years of experience"
+            value={experienceInput}
+            onChange={(e) => setExperienceInput(e.target.value)}
+          />
+
+          <div className={styles.buttonContainer}>
+            <input type="submit" value="Create job description" disabled={isLoading}  />
+            {isLoading && <span className={styles.loadingMessage}>Loading...</span>}
+          </div>
         </form>
-        <div className={styles.result}>{result}</div>
+        {result && (
+          <div
+            className={styles.result}
+            dangerouslySetInnerHTML={{ __html: result.replace(/\n/g, "<br>") }}
+          />
+        )}
       </main>
     </div>
   );

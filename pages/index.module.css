@@ -65,3 +65,34 @@
   font-weight: bold;
   margin-top: 40px;
 }
+.main {
+  text-align: center;
+  margin-top: 50px;
+}
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.loadingMessage {
+  margin-left: 10px;
+}
+
+.buttonContainer input[type="submit"] {
+  padding: 10px 15px; /* Adjust the padding values as needed */
+  margin-right: 10px;
+  height: 65px; /* Set the desired height */
+}
+
+
+
+.loadingMessage {
+  margin-left: 20px;
+}
+.result {
+  margin-top: 30px;
+  text-align: left;
+}
+
