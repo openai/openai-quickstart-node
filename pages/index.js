@@ -74,10 +74,17 @@ export default function Home() {
           />
 
           <div className={styles.buttonContainer}>
-            <input type="submit" value="Create job description" disabled={isLoading}  />
+            <input type="submit" value="Create job description" disabled={isLoading} />
             {isLoading && <span className={styles.loadingMessage}>Loading...</span>}
           </div>
         </form>
+        {result && (
+          <div  className={styles.description} >
+            <p>
+              Job requirements and responsibilities of {jobLevelInput} {jobNameInput} with {experienceInput} year experience:
+            </p>
+          </div>
+        )}
         {result && (
           <div
             className={styles.result}

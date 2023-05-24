@@ -62,8 +62,12 @@
   cursor: pointer;
 }
 .main .result {
+  margin-top: 15px;
+}
+.main .description {
   font-weight: bold;
-  margin-top: 40px;
+  margin-top: 15px;
+  color:slateblue;
 }
 .main {
   text-align: center;
