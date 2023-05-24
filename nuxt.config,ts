@@ -1,8 +1,0 @@
-export default defineNuxtConfig({
-  runtimeConfig: {
-    secret: process.env.OPENAI_API_KEY,
-  },
-  nitro: {
-    preset: 'vercel-edge',
-  },
-});
