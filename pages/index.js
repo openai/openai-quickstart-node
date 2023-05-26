@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
@@ -8,6 +8,16 @@ export default function Home() {
   const [experienceInput, setExperienceInput] = useState("");
   const [result, setResult] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Send a request to keep the server awake
+      fetch("/");
+    }, 800000); // Send a request every 15 minutes (900,000 milliseconds)
+
+    return () => clearInterval(interval); // Clean up the interval on component unmount
+  }, []);
 
   async function onSubmit(event) {
     event.preventDefault();
