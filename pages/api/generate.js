@@ -63,6 +63,7 @@ function generatePrompt(jobName, jobLevel, experience) {
   Requirements:`;
   
   console.log('The generated prompt is: ${prompt}');
+  console.log('The generated prompt is: ${prompt}');
   return prompt;
   }
 
