@@ -71,7 +71,7 @@
 }
 .main {
   text-align: center;
-  margin-top: 50px;
+  /*margin-top: 50px;*/
 }
 .buttonContainer {
   display: flex;
@@ -98,5 +98,29 @@
 .result {
   margin-top: 30px;
   text-align: left;
+  margin-left: 250px;
+  margin-right: 250px;
 }
+/* index.module.css */
+
+.customInput {
+  position: relative;
+  width: 400px;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 0;
+  width: 100%;
+  margin-top: 1px;
+}
+
+.dropdown select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+/* Add any additional styling as needed */
+
 

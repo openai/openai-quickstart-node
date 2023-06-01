@@ -55,7 +55,7 @@ export default function Home() {
     <div>
       <Head>
         <title>Job requirements</title>
-        <link rel="icon" href="/dog.png" />
+        <link rel="icon" href="/biLogo.jpg" />
       </Head>
 
       <main className={styles.main}>
