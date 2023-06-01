@@ -96,10 +96,9 @@ export default function Home() {
           </div>
         )}
         {result && (
-          <div
-            className={styles.result}
-            dangerouslySetInnerHTML={{ __html: result.replace(/\n/g, "<br>") }}
-          />
+            <div className={styles.result}>
+              <p dangerouslySetInnerHTML={{ __html: result.replace(/(About the Role)/g, '<u>$1</u>').replace(/(Responsibilities)/g, '<strong>$1</strong>').replace(/(Requirements)/g, '<strong>$1</strong>').replace(/\n/g, "<br>") }}></p>
+            </div>
         )}
       </main>
     </div>
