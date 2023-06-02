@@ -59,14 +59,15 @@ export default async function (req, res) {
 function generatePrompt(jobName, jobLevel, experience) {
   const prompt = `Write personal requirements , technical ability and responsibilities for ${jobLevel} ${jobName} with ${experience} years of experience.Modify answer under these topics :Job requirements, first personal features, technical ability , teamwork skills.try to find as much information as you can so that you don't have to look elsewhere`
   const prompt2 = `First ,a litte information about ${jobName} with a title as "Job description" . Then write responsibilities of ${jobLevel} ${jobName} with bullet points . At last write comprehensive required knowledge , skills and experience of ${jobLevel} ${jobName} with ${experience} year experience. Write titles of answer.`
-  const prompt3 = `Act like a hiring manager with +10 years of experience. First, write 4-5 sentences about ${jobName} with a title as "About the role" . Then write extensive responsibilities of ${jobLevel} ${jobName} with min 5 and max 10 bullet points. At last write required knowledge, skills and experience of ${jobLevel} ${jobName} with ${experience} year experience. Write titles of answer.
+  const prompt3 = `Act like a hiring manager with +10 years of experience. First, write 4-5 sentences about ${jobName} with a title as "About the role" . Then write extensive responsibilities of ${jobLevel} ${jobName} with min 5 and max 10 bullet points. At last write required knowledge, skills and experience of ${jobLevel} ${jobName} with ${experience} year experience. Write titles of answer.`
+  const  prompt4 = `Act like a hiring manager with +10 years of experience working for PASHA Bank Azerbaijan. First, write 4-5 sentences about ${jobName} with a title as "About the role" . Then write extensive responsibilities of ${jobLevel} ${jobName} with min 5 and max 10 bullet points. At last write required knowledge, skills and experience of ${jobLevel} ${jobName} with ${experience} year experience. Write titles of answer.
   
   Responsibilities:
   Requirements:`;
   
   console.log('The generated prompt is: ${prompt}');
   console.log('The generated prompt is: ${prompt}');
-  return prompt3
+  return prompt4
   }
 
   

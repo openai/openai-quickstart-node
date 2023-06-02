@@ -68,6 +68,7 @@ const dropdownOptions = [
     { value: 'Private Banking Manager', label: 'Private Banking Manager' },
     { value: 'Product Manager', label: 'Product Manager' },
     { value: 'Project Manager', label: 'Project Manager' },
+    { value: 'Product Owner', label: 'Product Owner' },
     { value: 'React Developer (FE)', label: 'React Developer (FE)' },
     { value: 'React Native Developer', label: 'React Native Developer' },
     { value: 'Relationship Manager', label: 'Relationship Manager' },
