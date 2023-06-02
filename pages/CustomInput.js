@@ -1,17 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
+import DropdownOptions from '../resources/DropdownOptions.js';
 
 const CustomInput = ({ placeholder, value, onChange }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
-    const [dropdownOptions] = useState([
-        { value: 'option1', label: 'Option 1' },
-        { value: 'option2', label: 'Option 5' },
-        { value: 'option2', label: 'Option 5' },
-        { value: 'option2', label: 'Option 5' },
-        { value: 'option2', label: 'Option 5' },
-        { value: 'option2', label: 'Option 5' },
-        { value: 'Capslock', label: 'Capslock' },
-    ]);
+
+    const [dropdownOptions] = useState(DropdownOptions);
+
+    const [filteredOptions, setFilteredOptions] = useState([]);
     const inputRef = useRef(null);
     const dropdownRef = useRef(null);
 
@@ -33,6 +29,17 @@ const CustomInput = ({ placeholder, value, onChange }) => {
             document.removeEventListener('click', handleClickOutside);
         };
     }, []);
+
+    useEffect(() => {
+        if (value) {
+            const filtered = dropdownOptions.filter((option) =>
+                option.label.toLowerCase().includes(value.toLowerCase())
+            );
+            setFilteredOptions(filtered);
+        } else {
+            setFilteredOptions(dropdownOptions);
+        }
+    }, [value]);
 
     const handleInputChange = (e) => {
         onChange(e.target.value);
@@ -79,6 +86,7 @@ const CustomInput = ({ placeholder, value, onChange }) => {
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
+
                     >
                         <path d="M6 9l6 6 6-6" />
                     </svg>
@@ -91,15 +99,25 @@ const CustomInput = ({ placeholder, value, onChange }) => {
                         position: 'absolute',
                         left: '0',
                         width: '317px',
+                        maxHeight: '200px',
                         background: '#fff',
                         border: '1px solid #ccc',
+                        overflowY: 'auto',
+                        zIndex: '9999',
+                        borderRadius: '4px',
+                        boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)',
+                        // padding: '5px',
                     }}
                 >
-                    {dropdownOptions.map((option) => (
+                    {filteredOptions.map((option, index) => (
                         <div
                             key={option.value}
                             onClick={() => handleOptionSelect(option)}
-                            style={{ padding: '5px', cursor: 'pointer' }}
+                            style={{
+                                padding: '8px 12px',
+                                cursor: 'pointer',
+                                borderBottom: index === filteredOptions.length - 1 ? 'none' : '1px solid #ccc',
+                            }}
                         >
                             {option.label}
                         </div>
