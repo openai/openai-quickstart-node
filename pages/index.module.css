@@ -39,13 +39,13 @@
 .main form {
   display: flex;
   flex-direction: column;
-  width: 320px;
+  width: 319px;
 }
 .main input[type="text"] {
   padding: 12px 16px;
   border: 1px solid #10a37f;
   border-radius: 4px;
-  margin-bottom: 24px;
+  /*margin-bottom: 24px;*/
   outline-color: #10a37f;
 }
 .main ::placeholder {
@@ -104,8 +104,8 @@
 /* index.module.css */
 
 .customInput {
-  position: relative;
-  width: 400px;
+  /*position: relative;*/
+  margin-top: 24px;
 }
 
 .dropdown {

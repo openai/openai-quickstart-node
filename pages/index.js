@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
+import CustomInput from "./CustomInput";
 
 export default function Home() {
   const [jobNameInput, setJobNameInput] = useState("");
@@ -61,13 +62,15 @@ export default function Home() {
       <main className={styles.main}>
         <h3>Find job requirements</h3>
         <form onSubmit={onSubmit}>
-          <input
-            type="text"
-            name="jobName"
-            placeholder="Enter job name"
-            value={jobNameInput}
-            onChange={(e) => setJobNameInput(e.target.value)}
+
+
+          <CustomInput
+              placeholder="Enter job name"
+              value={jobNameInput}
+              onChange={(value) => setJobNameInput(value)}
+
           />
+
           <input
             type="text"
             name="jobLevel"
@@ -81,6 +84,8 @@ export default function Home() {
             placeholder="Enter years of experience"
             value={experienceInput}
             onChange={(e) => setExperienceInput(e.target.value)}
+              className={styles.customInput}
+
           />
 
           <div className={styles.buttonContainer}>
