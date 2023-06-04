@@ -1,0 +1,56 @@
+{
+    "cells": [
+        {
+            "language": "shellscript",
+            "source": [
+                "curl 'http://localhost:3000/api/generate' \\\n  -H 'Accept: */*' \\\n  -H 'Accept-Language: en-US,en;q=0.9,zh;q=0.8,zh-CN;q=0.7' \\\n  -H 'Connection: keep-alive' \\\n  -H 'Content-Type: application/json' \\\n  -H 'Cookie: Hm_lvt_1d2d61263f13e4b288c8da19ad3ff56d=1673191265' \\\n  -H 'Origin: http://localhost:3000' \\\n  -H 'Referer: http://localhost:3000/' \\\n  -H 'Sec-Fetch-Dest: empty' \\\n  -H 'Sec-Fetch-Mode: cors' \\\n  -H 'Sec-Fetch-Site: same-origin' \\\n  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36' \\\n  -H 'sec-ch-ua: \"Google Chrome\";v=\"113\", \"Chromium\";v=\"113\", \"Not-A.Brand\";v=\"24\"' \\\n  -H 'sec-ch-ua-mobile: ?0' \\\n  -H 'sec-ch-ua-platform: \"macOS\"' \\\n  --data-raw '{\"animal\":\"what is alfred\"}' \\\n  --compressed"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stderr",
+                            "value": [
+                                "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current",
+                                "                                 Dload  Upload   Total   Spent    Left  Speed",
+                                "100   692    0   665  100    27     55      2  0:00:13  0:00:11  0:00:02   14203  0:00:03 --:--:--     8:--     60:09  0:00:07  0:00:02     009  0:00:08  0:00:01     09  0:00:04     0  0:00:03     02     0 692    0   665  100    27     55      2  0:00:13  0:00:11  0:00:02   181",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "{\"result\":\"Common-Translated Version: \\n\\nYou will play the role of a \\\"effective tool\\\" discoverer. I will tell you what I want to do (or my needs), and then you help me find fifteen suitable \\\"tools\\\" (such as websites, computer applications, Alfred workflow, VS Code extensions... or others I have not considered). \\n\\nBackground:\\n- I am a computer savvy programmer; \\n- I use macOS; \\n\\nRequirements:\\n- Ten free tools, five paid tools\\n\\nMy first requirement:\\nI want a convenient tool for capturing content from the computer screen.\\n\\nCorrection Version:\\n\\nYou have been tasked with discovering an \\\"efficient tool\\\". I shall explain to you my aspirations or needs after which I request you to search for fifteen appropriate \\\"toolsi\\\" (such as websites, computer applications, Alfred workflows, and VS Code extensions or any that you personally have ideas and considerations about). \\n\\nContext:\\n- Having adept comprehension of computing, I work as a programmer skillfully; \\n- Specifically speaking, I use the MacOS operating system. \\n\\nDemands:\\n- Prompt me with ten valuable free tools, as also comprise five helpful paid ones. \\n\\nMy First Need: \\nI need an comprehensible program to extrapolate content promptly from my computer display.\"}"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "shellscript",
+            "source": [
+                "ls"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "generate copy.js",
+                                "generate.js",
+                                "sh.nnb",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
