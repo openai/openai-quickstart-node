@@ -3,7 +3,12 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
+  const [myCompanyInput, setMyCompanyInput] = useState("");
+  const [myNameInput, setMyNameInput] = useState("");
+  const [reCompanyInput, setReCompanyInput] = useState("");
+  const [reNameInput, setReNameInput] = useState("");
+  const [purposeInput, setPurposeInput] = useState("");
+  const [questionInput, setQuestionInput] = useState("");
   const [result, setResult] = useState();
 
   async function onSubmit(event) {
@@ -14,19 +19,33 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ animal: animalInput }),
+        body: JSON.stringify({ 
+          myCompanyText: myCompanyInput,
+          myNameText: myNameInput,
+          reCompanyText: reCompanyInput,
+          reNameText: reNameInput,
+          purposeText: purposeInput,
+          questionText: questionInput,
+        }),
       });
 
       const data = await response.json();
+      
       if (response.status !== 200) {
         throw (
           data.error ||
           new Error(`Request failed with status ${response.status}`)
         );
       }
-
+      console.log(data.result);
       setResult(data.result);
-      setAnimalInput("");
+      // setMyCompanyInput("");
+      // setMyNameInput("");
+      // setReCompanyInput("");
+      // setReNameInput("");
+      // setPurposeInput("");
+      // setQuestionInput("");
+
     } catch (error) {
       // Consider implementing your own error handling logic here
       console.error(error);
@@ -36,25 +55,55 @@ export default function Home() {
 
   return (
     <div>
+      <style jsx global>{`body {background-color: #F0F2F1;`}</style>
       <Head>
-        <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/dog.png" />
+        <title>Morse Toss</title>
+        <link rel="icon" href="/logo.png" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
-        <h3 className="text-3xl font-bold underline">Name my pet</h3>
-        <form onSubmit={onSubmit}>
-          <input
-            type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
-          />
-          <input type="submit" value="Generate names" />
-        </form>
-        <div className={styles.result}>{result}</div>
+        <img src="/logo.png" className={styles.icon} />
+        <h3 class="text-3xl font-bold underline">비즈니스 영문 이메일을 빠르게 작성하세요~!</h3>
+        <div className={styles.box_container}>
+          <div className="box">
+            <form onSubmit={onSubmit}>
+              <h5>작성자 정보</h5>
+              <input type="text" name="myCompany" placeholder="회사 이름" value={myCompanyInput}
+                onChange={(e) => setMyCompanyInput(e.target.value)}/>
+              <input type="text" name="myName" placeholder="작성자 이름" value={myNameInput}
+                onChange={(e) => setMyNameInput(e.target.value)}/>
+              <h5>수신자 정보</h5>
+              <input type="text" name="reCompany" placeholder="회사 이름" value={reCompanyInput}
+                onChange={(e) => setReCompanyInput(e.target.value)}/>
+              <input type="text" name="reName" placeholder="수신자 이름" value={reNameInput}
+                onChange={(e) => setReNameInput(e.target.value)}/>
+              <h5>목적</h5>
+              <textarea
+                rows="10"
+                type="text"
+                name="purpose"
+                placeholder="이메일 목적을 입력하세요."
+                value={purposeInput}
+                onChange={(e) => setPurposeInput(e.target.value)}
+              />
+              <h5>질문</h5>
+              <textarea
+                rows="10"
+                type="text"
+                name="question"
+                placeholder="질문을 입력하세요."
+                value={questionInput}
+                onChange={(e) => setQuestionInput(e.target.value)}
+              />
+              <input type="submit" value="영문 이메일 생성" />
+            </form>
+          </div>
+          <div className="box">
+            <h5>영문 이메일 결과</h5>
+            <textarea disabled
+                rows="48" className={styles.result} value={result}></textarea>
+          </div>
+        </div>
       </main>
     </div>
   );
