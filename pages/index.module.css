@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: "ColfaxAI";
   src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2)
