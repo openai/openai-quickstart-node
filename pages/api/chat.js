@@ -32,139 +32,62 @@ async function doChat(prompt, type) {
 
   prompt = (publicTypes.includes(type) ? "" : prefix) + prompt;
 
+  const _f = homedir + "/Dropbox/tools/src/openai/output/index.md";
+  const _hf =
+    homedir + "/Dropbox/tools/src/openai/output/history/" + Date.now() + ".md";
+
   const completion = createChatCompletion(prompt);
 
-  // completion.then(function (response) {
-  //   response.data.pipe(
-  //     fs.createWriteStream(
-  //       homedir + "/Dropbox/tools/src/openai/output/index.md"
-  //     )
-  //   );
-  // });
-
-  const _f = homedir + "/Dropbox/tools/src/openai/output/index.md";
-  // const _hf =
-  //   homedir + "/Dropbox/tools/src/openai/output/history/" + Date.now() + ".md";
-
-  // await monitorPromiseToFile(completion, prompt, _f);
-
-  // // copy _f to _hf
   completion.then((res) => {
     const stream = res.data;
+    console.log(123);
     monitorSteamToFile(stream, _f);
   });
+
+  // // copy _f to _hf
   // fs.copyFileSync(_f, _hf);
 }
 
 function monitorSteamToFile(chatStream, file) {
-  const result = [];
-  // let cache = "";
-  let t = "";
-  chatStream.on("data", (data) => {
-    const _jsonString = data.toString("utf8");
+  const results = [];
+  let resContent = "";
+  const chunks = [];
+
+  chatStream.on("data", (bufferData) => {
+    const stringData = bufferData.toString("utf8"); // buffer => string
+    console.log(stringData);
+
     const _reg = /^data:(.*)\n$/gm;
 
-    t += _jsonString;
+    resContent += stringData;
 
-    const _chunks = [];
-    t.replace(_reg, (_, m) => {
+    resContent = resContent.replace(_reg, (m, m1) => {
       try {
-        let a = JSON.parse(m);
-        _chunks.push(a);
-      } catch (e) {}
-    });
-
-    const result = [];
-
-    _chunks.forEach((c) => {
-      console.log(c);
-      const _d = c.choices[0];
-      const { index, delta } = _d;
-      if ("content" in delta) {
-        // if (!result[index]) result[index] = [];
-        const _pre = result[index] || "";
-        result[index] = _pre + delta.content;
-        // result[index].push(c);
-        // if (index === 0) {
-        //   fs.writeFileSync(file, delta.content, { encoding: "utf-8" });
-        // } else {
-
-        // }
+        let a = JSON.parse(m1);
+        chunks.push(a);
+        return ""; // 这个说明处理成功了，就去掉
+      } catch (e) {
+        return m;
       }
     });
 
-    fs.writeFileSync(file, result[0], { encoding: "utf-8" });
-
-    // console.log(
-    //   _chunks
-    //     .map((item) => {
-    //       return item.choices[0].delta.content || "";
-    //     })
-    //     .join("")
-    // );
-
-    // const _ms = _jsonString.match(_reg);
-
-    // console.log(_ms);
-
-    // console.log(12123);
-    // const arr = _jsonString.split("\ndata:");
-    // console.log(arr);
-    // if (arr.length > 1) {
-    //   const _d = arr
-    //     .slice(0, arr.length - 1)
-    //     .map((str) => {
-    //       return JSON.parse(str);
-    //     })
-    //     .join("");
-    //   console.log(JSON.stringify(_d, null, 2));
-    // }
-    // cache = arr[arr.length - 1];
-
-    // console.log(_d);
+    chunks.forEach((c) => {
+      const _d = c.choices[0];
+      const { index, delta } = _d;
+      if ("content" in delta) {
+        if (index === 0) {
+          fs.appendFileSync(file, delta.content, { encoding: "utf-8" });
+        } else {
+          const _pre = results[index] || "";
+          results[index] = _pre + delta.content;
+        }
+      }
+    });
   });
 
   chatStream.on("end", (data) => {
-    console.log("end");
-    // console.log(result);
+    // todo
   });
-
-  // chatStream.then((res) => {
-
-  // });
-  // let time = 0;
-  // let resolveOrReject = false;
-
-  // const _p = new Promise((resolve, reject) => {
-  //   chatPromise
-  //     .then((res) => {
-  //       let _t = `## prompt \n ${prompt}`;
-  //       res.data.choices.map((item, index) => {
-  //         _t = `${_t}\n\n\n### Result: ${index + 1}: \n\n ${
-  //           item.message.content
-  //         }\n`;
-  //       });
-  //       fs.writeFileSync(file, _t);
-  //       resolve();
-  //     })
-  //     .catch((e) => {
-  //       fs.writeFileSync(file, `Fail to fetch result: ${e}`);
-  //       reject();
-  //     })
-  //     .finally(() => (resolveOrReject = true));
-  // });
-
-  // const interval = setInterval(() => {
-  //   if (resolveOrReject) {
-  //     clearInterval(interval);
-  //   } else {
-  //     const dots = ".".repeat(time);
-  //     time++;
-  //     fs.writeFileSync(file, dots);
-  //   }
-  // }, 1000);
-
-  // return _p;
 }
 
 async function createChatCompletion(prompt) {
@@ -187,40 +110,4 @@ async function createChatCompletion(prompt) {
       responseType: "stream",
     }
   );
-}
-
-function monitorPromiseToFile(chatPromise, prompt, file) {
-  let time = 0;
-  let resolveOrReject = false;
-
-  const _p = new Promise((resolve, reject) => {
-    chatPromise
-      .then((res) => {
-        let _t = `## prompt \n ${prompt}`;
-        res.data.choices.map((item, index) => {
-          _t = `${_t}\n\n\n### Result: ${index + 1}: \n\n ${
-            item.message.content
-          }\n`;
-        });
-        fs.writeFileSync(file, _t);
-        resolve();
-      })
-      .catch((e) => {
-        fs.writeFileSync(file, `Fail to fetch result: ${e}`);
-        reject();
-      })
-      .finally(() => (resolveOrReject = true));
-  });
-
-  const interval = setInterval(() => {
-    if (resolveOrReject) {
-      clearInterval(interval);
-    } else {
-      const dots = ".".repeat(time);
-      time++;
-      fs.writeFileSync(file, dots);
-    }
-  }, 1000);
-
-  return _p;
 }
