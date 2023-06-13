@@ -51,7 +51,6 @@ async function doChat(prompt, type) {
 function monitorSteamToFile(chatStream, file) {
   const results = [];
   let resContent = "";
-  const chunks = [];
 
   chatStream.on("data", (bufferData) => {
     const stringData = bufferData.toString("utf8"); // buffer => string
@@ -60,18 +59,19 @@ function monitorSteamToFile(chatStream, file) {
     const _reg = /^data:(.*)\n$/gm;
 
     resContent += stringData;
+    const _chunks = [];
 
     resContent = resContent.replace(_reg, (m, m1) => {
       try {
         let a = JSON.parse(m1);
-        chunks.push(a);
+        _chunks.push(a);
         return ""; // 这个说明处理成功了，就去掉
       } catch (e) {
         return m;
       }
     });
 
-    chunks.forEach((c) => {
+    _chunks.forEach((c) => {
       const _d = c.choices[0];
       const { index, delta } = _d;
       if ("content" in delta) {
