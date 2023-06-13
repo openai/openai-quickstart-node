@@ -60,7 +60,7 @@ const prefix = `(As a prerequisite, it is imperative that you treat the current 
 
 `;
 
-const publicTypes = ["review"]; // 这些 type 不加前缀
+const publicTypes = ["review", "raw"]; // 这些 type 不加前缀
 
 async function doChat(prompt, type) {
   console.log("doChat");
