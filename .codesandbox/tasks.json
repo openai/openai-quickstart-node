@@ -14,7 +14,7 @@
       "command": "npm run dev",
       "runAtStart": true,
       "preview": {
-        "port": 3000
+        "port": 4000
       }
     },
     "build": {
@@ -25,7 +25,10 @@
     "start": {
       "name": "start",
       "command": "npm run start",
-      "runAtStart": false
+      "runAtStart": false,
+      "preview": {
+        "port": 3000
+      }
     }
   }
 }

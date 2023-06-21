@@ -51,7 +51,7 @@ export default async function (req, res) {
 }
 
 function generatePrompt(body) {
-  const promptText = `Please make a standard email in high qaulity English based on the following information.
+  const promptText = `Please make a standard email in high quality English based on the following information.
   My company name: ${body.myCompanyText},
   Sender Name: ${body.myNameText},
   Recepient Company: ${body.reCompanyText},
