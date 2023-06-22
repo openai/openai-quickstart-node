@@ -29,3 +29,8 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+/.idea/.gitignore
+/.idea/markdown.xml
+/.idea/modules.xml
+/.idea/openai-quickstart-node.iml
+/.idea/vcs.xml

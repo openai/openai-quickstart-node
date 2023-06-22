@@ -59,7 +59,7 @@ export default function Home() {
 
   return (
     <div>
-      <style jsx global>{`body {background-color: #F0F2F1;`}</style>
+      <style jsx global>{`body {background-color: #F0F2F1;}`}</style>
       <Head>
         <title>Morse Toss</title>
         <link rel="icon" href="/logo.png" />
@@ -68,7 +68,7 @@ export default function Home() {
       <main className={styles.main}>
         <Button>Click me</Button>
         {/* <img src="/logo.png" className={styles.icon} /> */}
-        <h3 class="text-3xl font-bold underline">
+        <h3>
           비즈니스 영문 이메일을 빠르게 작성하세요~!
         </h3>
         <div className={styles.box_container}>
@@ -110,7 +110,6 @@ export default function Home() {
               <textarea
                 required
                 rows="20"
-                type="text"
                 name="emailBody"
                 placeholder="목적이나 질문을 작성하세요."
                 value={emailBodyInput}
