@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
+import Button from '@nextui-org/react/button';
 
 export default function Home() {
   const [myCompanyInput, setMyCompanyInput] = useState("");
@@ -65,6 +66,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+        <Button>Click me</Button>
         {/* <img src="/logo.png" className={styles.icon} /> */}
         <h3 class="text-3xl font-bold underline">
           비즈니스 영문 이메일을 빠르게 작성하세요~!
