@@ -35,12 +35,12 @@ export default function Home() {
     <div>
       <Head>
         <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/dog.png" />
+        <link rel="icon" href="/pet.jpg" />
       </Head>
-
+      <h2 className={styles.vic}>Application Powered by OpenAI</h2>
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
+        <img src="/pet.jpg" className={styles.icon} />
+        <h3>Name My Pet</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
