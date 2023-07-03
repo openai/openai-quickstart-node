@@ -17,6 +17,7 @@
 
 # misc
 .DS_Store
+.code-workspace
 
 # debug
 npm-debug.log*
