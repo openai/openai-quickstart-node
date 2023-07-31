@@ -3,18 +3,23 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
+  // Changed state variable from animalInput to movieInput
+  const [movieInput, setMovieInput] = useState("");
   const [result, setResult] = useState();
 
   async function onSubmit(event) {
     event.preventDefault();
     try {
+      // Added this line to convert the movie input string to an array. The trim() method removes any whitespace before or after each movie title.
+      const movieArray = movieInput.split(',').map(movie => movie.trim());
+
+      // Changed 'animal' to 'movies' in the request body
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ animal: animalInput }),
+        body: JSON.stringify({ movies: movieArray }),
       });
 
       const data = await response.json();
@@ -23,36 +28,41 @@ export default function Home() {
       }
 
       setResult(data.result);
-      setAnimalInput("");
+      // Cleared the movie input field after submitting
+      setMovieInput("");
     } catch(error) {
-      // Consider implementing your own error handling logic here
       console.error(error);
       alert(error.message);
     }
   }
 
+  console.log(result); // Add this line
+   
+   
   return (
     <div>
       <Head>
         <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/dog.png" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
-
+  
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
+        <h3>Recommend Movies</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            name="movies"
+            placeholder="Enter a list of movies"
+            value={movieInput}
+            onChange={(e) => setMovieInput(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
+          <input type="submit" value="Generate Recommendations" />
         </form>
-        <div className={styles.result}>{result}</div>
+        <div className={styles.result}>
+        {result && result.split('\n').map((rec, index) => rec && <p key={index}>{rec}</p>)}
+         </div>
       </main>
     </div>
   );
+  
 }
