@@ -61,7 +61,32 @@
   text-align: center;
   cursor: pointer;
 }
-.main .result {
+.main .result,
+.main .error {
   font-weight: bold;
   margin-top: 40px;
+}
+.main .error {
+  color: #f43f5e;
+  max-width: 285px;
+  margin: inherit auto;
+  text-align: center;
+  font-size: 15px;
+}
+.loading {
+  margin-top: 40px;
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  border: #10a37f 2px solid;
+  border-top: none;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
