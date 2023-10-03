@@ -1,38 +1,41 @@
-import { Configuration, OpenAIApi } from "openai";
+import OpenAI from 'openai';
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+const OPEN_API_KEY_ERROR_MESSAGE = 'OPENAI_API_KEY environment variable is not defined';
+
+const CONFIG = {
+  apiKey: process.env.OPENAI_API_KEY, // .env value is automatically loaded as a string
+};
+
+// V4 OpenAPI client
+const openai = new OpenAI({
+  apiKey: CONFIG.apiKey,
 });
-const openai = new OpenAIApi(configuration);
 
 export default async function (req, res) {
-  if (!configuration.apiKey) {
-    res.status(500).json({
-      error: {
-        message: "OpenAI API key not configured, please follow instructions in README.md",
-      }
-    });
-    return;
-  }
-
   const animal = req.body.animal || '';
   if (animal.trim().length === 0) {
     res.status(400).json({
       error: {
-        message: "Please enter a valid animal",
-      }
+        message: 'Please enter a valid animal',
+      },
     });
     return;
   }
 
   try {
-    const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: generatePrompt(animal),
-      temperature: 0.6,
+    if (CONFIG.apiKey === undefined) {
+      throw new Error(OPEN_API_KEY_ERROR_MESSAGE);
+    }
+    const message = {
+      role: 'user', // role: 'user' || 'system' || 'assistant'
+      content: generatePrompt(animal), // prompt for the completion
+    };
+    const chatCompletion = await openai.chat.completions.create({
+      messages: [message],
+      model: 'gpt-3.5-turbo',
     });
-    res.status(200).json({ result: completion.data.choices[0].text });
-  } catch(error) {
+    res.status(200).json({ result: chatCompletion.choices[0].message.content });
+  } catch (error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
       console.error(error.response.status, error.response.data);
@@ -42,7 +45,7 @@ export default async function (req, res) {
       res.status(500).json({
         error: {
           message: 'An error occurred during your request.',
-        }
+        },
       });
     }
   }
