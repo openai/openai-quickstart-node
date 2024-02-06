@@ -1,62 +1,74 @@
-import { Configuration, OpenAIApi } from "openai";
+import OpenAI from "openai";
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
+const openai = new OpenAI();
 
-export default async function (req, res) {
-  if (!configuration.apiKey) {
-    res.status(500).json({
-      error: {
-        message: "OpenAI API key not configured, please follow instructions in README.md",
+let chatHistory = [{ role: "system", content: "You are a helpful assistant." }];
+
+export default async function handler(req, res) {
+  const { method } = req;
+
+  switch (method) {
+    case "POST":
+      if (req.query.endpoint === "chat") {
+        // Handle POST to /api/generate?endpoint=chat
+        const content = req.body.message;
+        chatHistory.push({ role: "user", content: content });
+        res.status(200).json({ success: true });
+      } else if (req.query.endpoint === "reset") {
+        // Handle POST to /api/generate?endpoint=reset
+        chatHistory = [
+          { role: "system", content: "You are a helpful assistant." },
+        ];
+        res.status(200).json({ success: true });
+      } else {
+        res.status(404).json({ error: "Not Found" });
       }
-    });
-    return;
-  }
+      break;
+    case "GET":
+      if (req.query.endpoint === "stream") {
+        // Set headers for Server-Sent Events
+        res.setHeader("Content-Type", "text/event-stream");
+        res.setHeader("Cache-Control", "no-cache");
+        res.setHeader("Connection", "keep-alive");
 
-  const animal = req.body.animal || '';
-  if (animal.trim().length === 0) {
-    res.status(400).json({
-      error: {
-        message: "Please enter a valid animal",
-      }
-    });
-    return;
-  }
+        try {
+          const stream = await openai.beta.chat.completions.stream({
+            model: "gpt-3.5-turbo",
+            messages: chatHistory,
+            stream: true,
+          });
 
-  try {
-    const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: generatePrompt(animal),
-      temperature: 0.6,
-    });
-    res.status(200).json({ result: completion.data.choices[0].text });
-  } catch(error) {
-    // Consider adjusting the error handling logic for your use case
-    if (error.response) {
-      console.error(error.response.status, error.response.data);
-      res.status(error.response.status).json(error.response.data);
-    } else {
-      console.error(`Error with OpenAI API request: ${error.message}`);
-      res.status(500).json({
-        error: {
-          message: 'An error occurred during your request.',
+          for await (const chunk of stream) {
+            const message = chunk.choices[0]?.delta?.content || "";
+            console.log("Chunk: ", message);
+            res.write(`data: ${JSON.stringify(message)}\n\n`);
+          }
+
+          // After the stream ends, get the final chat completion
+          const chatCompletion = await stream.finalChatCompletion();
+          console.log(chatCompletion); // Log the final completion for debugging
+        } catch (error) {
+          console.error("Stream encountered an error:", error);
+          res.write(
+            "event: error\ndata: " +
+              JSON.stringify({ message: "Stream encountered an error" }) +
+              "\n\n"
+          );
         }
-      });
-    }
+
+        // When the client closes the connection, we stop the stream
+        return new Promise((resolve) => {
+          req.on("close", () => {
+            // Clean up any open resources here
+            resolve();
+          });
+        });
+      } else {
+        res.status(404).json({ error: "Not Found" });
+      }
+      break;
+    default:
+      res.setHeader("Allow", ["GET", "POST"]);
+      res.status(405).end(`Method ${method} Not Allowed`);
   }
-}
-
-function generatePrompt(animal) {
-  const capitalizedAnimal =
-    animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-  return `Suggest three names for an animal that is a superhero.
-
-Animal: Cat
-Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-Animal: Dog
-Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-Animal: ${capitalizedAnimal}
-Names:`;
 }
