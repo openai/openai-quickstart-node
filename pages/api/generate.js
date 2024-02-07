@@ -25,7 +25,9 @@ export default async function handler(req, res) {
       }
       break;
     case "GET":
-      if (req.query.endpoint === "stream") {
+      if (req.query.endpoint === "history") {
+        res.status(200).json(chatHistory);
+      } else if (req.query.endpoint === "stream") {
         // Set headers for Server-Sent Events
         res.setHeader("Content-Type", "text/event-stream");
         res.setHeader("Cache-Control", "no-cache");
@@ -40,15 +42,12 @@ export default async function handler(req, res) {
 
           for await (const chunk of stream) {
             const message = chunk.choices[0]?.delta?.content || "";
-            console.log("Chunk: ", message);
             res.write(`data: ${JSON.stringify(message)}\n\n`);
           }
 
           // After the stream ends, get the final chat completion
           const chatCompletion = await stream.finalChatCompletion();
-          console.log(chatCompletion); // Log the final completion for debugging
         } catch (error) {
-          console.error("Stream encountered an error:", error);
           res.write(
             "event: error\ndata: " +
               JSON.stringify({ message: "Stream encountered an error" }) +
@@ -59,7 +58,6 @@ export default async function handler(req, res) {
         // When the client closes the connection, we stop the stream
         return new Promise((resolve) => {
           req.on("close", () => {
-            // Clean up any open resources here
             resolve();
           });
         });

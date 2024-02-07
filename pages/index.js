@@ -10,25 +10,16 @@ export default function Home() {
   const chatContainerRef = useRef(null);
 
   useEffect(() => {
-    // This will scroll the chat container to the bottom every time chatHistory changes
+    // Scroll to the bottom of the chat container whenever chatHistory changes
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
   }, [chatHistory]);
 
-  async function onSubmit(event) {
-    event.preventDefault();
-    if (!message.trim()) return;
-
+  const sendMessage = async (message) => {
     // Append user message to chat history
-    setChatHistory((prevChatHistory) => [
-      ...prevChatHistory,
-      { role: "user", content: message.trim() },
-    ]);
-
-    // Clear the message input
-    setMessage("");
+    setChatHistory((prev) => [...prev, { role: "user", content: message }]);
 
     // Send the user's message to the server
     const response = await fetch("/api/generate?endpoint=chat", {
@@ -36,7 +27,7 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ message: message.trim() }),
+      body: JSON.stringify({ message }),
     });
 
     const data = await response.json();
@@ -46,51 +37,68 @@ export default function Home() {
       eventSource.onmessage = function (event) {
         // Parse the event data, which is a JSON string
         const parsedData = JSON.parse(event.data);
-        // Append assistant message to chat history
-        setChatHistory((prevChatHistory) => [
-          ...prevChatHistory,
-          { role: "assistant", content: parsedData },
-        ]);
+
+        // Check if the last message in the chat history is from the assistant
+        setChatHistory((prevChatHistory) => {
+          const newChatHistory = [...prevChatHistory];
+          if (
+            newChatHistory.length > 0 &&
+            newChatHistory[newChatHistory.length - 1].role === "assistant"
+          ) {
+            // If so, append the new chunk to the existing assistant message content
+            newChatHistory[newChatHistory.length - 1].content += parsedData;
+          } else {
+            // Otherwise, add a new assistant message to the chat history
+            newChatHistory.push({ role: "assistant", content: parsedData });
+          }
+          return newChatHistory;
+        });
       };
       eventSource.onerror = function () {
         eventSource.close();
       };
     }
-  }
+  };
 
-  function clearChat() {
+  const clearChat = async () => {
+    // Clear the chat history in the client state
     setChatHistory([
       { role: "system", content: "You are a helpful assistant." },
     ]);
-    // Reset the chat history on the server
-    fetch("/api/generate?endpoint=reset", { method: "POST" });
-  }
 
-  console.log(chatHistory);
+    // Reset the chat history on the server
+    await fetch("/api/generate?endpoint=reset", { method: "POST" });
+  };
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    if (!message.trim()) return;
+    sendMessage(message.trim());
+    setMessage("");
+  };
 
   return (
     <div>
       <Head>
         <title>OpenAI Chat</title>
       </Head>
-      <h1>OpenAI Chat Completion Quickstart</h1>
+      <h1 className={styles.heading1}>OpenAI Chat Completion Quickstart</h1>
       <div className={styles.chatContainer} ref={chatContainerRef}>
-        {chatHistory.map((message, index) => (
+        {chatHistory.map((msg, index) => (
           <div
             key={index}
             className={
-              message.role === "user"
-                ? styles.userMessage
-                : styles.assistantMessage
+              msg.role === "user" ? styles.userMessage : styles.assistantMessage
             }
           >
-            {message.content}
+            {msg.content}
           </div>
         ))}
       </div>
       <div className={styles.messageInputContainer}>
         <form onSubmit={onSubmit}>
           <textarea
+            className={styles.textarea}
             name="message"
             placeholder="Type your message here..."
             required
@@ -98,8 +106,12 @@ export default function Home() {
             onChange={(e) => setMessage(e.target.value)}
           ></textarea>
           <div className={styles.buttonGroup}>
-            <input type="submit" value="Send" />
-            <button type="button" onClick={clearChat}>
+            <input className={styles.inputSubmit} type="submit" value="Send" />
+            <button
+              className={styles.inputButton}
+              type="button"
+              onClick={clearChat}
+            >
               Clear
             </button>
           </div>
