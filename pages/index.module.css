@@ -1,67 +1,163 @@
 @font-face {
   font-family: "ColfaxAI";
-  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2)
-      format("woff2"),
+  src:
+    url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2) format("woff2"),
     url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: "ColfaxAI";
-  src: url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff2) format("woff2"),
+  src:
+    url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff2) format("woff2"),
     url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff) format("woff");
   font-weight: bold;
   font-style: normal;
 }
-.main,
-.main input {
+
+.body,
+.input {
   font-size: 16px;
   line-height: 24px;
   color: #353740;
   font-family: "ColfaxAI", Helvetica, sans-serif;
 }
-.main {
+
+.body {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 60px;
 }
-.main .icon {
+
+.icon {
   width: 34px;
 }
-.main h3 {
+
+.h3 {
   font-size: 32px;
   line-height: 40px;
   font-weight: bold;
   color: #202123;
   margin: 16px 0 40px;
 }
-.main form {
+
+.chatContainer {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
-  width: 320px;
+  align-items: center;
+  padding-bottom: 160px;
+  margin-bottom: 20px;
+  overflow: auto;
 }
-.main input[type="text"] {
+
+.userMessage,
+.assistantMessage {
+  padding: 12px 16px;
+  border: 1px solid #10a37f;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.userMessage {
+  align-self: flex-end;
+  background-color: #daf8e3;
+}
+
+.assistantMessage {
+  align-self: flex-start;
+  background-color: #f1f1f1;
+}
+
+.messageInputContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: #fff;
+  border-top: 1px solid #eaeaea;
+  display: flex;
+  justify-content: center;
+  height: auto;
+  padding-bottom: 20px;
+}
+
+.heading1 {
+  text-align: center; /* Centers text horizontally */
+  width: 100%; /* Ensures the heading takes full width of its container */
+  margin: 0 auto; /* Applies automatic horizontal margins */
+}
+
+.form {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.textarea {
   padding: 12px 16px;
   border: 1px solid #10a37f;
   border-radius: 4px;
   margin-bottom: 24px;
-  outline-color: #10a37f;
+  width: 100%;
+  min-height: 50px;
+  resize: both;
+  overflow: auto;
+  margin-right: 4px;
+  flex: 3;
 }
-.main ::placeholder {
-  color: #8e8ea0;
-  opacity: 1;
+
+.buttonGroup {
+  display: flex;
 }
-.main input[type="submit"] {
-  padding: 12px 0;
+
+.inputSubmit,
+.inputButton {
+  padding: 12px 16px;
   color: #fff;
   background-color: #10a37f;
   border: none;
   border-radius: 4px;
   text-align: center;
   cursor: pointer;
+  flex: 1;
+  margin: 0 2px;
 }
-.main .result {
+
+.inputSubmit {
+  flex-grow: 4;
+}
+
+.inputButton {
+  flex-grow: 1;
+  background-color: #f44336;
+}
+
+.inputText {
+  padding: 12px 16px;
+  border: 1px solid #10a37f;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.placeholder {
+  color: #8e8ea0;
+  opacity: 1;
+}
+
+.result {
   font-weight: bold;
   margin-top: 40px;
 }
