@@ -34,7 +34,20 @@ export WEBAPP_PORT="3000"
 # Model Configuration
 export MODEL_PATH="/path/to/model"
 export MODEL_TYPE="llama2"
+
+# Wallet Configuration
+export WALLET_PRIVATE_KEY="your-wallet-private-key"
+
+# Contract Configuration
+export DIAMOND_CONTRACT_ADDRESS="0xb8C55cD613af947E73E262F0d3C54b7211Af16CF"
 ```
+
+## Docker Images
+The deployment uses the following pre-built Docker Hub images:
+- NFA Proxy: `srt0422/openai-morpheus-proxy:latest`
+- Consumer Node: `srt0422/morpheus-marketplace-consumer:latest`
+
+The Chat Web App is built and deployed directly from source code.
 
 ## Deployment
 
@@ -77,6 +90,8 @@ NFA Proxy (LLM Service)
 ### Consumer Node
 - `PROXY_URL`: URL of NFA Proxy service
 - `PORT`: Service port (default: 3333)
+- `WALLET_PRIVATE_KEY`: Your Ethereum wallet private key (required for blockchain interactions)
+- `DIAMOND_CONTRACT_ADDRESS`: The deployed diamond contract address
 
 ### Chat Web App
 - `OPENAI_API_URL`: URL of Consumer Node

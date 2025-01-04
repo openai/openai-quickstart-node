@@ -4,7 +4,7 @@
 export PROJECT_ID="your-project-id"
 export REGION="us-central1"
 export ZONE="us-central1-a"
-export DOCKER_REGISTRY="gcr.io/${PROJECT_ID}"
+export DOCKER_REGISTRY="srt0422"  # Using Docker Hub registry instead of GCR
 
 # Service Configuration
 export NFA_PROXY_PORT="8080"
@@ -19,6 +19,10 @@ export CONSUMER_URL="" # Will be auto-populated during deployment with consumer 
 # Model Configuration
 export MODEL_PATH="/path/to/model"
 export MODEL_TYPE="llama2"
+
+# Contract Configuration
+export DIAMOND_CONTRACT_ADDRESS="0xb8C55cD613af947E73E262F0d3C54b7211Af16CF"
+export WALLET_PRIVATE_KEY="your-wallet-private-key"
 
 # Function to ensure correct GCP context
 ensure_gcp_context() {
