@@ -3,78 +3,93 @@ import { useState, useEffect, useRef } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [message, setMessage] = useState("");
-  const [chatHistory, setChatHistory] = useState([
-    { role: "system", content: "You are a helpful assistant." },
-  ]);
+  const [messageInput, setMessageInput] = useState('');
+  const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const chatContainerRef = useRef(null);
 
   useEffect(() => {
-    // Scroll to the bottom of the chat container whenever chatHistory changes
+    // Scroll to the bottom of the chat container whenever messages changes
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
-  }, [chatHistory]);
+  }, [messages]);
 
-  const sendMessage = async (message) => {
-    // Append user message to chat history
-    setChatHistory((prev) => [...prev, { role: "user", content: message }]);
-
-    // Send the user's message to the server
-    const response = await fetch("/api/generate?endpoint=chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ message }),
-    });
-
-    const data = await response.json();
-    if (data.success) {
-      // Open a connection to receive streamed responses
-      const eventSource = new EventSource("/api/generate?endpoint=stream");
-      eventSource.onmessage = function (event) {
-        // Parse the event data, which is a JSON string
-        const parsedData = JSON.parse(event.data);
-
-        // Check if the last message in the chat history is from the assistant
-        setChatHistory((prevChatHistory) => {
-          const newChatHistory = [...prevChatHistory];
-          if (
-            newChatHistory.length > 0 &&
-            newChatHistory[newChatHistory.length - 1].role === "assistant"
-          ) {
-            // If so, append the new chunk to the existing assistant message content
-            newChatHistory[newChatHistory.length - 1].content += parsedData;
-          } else {
-            // Otherwise, add a new assistant message to the chat history
-            newChatHistory.push({ role: "assistant", content: parsedData });
-          }
-          return newChatHistory;
-        });
-      };
-      eventSource.onerror = function () {
-        eventSource.close();
-      };
-    }
+  const clearChat = () => {
+    setMessages([]);
+    setError('');
   };
 
-  const clearChat = async () => {
-    // Clear the chat history in the client state
-    setChatHistory([
-      { role: "system", content: "You are a helpful assistant." },
-    ]);
-
-    // Reset the chat history on the server
-    await fetch("/api/generate?endpoint=reset", { method: "POST" });
-  };
-
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    if (!message.trim()) return;
-    sendMessage(message.trim());
-    setMessage("");
+    setError('');
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: [
+            { role: 'system', content: 'You are a helpful assistant.' },
+            ...messages,
+            { role: 'user', content: messageInput }
+          ]
+        })
+      });
+
+      // Add user message immediately
+      setMessages(prev => [...prev, { role: 'user', content: messageInput }]);
+      setMessageInput('');
+
+      // Handle streaming response
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let assistantMessage = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value);
+        const lines = chunk.split('\n');
+        
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            try {
+              const data = JSON.parse(line.slice(6));
+              if (data.content) {
+                assistantMessage += data.content;
+                setMessages(prev => {
+                  const lastMessage = prev[prev.length - 1];
+                  if (lastMessage?.role === 'assistant') {
+                    return [...prev.slice(0, -1), { role: 'assistant', content: assistantMessage }];
+                  }
+                  return [...prev, { role: 'assistant', content: assistantMessage }];
+                });
+              }
+              if (data.error) {
+                throw new Error(data.error);
+              }
+              if (data.done) {
+                // Stream is complete
+                break;
+              }
+            } catch (parseError) {
+              console.error('Parse error:', parseError);
+              continue; // Skip invalid JSON lines
+            }
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setError(error.message || 'Failed to send message');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -83,8 +98,9 @@ export default function Home() {
         <title>OpenAI Chat</title>
       </Head>
       <h1 className={styles.heading1}>OpenAI Chat Completion Quickstart</h1>
+      {error && <div className={styles.errorMessage}>{error}</div>}
       <div className={styles.chatContainer} ref={chatContainerRef}>
-        {chatHistory.map((msg, index) => (
+        {messages.map((msg, index) => (
           <div
             key={index}
             className={
@@ -102,11 +118,12 @@ export default function Home() {
             name="message"
             placeholder="Type your message here..."
             required
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            value={messageInput}
+            onChange={(e) => setMessageInput(e.target.value)}
+            disabled={isLoading}
           ></textarea>
           <div className={styles.buttonGroup}>
-            <input className={styles.inputSubmit} type="submit" value="Send" />
+            <input className={styles.inputSubmit} type="submit" value={isLoading ? 'Sending...' : 'Send'} disabled={isLoading || !messageInput.trim()} />
             <button
               className={styles.inputButton}
               type="button"

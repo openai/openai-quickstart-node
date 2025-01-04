@@ -1,64 +1,97 @@
-# OpenAI API Quickstart - Node.js example app
+# Chat Application Deployment Guide
 
-This is an example chat app intended to get you started with your first OpenAI API project. It uses the [Chat Completions API](https://platform.openai.com/docs/api-reference/chat) to create a simple general purpose chat app with streaming.
+## Overview
+This repository contains deployment configurations for three interconnected services:
+- NFA Proxy (Base LLM Service)
+- Consumer Node
+- Chat Web Application
 
-## Basic request
+## Prerequisites
+- Google Cloud SDK installed
+- Node.js >=16
+- npm >=7
+- Docker
 
-To send your first API request with the [OpenAI Node SDK](https://github.com/openai/openai-node), make sure you have the right [dependencies installed](https://platform.openai.com/docs/quickstart?context=node) and then run the following code:
+## Configuration
 
-```python
-import OpenAI from "openai";
-
-const openai = new OpenAI();
-
-async function main() {
-  const completion = await openai.chat.completions.create({
-    messages: [{ role: "system", content: "You are a helpful assistant." }],
-    model: "gpt-3.5-turbo",
-  });
-
-  console.log(completion.choices[0]);
-}
-
-main();
+1. Copy the example environment file:
+```bash
+cp cloud/config.example.sh cloud/config.sh
 ```
 
-This quickstart app builds on top of the example code above, with streaming and a UI to visualize messages.
+2. Edit `cloud/config.sh` with your settings:
+```bash
+export PROJECT_ID="your-project-id"
+export REGION="us-central1"
+export ZONE="us-central1-a"
+export DOCKER_REGISTRY="gcr.io/${PROJECT_ID}"
 
-## Setup
+# Service Configuration
+export NFA_PROXY_PORT="8080"
+export CONSUMER_PORT="3333"
+export WEBAPP_PORT="3000"
 
-1. If you don’t have Node.js installed, install it from [nodejs.org](https://nodejs.org/en/) (Node.js version >= 16.0.0 required)
+# Model Configuration
+export MODEL_PATH="/path/to/model"
+export MODEL_TYPE="llama2"
+```
 
-2. Clone this repository
+## Deployment
 
-3. Navigate into the project directory
+### Single Command Deployment
+Deploy all services with:
+```bash
+./cloud/deploy-all.sh
+```
 
-   ```bash
-   $ cd openai-quickstart-node
-   ```
+### Individual Service Deployment
+Deploy services separately:
+```bash
+# Deploy NFA Proxy
+./cloud/deploy-proxy.sh
 
-4. Install the requirements
+# Deploy Consumer Node
+./cloud/deploy-consumer.sh
 
-   ```bash
-   $ npm install
-   ```
+# Deploy Chat Web App
+./cloud/deploy-webapp.sh
+```
 
-5. Make a copy of the example environment variables file
+## Service Architecture
 
-   On Linux systems: 
-   ```bash
-   $ cp .env.example .env
-   ```
-   On Windows:
-   ```powershell
-   $ copy .env.example .env
-   ```
-6. Add your [API key](https://platform.openai.com/account/api-keys) to the newly created `.env` file
+```
+Chat Web App (Frontend)
+       ↓
+Consumer Node (API Layer)
+       ↓
+NFA Proxy (LLM Service)
+```
 
-7. Run the app
+## Environment Variables
 
-   ```bash
-   $ npm run dev
-   ```
+### NFA Proxy
+- `MODEL_PATH`: Path to model files
+- `MODEL_TYPE`: Type of model (default: llama2)
+- `PORT`: Service port (default: 8080)
 
-You should now be able to access the app at [http://localhost:3000](http://localhost:3000)! For the full context behind this example app, check out the [tutorial](https://platform.openai.com/docs/quickstart).
+### Consumer Node
+- `PROXY_URL`: URL of NFA Proxy service
+- `PORT`: Service port (default: 3333)
+
+### Chat Web App
+- `OPENAI_API_URL`: URL of Consumer Node
+- `PORT`: Web app port (default: 3000)
+
+## Monitoring & Logs
+
+View service logs:
+```bash
+gcloud logging tail "resource.type=cloud_run_revision"
+```
+
+## Cleanup
+
+Remove all deployed services:
+```bash
+./cloud/cleanup.sh
+```
