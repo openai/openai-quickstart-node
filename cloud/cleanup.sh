@@ -6,7 +6,7 @@ ensure_gcp_context
 # Delete all services
 echo "Cleaning up deployed services..."
 
-services=("nfa-proxy" "consumer-node" "chat-app")
+services=("nfa-proxy" "consumer-node" "chat-web-app")
 
 for service in "${services[@]}"; do
     echo "Deleting $service..."

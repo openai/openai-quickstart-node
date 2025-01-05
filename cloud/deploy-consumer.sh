@@ -2,26 +2,70 @@
 
 set -e
 
-# Source configuration
-source "$(dirname "$0")/config.sh"
-ensure_gcp_context
+SCRIPT_DIR="$(dirname "$0")"
+source "${SCRIPT_DIR}/config.sh"
 
-# Build and deploy Consumer Node
-IMAGE_NAME="${DOCKER_REGISTRY}/consumer-node"
+# Load NFA_PROXY_URL from temp file if it exists
+if [ -f "${SCRIPT_DIR}/.env.tmp" ]; then
+    source "${SCRIPT_DIR}/.env.tmp"
+fi
 
-echo "Building Consumer Node..."
-gcloud builds submit ./consumer --tag $IMAGE_NAME
+if [ -z "$NFA_PROXY_URL" ]; then
+    echo "Error: NFA_PROXY_URL not set"
+    echo "Make sure to run deploy-proxy.sh first"
+    exit 1
+fi
 
-echo "Deploying Consumer Node..."
+# Set image tag based on version if specified
+IMAGE_TAG="${CONSUMER_NODE_VERSION:-latest}"
+IMAGE_NAME="${DOCKER_REGISTRY}/morpheus-marketplace:${IMAGE_TAG}"
+
+# Deploy Consumer Node
+echo "Deploying Consumer Node version: ${IMAGE_TAG}..."
 gcloud run deploy consumer-node \
-    --image $IMAGE_NAME \
-    --platform managed \
-    --region $REGION \
-    --allow-unauthenticated \
-    --set-env-vars "PORT=${CONSUMER_PORT},\
-    PROXY_URL=${NFA_PROXY_URL},\
-    DIAMOND_CONTRACT_ADDRESS=${DIAMOND_CONTRACT_ADDRESS},\
-    WALLET_PRIVATE_KEY=${WALLET_PRIVATE_KEY}" \
-    --project $PROJECT_ID
+  --image $IMAGE_NAME \
+  --platform managed \
+  --region $REGION \
+  --allow-unauthenticated \
+  --port=8083 \
+  --set-env-vars "\
+PROXY_ADDRESS=0.0.0.0:3334,\
+WEB_ADDRESS=0.0.0.0:8083,\
+WALLET_PRIVATE_KEY=${WALLET_PRIVATE_KEY},\
+DIAMOND_CONTRACT_ADDRESS=${DIAMOND_CONTRACT_ADDRESS},\
+MOR_TOKEN_ADDRESS=${MOR_TOKEN_ADDRESS},\
+EXPLORER_API_URL=${EXPLORER_API_URL},\
+ETH_NODE_CHAIN_ID=${ETH_NODE_CHAIN_ID},\
+ENVIRONMENT=${ENVIRONMENT},\
+PROXY_ADDRESS=${PROXY_ADDRESS},\
+WEB_ADDRESS=${WEB_ADDRESS},\
+WEB_PUBLIC_URL=http://consumer-service:9000,\
+ETH_NODE_USE_SUBSCRIPTIONS=${ETH_NODE_USE_SUBSCRIPTIONS},\
+ETH_NODE_ADDRESS=${ETH_NODE_ADDRESS},\
+ETH_NODE_LEGACY_TX=${ETH_NODE_LEGACY_TX},\
+PROXY_STORE_CHAT_CONTEXT=${PROXY_STORE_CHAT_CONTEXT},\
+PROXY_STORAGE_PATH=${PROXY_STORAGE_PATH},\
+LOG_COLOR=${LOG_COLOR},\
+LOG_LEVEL=${LOG_LEVEL:-info},\
+LOG_FORMAT=${LOG_FORMAT:-text},\
+PROVIDER_CACHE_TTL=${PROVIDER_CACHE_TTL:-60},\
+MAX_CONCURRENT_SESSIONS=${MAX_CONCURRENT_SESSIONS:-100},\
+SESSION_TIMEOUT=${SESSION_TIMEOUT:-3600},\
+PROXY_URL=${NFA_PROXY_URL}"
 
 check_deployment "consumer-node"
+
+# Output the service URL and save for parent script
+CONSUMER_URL=$(gcloud run services describe consumer-node --format 'value(status.url)' --region $REGION)
+export CONSUMER_URL
+
+# Update config.sh with the correct CONSUMER_URL using a .bak backup
+sed -i.bak "s|^export CONSUMER_URL=.*|export CONSUMER_URL=\"${CONSUMER_URL}\"|" "${SCRIPT_DIR}/config.sh" && rm -f "${SCRIPT_DIR}/config.sh.bak"
+
+echo "Consumer URL: ${CONSUMER_URL}"
+
+echo "Checking consumer-node health via ${CONSUMER_URL}/healthcheck endpoint..."
+if ! check_service_health "${CONSUMER_URL}/healthcheck"; then
+    echo "Consumer node health check failed"
+    exit 1
+fi

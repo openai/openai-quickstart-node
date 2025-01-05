@@ -8,17 +8,15 @@ ensure_gcp_context
 echo "Building Next.js application..."
 npm run build
 
-# Build and push the container
-echo "Building and pushing container..."
-IMAGE_NAME="gcr.io/$PROJECT_ID/chat-app"
+# Remove building and pushing container
+# echo "Building and pushing container..."
+# IMAGE_NAME="${DOCKER_REGISTRY}/chat-web-app"
+# gcloud builds submit --tag $IMAGE_NAME
 
-# Build the container
-gcloud builds submit --tag $IMAGE_NAME
-
-# Deploy to Cloud Run
-echo "Deploying to Cloud Run..."
-gcloud run deploy chat-app \
-  --image $IMAGE_NAME \
+# Deploy to Cloud Run directly from source
+echo "Deploying Chat Web App to Cloud Run..."
+gcloud run deploy chat-web-app \
+  --source . \
   --platform managed \
   --region $REGION \
   --allow-unauthenticated \
@@ -26,7 +24,7 @@ gcloud run deploy chat-app \
   --project $PROJECT_ID
 
 # Get the deployed URL
-SERVICE_URL=$(gcloud run services describe chat-app \
+SERVICE_URL=$(gcloud run services describe chat-web-app \
   --platform managed \
   --region $REGION \
   --format 'value(status.url)')

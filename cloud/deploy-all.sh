@@ -2,52 +2,38 @@
 
 set -e
 
-# Source configuration
-source "$(dirname "$0")/config.sh"
-ensure_gcp_context
+SCRIPT_DIR="$(dirname "$0")"
+source "${SCRIPT_DIR}/config.sh"
 
-# Define proxy and consumer images
-export NFA_PROXY_IMAGE="srt0422/openai-morpheus-proxy:latest"
-export CONSUMER_IMAGE="srt0422/morpheus-marketplace-consumer:latest"
+# Deploy NFA Proxy and load its environment
+echo "=== Deploying NFA Proxy ==="
+source "${SCRIPT_DIR}/deploy-proxy.sh"
 
-# Deploy NFA Proxy
-echo "Deploying NFA Proxy..."
-gcloud run deploy nfa-proxy \
-  --image $NFA_PROXY_IMAGE \
-  --platform managed \
-  --region $REGION \
-  --allow-unauthenticated
-
-# Get proxy URL
-export NFA_PROXY_URL=$(gcloud run services describe nfa-proxy \
-  --format 'value(status.url)')
+if [ -z "$NFA_PROXY_URL" ]; then
+    echo "Error: NFA Proxy URL not set after deployment"
+    exit 1
+fi
 
 # Deploy Consumer Node
-echo "Deploying Consumer Node..."
-gcloud run deploy consumer-node \
-  --image $CONSUMER_IMAGE \
+echo "=== Deploying Consumer Node ==="
+source "${SCRIPT_DIR}/deploy-consumer.sh"
+export CONSUMER_URL
+
+# Update NFA Proxy configuration with consumer URL
+echo "=== Updating NFA Proxy configuration ==="
+gcloud run services update nfa-proxy \
   --platform managed \
   --region $REGION \
-  --allow-unauthenticated \
-  --set-env-vars "PROXY_URL=${NFA_PROXY_URL},DIAMOND_CONTRACT_ADDRESS=${DIAMOND_CONTRACT_ADDRESS},WALLET_PRIVATE_KEY=${WALLET_PRIVATE_KEY}"
+  --set-env-vars "MARKETPLACE_PORT=3333,\
+SESSION_DURATION=1h,\
+MARKETPLACE_BASE_URL=${CONSUMER_URL},\
+MARKETPLACE_URL=${CONSUMER_URL}/v1/chat/completions"
 
-# Get consumer URL
-export CONSUMER_URL=$(gcloud run services describe consumer-node \
-  --format 'value(status.url)')
+# Deploy Web App
+echo "=== Deploying Web App ==="
+source "${SCRIPT_DIR}/deploy-webapp.sh"
 
-# Build and deploy Chat Web App
-echo "Building and deploying Chat Web App..."
-npm run build
-
-# Deploy using local build
-gcloud run deploy chat-app \
-  --source . \
-  --platform managed \
-  --region $REGION \
-  --allow-unauthenticated \
-  --set-env-vars "OPENAI_API_URL=${CONSUMER_URL}"
-
-echo "Deployment complete! Service URLs:"
-echo "NFA Proxy: $(gcloud run services describe nfa-proxy --format 'value(status.url)')"
-echo "Consumer: $(gcloud run services describe consumer-node --format 'value(status.url)')"
-echo "Web App: $(gcloud run services describe chat-app --format 'value(status.url)')"
+echo "=== Deployment Complete ==="
+echo "NFA Proxy: ${NFA_PROXY_URL}"
+echo "Consumer: ${CONSUMER_URL}"
+echo "Web App: ${WEBAPP_URL}"

@@ -24,16 +24,12 @@ cp cloud/config.example.sh cloud/config.sh
 export PROJECT_ID="your-project-id"
 export REGION="us-central1"
 export ZONE="us-central1-a"
-export DOCKER_REGISTRY="gcr.io/${PROJECT_ID}"
+export DOCKER_REGISTRY="srt0422"  # Using Docker Hub registry instead of GCR
 
 # Service Configuration
 export NFA_PROXY_PORT="8080"
 export CONSUMER_PORT="3333"
 export WEBAPP_PORT="3000"
-
-# Model Configuration
-export MODEL_PATH="/path/to/model"
-export MODEL_TYPE="llama2"
 
 # Wallet Configuration
 export WALLET_PRIVATE_KEY="your-wallet-private-key"
@@ -45,9 +41,9 @@ export DIAMOND_CONTRACT_ADDRESS="0xb8C55cD613af947E73E262F0d3C54b7211Af16CF"
 ## Docker Images
 The deployment uses the following pre-built Docker Hub images:
 - NFA Proxy: `srt0422/openai-morpheus-proxy:latest`
-- Consumer Node: `srt0422/morpheus-marketplace-consumer:latest`
+- Consumer Node: `srt0422/morpheus-marketplace:latest`
 
-The Chat Web App is built and deployed directly from source code.
+The Chat Web App is deployed directly from the source code to Google Cloud Run.
 
 ## Deployment
 
@@ -75,23 +71,28 @@ Deploy services separately:
 ```
 Chat Web App (Frontend)
        ↓
-Consumer Node (API Layer)
+NFA Proxy (API Layer)
        ↓
-NFA Proxy (LLM Service)
+Consumer Node (Morpheus Integration Layer)
 ```
 
 ## Environment Variables
 
 ### NFA Proxy
-- `MODEL_PATH`: Path to model files
-- `MODEL_TYPE`: Type of model (default: llama2)
-- `PORT`: Service port (default: 8080)
+- `API_LISTEN_PORT`: Internal service port (default: 8080)
 
 ### Consumer Node
 - `PROXY_URL`: URL of NFA Proxy service
 - `PORT`: Service port (default: 3333)
 - `WALLET_PRIVATE_KEY`: Your Ethereum wallet private key (required for blockchain interactions)
 - `DIAMOND_CONTRACT_ADDRESS`: The deployed diamond contract address
+- `BLOCKCHAIN_WS_URL`: Websocket URL for blockchain events
+- `BLOCKCHAIN_HTTP_URL`: HTTP URL for blockchain transactions
+- `LOG_LEVEL`: Logging level (default: info)
+- `LOG_FORMAT`: Log format (text/json, default: text)
+- `PROVIDER_CACHE_TTL`: Provider cache time-to-live in seconds (default: 60)
+- `MAX_CONCURRENT_SESSIONS`: Maximum concurrent sessions (default: 100)
+- `SESSION_TIMEOUT`: Session timeout in seconds (default: 3600)
 
 ### Chat Web App
 - `OPENAI_API_URL`: URL of Consumer Node
@@ -110,3 +111,4 @@ Remove all deployed services:
 ```bash
 ./cloud/cleanup.sh
 ```
+
