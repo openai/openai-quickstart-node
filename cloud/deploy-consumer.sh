@@ -51,7 +51,7 @@ LOG_FORMAT=${LOG_FORMAT:-text},\
 PROVIDER_CACHE_TTL=${PROVIDER_CACHE_TTL:-60},\
 MAX_CONCURRENT_SESSIONS=${MAX_CONCURRENT_SESSIONS:-100},\
 SESSION_TIMEOUT=${SESSION_TIMEOUT:-3600},\
-PROXY_URL=${NFA_PROXY_URL}"
+PROXY_URL=${NFA_PROXY_URL}/v1"
 
 check_deployment "consumer-node"
 
@@ -59,10 +59,20 @@ check_deployment "consumer-node"
 CONSUMER_URL=$(gcloud run services describe consumer-node --format 'value(status.url)' --region $REGION)
 export CONSUMER_URL
 
+# Update marketplace URLs
+gcloud run services update nfa-proxy \
+    --region $REGION \
+    --update-env-vars "MARKETPLACE_BASE_URL=${CONSUMER_URL},MARKETPLACE_URL=${CONSUMER_URL}/v1/chat/completions"
+
 # Update config.sh with the correct CONSUMER_URL using a .bak backup
 sed -i.bak "s|^export CONSUMER_URL=.*|export CONSUMER_URL=\"${CONSUMER_URL}\"|" "${SCRIPT_DIR}/config.sh" && rm -f "${SCRIPT_DIR}/config.sh.bak"
 
 echo "Consumer URL: ${CONSUMER_URL}"
+
+echo "Updating consumer-node with WEB_PUBLIC_URL=${CONSUMER_URL}..."
+gcloud run services update consumer-node \
+    --region $REGION \
+    --update-env-vars "WEB_PUBLIC_URL=${CONSUMER_URL}"
 
 echo "Checking consumer-node health via ${CONSUMER_URL}/healthcheck endpoint..."
 if ! check_service_health "${CONSUMER_URL}/healthcheck"; then

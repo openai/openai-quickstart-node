@@ -1,5 +1,17 @@
 # Chat Application Deployment Guide
 
+## Getting Started
+
+### Clone the Repository
+```bash
+git clone https://github.com/srt0422/morpheus-quickstart-node.git
+```
+
+### Navigate to the Repository Root Directory
+```bash
+cd morpheus-quickstart-node
+```
+
 ## Overview
 This repository contains deployment configurations for three interconnected services:
 - NFA Proxy (Base LLM Service)
@@ -7,7 +19,10 @@ This repository contains deployment configurations for three interconnected serv
 - Chat Web Application
 
 ## Prerequisites
-- Google Cloud SDK installed
+- Google Cloud Account
+- Google Cloud SDK installed [Setup Instructions](https://cloud.google.com/sdk/docs/install-sdk?_gl=1*1eoawsq*_up*MQ..&gclid=CjwCAiA-Oi7BhA1EiwA2rIu2xra5EEWf_n6EB_rOgehhBNqqx53-B6nhCDvgzAhAiBAEqvEOv0kThoCyJYQAvD_BwE&gclsrc=aw.ds)
+- **Google Cloud Run and necessary APIs enabled**
+- **Logged in with `gcloud auth login`**
 - Node.js >=16
 - npm >=7
 - Docker

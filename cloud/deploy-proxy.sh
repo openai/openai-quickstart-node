@@ -19,15 +19,20 @@ gcloud run deploy nfa-proxy \
   --allow-unauthenticated \
   --set-env-vars "INTERNAL_API_PORT=8080,\
 MARKETPLACE_PORT=3333,\
+MARKETPLACE_BASE_URL=${MARKETPLACE_BASE_URL},\
+MARKETPLACE_URL=${MARKETPLACE_BASE_URL}/v1/chat/completions,\
 SESSION_DURATION=1h"
 
 check_deployment "nfa-proxy"
 
-# Get service URL
+# Get service URL and export to environment
 NFA_PROXY_URL=$(gcloud run services describe nfa-proxy \
   --region $REGION \
   --format 'value(status.url)')
 export NFA_PROXY_URL
+
+# Save NFA_PROXY_URL to temporary file for other scripts
+echo "export NFA_PROXY_URL='${NFA_PROXY_URL}'" > "$(dirname "$0")/.env.tmp"
 
 # Check service health
 echo "Checking NFA Proxy health..."
