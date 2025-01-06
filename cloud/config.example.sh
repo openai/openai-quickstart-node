@@ -18,6 +18,7 @@ export WALLET_PRIVATE_KEY="your-wallet-private-key"
 export INTERNAL_API_PORT="8080"  # Internal reference only, Cloud Run will provide PORT
 export MARKETPLACE_PORT="3333"
 export SESSION_DURATION="1h"
+export MOR_TOKEN_ADDRESS=0x34a285a1b1c166420df5b6630132542923b5b27e
 
 # API Configuration
 export MARKETPLACE_BASE_URL="" # Will be auto-populated during deployment
