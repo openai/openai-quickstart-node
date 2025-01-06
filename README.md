@@ -1,6 +1,81 @@
-# Chat Application Deployment Guide
+APP Router Readme 0.0.1
 
-## Getting Started
+# Sample Morpheus Chat App Deployment Guide
+
+## Overview
+This is a sample app using Morpheus inference in a Next.js app hosted on Google Cloud.  The app consists of two parts: 
+1. App proxy router that exists in a Docker container.
+2. A front end that the user uses to send prompts and see responses from the App router
+
+You will need to set up the app router in order to open and close inference sessions on the Morpheus network.  There is a complete guide for this in the [Morpheus Marketplace Docs](https://github.com/Lumerin-protocol/Morpheus-Lumerin-Node/blob/dev/docs/00-overview.md)
+
+For this particular demo we have installed the app router on a Google Cloud Run service to host Docker containers.
+
+## Guide
+
+1. Collect at least 10 MOR that will be used to pay for inference on the Morpheus network.  The address's secret key used for this demo will be potentially exposed so use a new address that you don't use for anything else besides this demo.
+
+2. Make sure you have at least 0.1 ETH in your consumder node.  This is the minimum required gas to operate the system.
+
+2. Set up your hosting so it can host the 3 Docker Containers required for this demo.  We are using Google Cloud.  You can use any cloud service the hosts docker containers. 
+
+For the required environment variables see ./cloud/config.example.sh
+
+3. The `./cloud/deploy-all.sh script basically deploys the 3 Docker containers to Google Cloud Run.  You can also deploy each container individually with the other scripts in the cloud directory.  If you're not using google cloud, you should be able to comment out the gcloud commands and replace them with the commands for your cloud service, or just use the docker commands to push your containers where you need them for your cloud service.
+
+4. **Environment variables**
+
+The following variables are used across the sample deployment:
+
+- GCP Project
+  - `PROJECT_ID` – GCP project ID
+  - `REGION` – GCP region
+  - `ZONE` – GCP zone
+  - `DOCKER_REGISTRY` – Docker registry name
+
+- API Configuration
+  - `OPENAI_API_URL` – URL for the NFA Proxy
+  - `CONSUMER_URL` – URL for Consumer Node
+
+- Contract Configuration
+  - `DIAMOND_CONTRACT_ADDRESS` – Address of the diamond contract
+  - `WALLET_PRIVATE_KEY` – Private key for transactions
+
+- Service Configuration
+  - `INTERNAL_API_PORT` – Internal port for API container
+  - `MARKETPLACE_PORT` – Consumer Node port
+  - `SESSION_DURATION` – Session duration (e.g. "1h")
+
+- Additional
+  - `MARKETPLACE_BASE_URL` – Base URL for Marketplace
+  - `MARKETPLACE_URL` – Public URL for Marketplace
+  - `NFA_PROXY_URL` – Public URL for the NFA Proxy
+
+- Versions
+  - `NFA_PROXY_VERSION` – Tag for the proxy image
+  - `CONSUMER_NODE_VERSION` – Tag for the consumer image
+
+- Consumer Node - for more context see lumerin protocol docs (https://github.com/Lumerin-protocol/Morpheus-Lumerin-Node/blob/dev/docs/proxy-router.all.env)
+  - `BLOCKCHAIN_WS_URL` – WebSocket endpoint for chain events
+  - `BLOCKCHAIN_HTTP_URL` – HTTP endpoint for chain transactions
+  - `LOG_LEVEL` – Logging detail (info/debug)
+  - `LOG_FORMAT` – Log output format (text/json)
+  - `PROVIDER_CACHE_TTL` – Cache TTL in seconds
+  - `MAX_CONCURRENT_SESSIONS` – Max concurrency limit
+  - `SESSION_TIMEOUT` – Timeout in seconds
+  - `MOR_TOKEN_ADDRESS` – MOR token address
+  - `EXPLORER_API_URL` – Blockchain explorer endpoint
+  - `ETH_NODE_CHAIN_ID` – Ethereum chain ID
+  - `ENVIRONMENT` – App environment (development/production)
+  - `PROXY_ADDRESS` – Consumer Node’s proxy bind address
+  - `WEB_ADDRESS` – Consumer Node’s web interface address
+  - `WEB_PUBLIC_URL` – Consumer Node’s public URL
+  - `ETH_NODE_USE_SUBSCRIPTIONS` – Enable chain event subscriptions
+  - `ETH_NODE_ADDRESS` – Ethereum RPC node URL
+  - `ETH_NODE_LEGACY_TX` – True to enforce legacy transactions
+  - `PROXY_STORE_CHAT_CONTEXT` – Activates chat context storage
+  - `PROXY_STORAGE_PATH` – Storage path for data
+  - `LOG_COLOR` – True to enable colored logs
 
 ### Clone the Repository
 ```bash
@@ -126,4 +201,5 @@ Remove all deployed services:
 ```bash
 ./cloud/cleanup.sh
 ```
+
 
