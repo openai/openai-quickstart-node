@@ -27,10 +27,10 @@ gcloud run deploy consumer-node \
   --platform managed \
   --region $REGION \
   --allow-unauthenticated \
-  --port=8083 \
+  --port=8082 \
   --set-env-vars "\
-PROXY_ADDRESS=0.0.0.0:3334,\
-WEB_ADDRESS=0.0.0.0:8083,\
+PROXY_ADDRESS=0.0.0.0:3333,\
+WEB_ADDRESS=0.0.0.0:8082,\
 WALLET_PRIVATE_KEY=${WALLET_PRIVATE_KEY},\
 DIAMOND_CONTRACT_ADDRESS=${DIAMOND_CONTRACT_ADDRESS},\
 MOR_TOKEN_ADDRESS=${MOR_TOKEN_ADDRESS},\

@@ -39,6 +39,17 @@ export PROVIDER_CACHE_TTL="60"
 export MAX_CONCURRENT_SESSIONS="100"
 export SESSION_TIMEOUT="3600"
 
+# Node Configuration
+export EXPLORER_API_URL="https://api-sepolia.arbiscan.io/api"
+export ETH_NODE_ADDRESS="https://sepolia-rollup.arbitrum.io/rpc"
+export ETH_NODE_LEGACY_TX="false"
+export PROXY_STORE_CHAT_CONTEXT="true"
+export PROXY_STORAGE_PATH="./data/"
+export LOG_COLOR="true"
+export ETH_NODE_USE_SUBSCRIPTIONS="false"
+export ETH_NODE_CHAIN_ID="421614"
+export ENVIRONMENT="development"
+
 # Function to ensure correct GCP context
 ensure_gcp_context() {
     echo "Setting GCP context..."
@@ -76,6 +87,7 @@ check_deployment() {
 
     while [ $attempt -le $max_attempts ]; do
         status=$(gcloud run services describe $service_name \
+            --region=$REGION \
             --format='value(status.conditions[0].status)' 2>/dev/null || echo "Unknown")
         
         if [ "$status" == "True" ]; then
