@@ -33,7 +33,6 @@ yarn-error.log*
 
 # config
 config.sh
-cloud/config.sh
 
 # Cloud deployment configuration
 cloud/config.sh
