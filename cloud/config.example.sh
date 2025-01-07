@@ -31,8 +31,8 @@ export NFA_PROXY_VERSION=""      # e.g. "v1.0.0" - for srt0422/openai-morpheus-p
 export CONSUMER_NODE_VERSION=""  # e.g. "v1.0.0" - for srt0422/morpheus-marketplace-consumer
 
 # Consumer Node Configuration
-export BLOCKCHAIN_WS_URL="wss://arbitrum-mainnet.infura.io/ws/v3/your-project-id"
-export BLOCKCHAIN_HTTP_URL="https://arbitrum-mainnet.infura.io/v3/your-project-id"
+export BLOCKCHAIN_WS_URL="" # "wss://arbitrum-mainnet.infura.io/ws/v3/your-project-id"
+export BLOCKCHAIN_HTTP_URL="" # "https://arbitrum-mainnet.infura.io/v3/your-project-id"
 export LOG_LEVEL="info"
 export LOG_FORMAT="text"
 export PROVIDER_CACHE_TTL="60"
@@ -41,7 +41,7 @@ export SESSION_TIMEOUT="3600"
 
 # Node Configuration
 export EXPLORER_API_URL="https://api-sepolia.arbiscan.io/api"
-export ETH_NODE_ADDRESS="https://sepolia-rollup.arbitrum.io/rpc"
+export ETH_NODE_ADDRESS="${BLOCKCHAIN_WS_URL:-${BLOCKCHAIN_HTTP_URL:-https://sepolia-rollup.arbitrum.io/rpc}}"
 export ETH_NODE_LEGACY_TX="false"
 export PROXY_STORE_CHAT_CONTEXT="true"
 export PROXY_STORAGE_PATH="./data/"
