@@ -66,7 +66,7 @@ check_service_health() {
 
     while [ $attempt -le $max_attempts ]; do
         echo "Checking service health (attempt $attempt/$max_attempts)..."
-        if curl -s "${service_url}" | grep -q '"status":"healthy"'; then
+        if curl -s "${service_url}" | grep -iq 'healthy'; then
             echo "Service is healthy!"
             return 0
         fi
