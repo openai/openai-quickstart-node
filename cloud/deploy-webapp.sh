@@ -4,24 +4,43 @@
 source "$(dirname "$0")/config.sh"
 ensure_gcp_context
 
+# Define version
+VERSION="${VERSION:-latest}"
+
 # Build the Next.js application
 echo "Building Next.js application..."
 npm run build
 
-# Build and push the container
-echo "Building and pushing container..."
-IMAGE_NAME="gcr.io/$PROJECT_ID/chat-web-app"
-gcloud builds submit --tag $IMAGE_NAME
+# Build and push containers
+echo "Building and pushing containers..."
+IMAGE_NAME="gcr.io/$PROJECT_ID/chat-web-app:$VERSION"
+DOCKER_HUB_IMAGE="$DOCKER_REGISTRY/chat-web-app:$VERSION"
+
+# Build and push to Docker Hub first
+docker build -t "$DOCKER_HUB_IMAGE" .
+docker push "$DOCKER_HUB_IMAGE"
 
 # Deploy to Cloud Run
 echo "Deploying Chat Web App to Cloud Run..."
-gcloud run deploy chat-web-app \
-  --image $IMAGE_NAME \
+if gcloud run deploy chat-web-app \
+  --image "$DOCKER_HUB_IMAGE" \
   --platform managed \
-  --region $REGION \
+  --region "$REGION" \
   --allow-unauthenticated \
   --set-env-vars "OPENAI_API_URL=${OPENAI_API_URL}/v1" \
-  --project $PROJECT_ID
+  --project "$PROJECT_ID"; then
+  echo "Docker Hub deployment succeeded."
+else
+  echo "Docker Hub deployment failed. Falling back to Google Cloud Registry..."
+  gcloud builds submit --tag "$IMAGE_NAME"
+  gcloud run deploy chat-web-app \
+    --image "$IMAGE_NAME" \
+    --platform managed \
+    --region "$REGION" \
+    --allow-unauthenticated \
+    --set-env-vars "OPENAI_API_URL=${OPENAI_API_URL}/v1" \
+    --project "$PROJECT_ID"
+fi
 
 # Get the deployed URL
 SERVICE_URL=$(gcloud run services describe chat-web-app \
