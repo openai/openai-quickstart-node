@@ -16,9 +16,16 @@ echo "Building and pushing containers..."
 IMAGE_NAME="gcr.io/$PROJECT_ID/chat-web-app:$VERSION"
 DOCKER_HUB_IMAGE="$DOCKER_REGISTRY/chat-web-app:$VERSION"
 
-# Build and push to Docker Hub first
-docker build -t "$DOCKER_HUB_IMAGE" .
-docker push "$DOCKER_HUB_IMAGE"
+# Create multi-platform builder if not exists
+if ! docker buildx inspect chatbuilder > /dev/null 2>&1; then
+  docker buildx create --name chatbuilder --driver docker-container --bootstrap
+fi
+docker buildx use chatbuilder
+
+# Build and push to Docker Hub with buildx
+docker buildx build --platform linux/amd64 \
+  --push \
+  -t "$DOCKER_HUB_IMAGE" .
 
 # Deploy to Cloud Run
 echo "Deploying Chat Web App to Cloud Run..."
