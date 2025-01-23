@@ -1,20 +1,14 @@
 {
   "name": "openai-quickstart-node",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "node quickstart for OpenAI APIs",
+  "main": "index.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "license": "ISC",
   "dependencies": {
-    "next": "^13.1.1",
-    "openai": "^4.26.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "openai": "^4.79.2"
   },
-  "engines": {
-    "node": ">=16",
-    "npm": ">=7"
-  }
+  "type": "module"
 }
