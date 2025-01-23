@@ -142,11 +142,11 @@ Explore the examples below to learn how to use the Node.js SDK for your specific
   <tr>
     <td rowspan="2">Batch</td>
     <td>Create a batch job</td>
-    <td><a href="/batch/index.js">batch_processing/index.js</a></td>
+    <td><a href="/batch/index.js">batch/index.js</a></td>
   </tr>
   <tr>
     <td>Get batch job results</td>
-    <td><a href="/batch/retrieve_results.js">batch_processing/retrieve_results.js {job-id}</a></td>
+    <td><a href="/batch/retrieve_results.js">batch/retrieve_results.js {job-id}</a></td>
   </tr>
   <tr>
     <td rowspan="1">Images</td>
