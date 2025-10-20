@@ -1,0 +1,47 @@
+import gradio as gr
+from datetime import datetime, timedelta
+
+# Dummy LLM function (replace with real Hugging Face/transformers model for production)
+def jet_ai_chat(message, history, premium, image=None, sent_images=0):
+    # Simulate smarter & faster responses for premium users
+    if premium:
+        response = f"[Jet Premium] {message[::-1]} 🚀"  # Just reverses text for demo
+    else:
+        response = f"[Jet Free] {message.capitalize()} 😊"
+    
+    # Image send logic
+    img_warning = ""
+    if image is not None:
+        if not premium and sent_images >= 5:
+            img_warning = "⚠️ Free users can only send 5 images/month."
+            image = None
+        elif premium:
+            img_warning = "✅ Premium: Infinite images allowed!"
+        else:
+            img_warning = f"✅ You have sent {sent_images+1}/5 images this month."
+    
+    # Update chat history
+    history.append((message, response + (" " + img_warning if img_warning else "")))
+    return history, sent_images + (1 if image is not None and (premium or sent_images < 5) else 0)
+
+# Gradio UI components
+with gr.Blocks() as demo:
+    gr.Markdown("# Jet AI 🚀\nChatGPT + Grok Hybrid Demo\n\n**Premium users get unlimited images & smarter, faster answers!**")
+    premium = gr.Checkbox(label="Premium User?", value=False)
+    chat = gr.Chatbot(label="Jet AI Chat")
+    sent_images = gr.State(0)
+    msg_input = gr.Textbox(label="Type your message")
+    img_input = gr.Image(label="Send an image (optional)", type="filepath")
+    send_btn = gr.Button("Send")
+    
+    def reset_images():
+        return 0
+
+    send_btn.click(
+        jet_ai_chat,
+        inputs=[msg_input, chat, premium, img_input, sent_images],
+        outputs=[chat, sent_images],
+    )
+    gr.Markdown("Free: 5 images/month • Premium: Unlimited images, smarter, faster Jet! [Demo: Toggle premium above]")
+
+demo.launch()
