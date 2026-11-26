@@ -25,11 +25,12 @@ while (
 
 if (batch.status === "completed") {
   console.log("Batch completed");
-  const batchResults = await openai.batches.results(batch.id);
-  console.log("Batch results: ", batchResults);
+  if (!batch.output_file_id) {
+    throw new Error("Completed batch has no output_file_id");
+  }
 
-  // Retrieve the results
-  const resultsFile = await openai.files.content(batchResults.output_file_id);
+  // Retrieve the results from the output file returned with the batch.
+  const resultsFile = await openai.files.content(batch.output_file_id);
   const results = await resultsFile.text();
   console.log("Results: ", results);
 } else {
