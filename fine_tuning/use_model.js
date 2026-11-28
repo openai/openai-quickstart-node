@@ -10,12 +10,13 @@ let fineTuningJob = await openai.fineTuning.jobs.retrieve(fineTuningJobId);
 
 console.log("Fine tuning job: ", fineTuningJob);
 
-// Check the status of the fine-tuning job every 10 seconds until it is completed with a timeout of 20 minutes
+// Check the status of the fine-tuning job every 10 seconds until it succeeds, fails or is cancelled with a timeout of 20 minutes
 const TIMEOUT = 1200000;
 const startTime = Date.now();
 while (
   fineTuningJob.status !== "succeeded" &&
   fineTuningJob.status !== "failed" &&
+  fineTuningJob.status !== "cancelled" &&
   Date.now() - startTime < TIMEOUT
 ) {
   fineTuningJob = await openai.fineTuning.jobs.retrieve(fineTuningJob.id);
